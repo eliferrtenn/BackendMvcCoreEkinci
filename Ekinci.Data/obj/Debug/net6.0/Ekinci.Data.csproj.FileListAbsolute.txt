@@ -1,0 +1,12 @@
+C:\Projects\Ekinci\Ekinci.Data\bin\Debug\net6.0\Ekinci.Data.deps.json
+C:\Projects\Ekinci\Ekinci.Data\bin\Debug\net6.0\Ekinci.Data.dll
+C:\Projects\Ekinci\Ekinci.Data\bin\Debug\net6.0\Ekinci.Data.pdb
+C:\Projects\Ekinci\Ekinci.Data\obj\Debug\net6.0\Ekinci.Data.csproj.AssemblyReference.cache
+C:\Projects\Ekinci\Ekinci.Data\obj\Debug\net6.0\Ekinci.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Ekinci\Ekinci.Data\obj\Debug\net6.0\Ekinci.Data.AssemblyInfoInputs.cache
+C:\Projects\Ekinci\Ekinci.Data\obj\Debug\net6.0\Ekinci.Data.AssemblyInfo.cs
+C:\Projects\Ekinci\Ekinci.Data\obj\Debug\net6.0\Ekinci.Data.csproj.CoreCompileInputs.cache
+C:\Projects\Ekinci\Ekinci.Data\obj\Debug\net6.0\Ekinci.Data.dll
+C:\Projects\Ekinci\Ekinci.Data\obj\Debug\net6.0\refint\Ekinci.Data.dll
+C:\Projects\Ekinci\Ekinci.Data\obj\Debug\net6.0\Ekinci.Data.pdb
+C:\Projects\Ekinci\Ekinci.Data\obj\Debug\net6.0\ref\Ekinci.Data.dll

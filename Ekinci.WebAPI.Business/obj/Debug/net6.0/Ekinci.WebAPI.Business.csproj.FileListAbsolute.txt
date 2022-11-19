@@ -1,0 +1,17 @@
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\bin\Debug\net6.0\Ekinci.WebAPI.Business.deps.json
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\bin\Debug\net6.0\Ekinci.WebAPI.Business.dll
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\bin\Debug\net6.0\Ekinci.WebAPI.Business.pdb
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\bin\Debug\net6.0\Ekinci.Common.dll
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\bin\Debug\net6.0\Ekinci.Data.dll
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\bin\Debug\net6.0\Ekinci.Common.pdb
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\bin\Debug\net6.0\Ekinci.Data.pdb
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\Ekinci.WebAPI.Business.csproj.AssemblyReference.cache
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\Ekinci.WebAPI.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\Ekinci.WebAPI.Business.AssemblyInfoInputs.cache
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\Ekinci.WebAPI.Business.AssemblyInfo.cs
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\Ekinci.WebAPI.Business.csproj.CoreCompileInputs.cache
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\Ekinci.WebAPI.Business.csproj.CopyComplete
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\Ekinci.WebAPI.Business.dll
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\refint\Ekinci.WebAPI.Business.dll
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\Ekinci.WebAPI.Business.pdb
+C:\Projects\Ekinci\Ekinci.WebAPI.Business\obj\Debug\net6.0\ref\Ekinci.WebAPI.Business.dll
