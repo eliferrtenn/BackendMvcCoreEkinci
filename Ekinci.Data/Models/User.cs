@@ -12,7 +12,9 @@ namespace Ekinci.Data.Models
         public string MobilePhone { get; set; }
         public string Password { get; set; }
         public string ProfilePhotoUrl { get; set; }
-        public bool IsEnabled { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public bool IsEnabled { get; set; } = true;
+        public bool IsDeleted { get; set; } = false;
         [NotMapped]
         public string FullName { get { return $"{Firstname} {Lastname}"; } }
     }
