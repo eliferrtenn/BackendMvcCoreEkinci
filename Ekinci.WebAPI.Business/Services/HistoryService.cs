@@ -1,6 +1,6 @@
 ﻿using Ekinci.Common.Business;
+using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.HistoryResponse;
 using Microsoft.AspNetCore.Http;
@@ -23,8 +23,8 @@ namespace Ekinci.WebAPI.Business.Services
                                    {
                                        ID = hist.ID,
                                        Title = hist.Title,
-                                       StartDate = hist.StartDate,
-                                       EndDate = hist.EndDate,
+                                       StartDate = hist.StartDate.ToFormattedDate(),
+                                       EndDate = hist.EndDate.ToFormattedDate(),
                                        PhotoUrl = hist.PhotoUrl,
                                        //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                    }).ToListAsync();
@@ -41,8 +41,8 @@ namespace Ekinci.WebAPI.Business.Services
                                    {
                                        ID = hist.ID,
                                        Title = hist.Title,
-                                       StartDate = hist.StartDate,
-                                       EndDate = hist.EndDate,
+                                       StartDate = hist.StartDate.ToFormattedDate(),
+                                       EndDate = hist.EndDate.ToFormattedDate(),
                                        PhotoUrl = hist.PhotoUrl,
                                        //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                    }).FirstAsync();

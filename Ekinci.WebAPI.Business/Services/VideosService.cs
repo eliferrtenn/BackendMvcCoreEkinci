@@ -1,6 +1,5 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.VideosResponse;
 using Microsoft.AspNetCore.Http;
@@ -24,7 +23,7 @@ namespace Ekinci.WebAPI.Business.Services
                                     ID = vid.ID,
                                     Title = vid.Title,
                                     Description = vid.Description,
-                                    PhotoUrl = vid.PhotoUrl,
+                                    PhotoUrl = vid.VideoUrl,
                                     //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                 }).ToListAsync();
             result.Data = videos;
@@ -34,22 +33,22 @@ namespace Ekinci.WebAPI.Business.Services
         public async Task<ServiceResult<GetVideoResponse>> GetVideo(int videoID)
         {
             var result = new ServiceResult<GetVideoResponse>();
-            var videos = await (from vid in _context.Videos
+            var video = await (from vid in _context.Videos
                                 where vid.ID == videoID
                                 select new GetVideoResponse
                                 {
                                     ID = vid.ID,
                                     Title = vid.Title,
                                     Description = vid.Description,
-                                    PhotoUrl = vid.PhotoUrl,
+                                    VideoUrl = vid.VideoUrl,
                                     //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                 }).FirstAsync();
-            if (videos == null)
+            if (video == null)
             {
                 result.SetError("Video bulunamadı");
                 return result;
             }
-            result.Data = videos;
+            result.Data = video;
             return result;
         }
     }

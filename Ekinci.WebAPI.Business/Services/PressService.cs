@@ -1,6 +1,5 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.PressResponse;
 using Microsoft.AspNetCore.Http;

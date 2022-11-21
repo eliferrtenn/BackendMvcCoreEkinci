@@ -1,6 +1,5 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.WebAPI.Business.Models.Requests.MemberRequests;
-using Ekinci.WebAPI.Business.Models.Responses.AnnouncementResponses;
 using Ekinci.WebAPI.Business.Models.Responses.MemberResponse;
 
 namespace Ekinci.WebAPI.Business.Interfaces

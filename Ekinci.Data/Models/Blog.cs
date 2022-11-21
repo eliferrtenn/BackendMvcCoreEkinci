@@ -9,6 +9,7 @@ namespace Ekinci.Data.Models
         public string Title { get; set; }
         public DateTime? BlogDate { get; set; }
         public string PhotoUrl { get; set; }
+        public string InstagramUrl { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public bool IsEnabled { get; set; } = true;
     }

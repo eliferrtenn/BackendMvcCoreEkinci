@@ -1,17 +1,10 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.AnnouncementResponses;
-using Ekinci.WebAPI.Business.Models.Responses.MemberResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ekinci.WebAPI.Business.Services
 {
@@ -25,17 +18,13 @@ namespace Ekinci.WebAPI.Business.Services
         {
             var result = new ServiceResult<List<ListAnnouncementsResponse>>();
             var announcements = await (from announ in _context.Announcements
-                                      select new ListAnnouncementsResponse
-                                      {
-                                          ID = announ.ID,
-                                          Title = announ.Title,
-                                          Description = announ.Description,
-                                      }).ToListAsync();
-            if(announcements == null)
-            {
-                result.SetError("Duyuru yoktur");
-                return result;
-            }
+                                       select new ListAnnouncementsResponse
+                                       {
+                                           ID = announ.ID,
+                                           Title = announ.Title,
+                                           Description = announ.Description,
+                                       }).ToListAsync();
+          
             result.Data = announcements;
             return result;
         }

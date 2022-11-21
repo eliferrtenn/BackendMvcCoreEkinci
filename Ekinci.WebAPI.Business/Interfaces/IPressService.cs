@@ -1,5 +1,4 @@
 ﻿using Ekinci.Common.Business;
-using Ekinci.WebAPI.Business.Models.Responses.AnnouncementResponses;
 using Ekinci.WebAPI.Business.Models.Responses.PressResponse;
 
 namespace Ekinci.WebAPI.Business.Interfaces

@@ -1,4 +1,5 @@
 ﻿using Ekinci.Common.Business;
+using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.BlogResponses;
@@ -27,8 +28,9 @@ namespace Ekinci.WebAPI.Business.Services
                               {
                                   ID = blo.ID,
                                   Title = blo.Title,
-                                  BlogDate = blo.BlogDate,
+                                  BlogDate = blo.BlogDate.ToFormattedDate(),
                                   PhotoUrl = blo.PhotoUrl,
+                                  InstagramUrl = blo.InstagramUrl,
                                   //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                               }).FirstAsync();
 
