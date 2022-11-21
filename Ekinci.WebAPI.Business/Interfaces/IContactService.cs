@@ -5,7 +5,7 @@ namespace Ekinci.WebAPI.Business.Interfaces
 {
     public interface IContactService
     {
-        Task<ServiceResult<List<ListContactsResponse>>> GetAll();
+        Task<ServiceResult<List<ListContactResponse>>> GetAll();
         Task<ServiceResult<GetContactResponse>> GetContact(int contactID);
     }
 }

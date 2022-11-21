@@ -20,7 +20,6 @@ C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\Ekinci.WebAPI.GeneratedMSBuild
 C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\Ekinci.WebAPI.AssemblyInfoInputs.cache
 C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\Ekinci.WebAPI.AssemblyInfo.cs
 C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\Ekinci.WebAPI.csproj.CoreCompileInputs.cache
-C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\Ekinci.WebAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\Ekinci.WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\staticwebassets\msbuild.Ekinci.WebAPI.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.Ekinci.WebAPI.props
@@ -54,3 +53,8 @@ C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\runtimes\win7-x64\native\sni.d
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\runtimes\win7-x86\native\sni.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\runtimes\unix\lib\netstandard1.3\System.Data.SqlClient.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard1.3\System.Data.SqlClient.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

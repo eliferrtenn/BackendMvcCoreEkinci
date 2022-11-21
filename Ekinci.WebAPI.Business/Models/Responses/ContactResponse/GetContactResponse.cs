@@ -10,7 +10,5 @@
         public string Email { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public bool IsEnabled { get; set; }
     }
 }

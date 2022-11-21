@@ -13,12 +13,11 @@ namespace Ekinci.WebAPI.Business.Services
     {
         public MemberService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
         {
-        }       
+        }
 
         public async Task<ServiceResult<GetMemberResponse>> GetMember()
         {
             var result = new ServiceResult<GetMemberResponse>();
-
             var member = await (from mem in _context.Members
                                 where mem.ID == CurrentUserID
                                 select new GetMemberResponse

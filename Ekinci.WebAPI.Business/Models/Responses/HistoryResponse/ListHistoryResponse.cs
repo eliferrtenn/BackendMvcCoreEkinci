@@ -7,7 +7,5 @@
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string PhotoUrl { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public bool IsEnabled { get; set; }
     }
 }

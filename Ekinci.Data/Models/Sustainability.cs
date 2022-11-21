@@ -6,7 +6,7 @@ namespace Ekinci.Data.Models
     public class Sustainability
     {
         public int ID { get; set; }
-        public string Header { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public string PhotoUrl { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;

@@ -4,6 +4,7 @@ using Ekinci.WebAPI.Business.Models.Responses.HumanResourceResponse;
 using Ekinci.WebAPI.Business.Models.Responses.IdentityGuideResponse;
 using Ekinci.WebAPI.Business.Models.Responses.IntroResponse;
 using Ekinci.WebAPI.Business.Models.Responses.KvkkResponse;
+using Ekinci.WebAPI.Business.Models.Responses.SustainabilityResponse;
 
 namespace Ekinci.WebAPI.Business.Interfaces
 {
@@ -14,5 +15,6 @@ namespace Ekinci.WebAPI.Business.Interfaces
         Task<ServiceResult<GetIdentityGuideResponse>> GetIdentityGuide();
         Task<ServiceResult<GetHumanResourceResponse>> GetHumanResorce();
         Task<ServiceResult<GetBlogResponse>> GetBlog();
+        Task<ServiceResult<GetSustainabilityResponse>> GetSustainability();
     }
 }

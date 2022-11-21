@@ -11,7 +11,5 @@
         public DateTime? DeliveryDate { get; set; }
         public int ApartmentCount { get; set; }
         public int SquareMeter { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public bool IsEnabled { get; set; }
     }
 }
