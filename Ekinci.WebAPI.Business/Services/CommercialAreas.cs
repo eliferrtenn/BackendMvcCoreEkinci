@@ -1,5 +1,6 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.CommercialAreaResponse;
 using Microsoft.AspNetCore.Http;
@@ -47,7 +48,11 @@ namespace Ekinci.WebAPI.Business.Services
                                          PhotoUrl = commercial.PhotoUrl,
                                          //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                      }).FirstAsync();
-
+            if (commercials == null)
+            {
+                result.SetError("Ticari alan bulunamadı");
+                return result;
+            }
             result.Data = commercials;
             return result;
         }

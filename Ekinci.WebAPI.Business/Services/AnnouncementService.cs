@@ -52,7 +52,11 @@ namespace Ekinci.WebAPI.Business.Services
                                           Title = announ.Title,
                                           Description = announ.Description,
                                       }).FirstAsync();
-
+            if (announcement == null)
+            {
+                result.SetError("Duyuru bulunamadı");
+                return result;
+            }
             result.Data = announcement;
             return result;
         }

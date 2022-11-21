@@ -1,5 +1,6 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.PressResponse;
 using Microsoft.AspNetCore.Http;
@@ -39,7 +40,11 @@ namespace Ekinci.WebAPI.Business.Services
                                    PhotoUrl = pres.PhotoUrl,
                                    //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                }).FirstAsync();
-
+            if (press == null)
+            {
+                result.SetError("Bu bölüm bulunamadı");
+                return result;
+            }
             result.Data = press;
             return result;
         }

@@ -1,5 +1,6 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.ContactResponse;
 using Microsoft.AspNetCore.Http;
@@ -49,7 +50,11 @@ namespace Ekinci.WebAPI.Business.Services
                                      Longitude = con.Longitude,
                                      Latitude = con.Latitude,
                                  }).FirstAsync();
-
+            if (contact == null)
+            {
+                result.SetError("İletişim bilgisi bulunamadı");
+                return result;
+            }
             result.Data = contact;
             return result;
         }

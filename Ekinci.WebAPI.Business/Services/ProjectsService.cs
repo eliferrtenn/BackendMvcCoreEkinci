@@ -1,5 +1,6 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.ProjectResponse;
 using Microsoft.AspNetCore.Http;
@@ -51,7 +52,11 @@ namespace Ekinci.WebAPI.Business.Services
                                      ApartmentCount = proj.ApartmentCount,
                                      SquareMeter = proj.SquareMeter,
                                  }).FirstAsync();
-
+            if (project == null)
+            {
+                result.SetError("Proje bulunamadı");
+                return result;
+            }
             result.Data = project;
             return result;
         }

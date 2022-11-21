@@ -1,5 +1,6 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.VideosResponse;
 using Microsoft.AspNetCore.Http;
@@ -43,7 +44,11 @@ namespace Ekinci.WebAPI.Business.Services
                                     PhotoUrl = vid.PhotoUrl,
                                     //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                 }).FirstAsync();
-
+            if (videos == null)
+            {
+                result.SetError("Video bulunamadı");
+                return result;
+            }
             result.Data = videos;
             return result;
         }
