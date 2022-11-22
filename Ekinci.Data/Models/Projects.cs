@@ -10,6 +10,7 @@ namespace Ekinci.Data.Models
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string Description { get; set; }
+        public string ThumbUrl { get; set; }
         public DateTime? ProjectDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public int ApartmentCount { get; set; }

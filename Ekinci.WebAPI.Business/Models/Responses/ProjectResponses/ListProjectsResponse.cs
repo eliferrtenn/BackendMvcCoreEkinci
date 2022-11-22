@@ -8,6 +8,7 @@
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string Description { get; set; }
+        public string ThumbUrl { get; set; }
         public string ProjectDate { get; set; }
         public string DeliveryDate { get; set; }
         public int ApartmentCount { get; set; }

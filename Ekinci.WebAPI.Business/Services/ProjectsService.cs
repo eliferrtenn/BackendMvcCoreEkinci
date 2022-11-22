@@ -27,6 +27,7 @@ namespace Ekinci.WebAPI.Business.Services
                                       StatusID = proj.StatusID,
                                       StatusName = ps.Name,
                                       Title = proj.Title,
+                                      ThumbUrl=proj.ThumbUrl,
                                       SubTitle = proj.SubTitle,
                                       Description = proj.Description,
                                       ProjectDate = proj.ProjectDate.ToFormattedDate(),
@@ -43,6 +44,13 @@ namespace Ekinci.WebAPI.Business.Services
             var result = new ServiceResult<GetProjectResponse>();
             var project = await (from proj in _context.Projects
                                  join ps in _context.ProjectStatus on proj.StatusID equals ps.ID
+                                 let projectPhotos = (from prph in _context.ProjectPhotos
+                                                      where prph.ProjectID == proj.ID
+                                                      select new ProjectPhotosResponse
+                                                      {
+                                                          ID = prph.ID,
+                                                          PhotoUrl = prph.PhotoUrl
+                                                      }).ToList()
                                  where proj.ID == projectID
                                  select new GetProjectResponse
                                  {
@@ -56,6 +64,7 @@ namespace Ekinci.WebAPI.Business.Services
                                      DeliveryDate = proj.DeliveryDate.ToFormattedDate(),
                                      ApartmentCount = proj.ApartmentCount,
                                      SquareMeter = proj.SquareMeter,
+                                     ProjectPhotos = projectPhotos
                                  }).FirstAsync();
             if (project == null)
             {

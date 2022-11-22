@@ -25,11 +25,6 @@ namespace Ekinci.WebAPI.Business.Services
                                          PhotoUrl = commercial.PhotoUrl,
                                          //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                      }).ToListAsync();
-            if (commercials == null)
-            {
-                result.SetError("Ticari Alan yoktur");
-                return result;
-            }
             result.Data = commercials;
             return result; ;
         }

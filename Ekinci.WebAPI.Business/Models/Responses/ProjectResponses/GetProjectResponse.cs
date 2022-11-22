@@ -12,5 +12,11 @@
         public string DeliveryDate { get; set; }
         public int ApartmentCount { get; set; }
         public int SquareMeter { get; set; }
+        public List<ProjectPhotosResponse> ProjectPhotos { get; set; }
+    }
+    public class ProjectPhotosResponse
+    {
+        public int ID { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

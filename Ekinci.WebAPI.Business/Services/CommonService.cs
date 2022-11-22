@@ -114,5 +114,6 @@ namespace Ekinci.WebAPI.Business.Services
             result.Data = sustainability;
             return result;
         }
+   
     }
 }

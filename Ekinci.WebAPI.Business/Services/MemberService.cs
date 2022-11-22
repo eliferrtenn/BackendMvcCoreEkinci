@@ -70,5 +70,7 @@ namespace Ekinci.WebAPI.Business.Services
             result.SetSuccess("Kullanıcı silindi.");
             return result;
         }
+  
+    
     }
 }

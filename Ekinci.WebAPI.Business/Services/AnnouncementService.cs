@@ -1,7 +1,9 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.Data.Models;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.AnnouncementResponses;
+using Ekinci.WebAPI.Business.Models.Responses.ProjectResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +25,7 @@ namespace Ekinci.WebAPI.Business.Services
                                            ID = announ.ID,
                                            Title = announ.Title,
                                            Description = announ.Description,
+                                           ThumbUrl=announ.ThumbUrl,
                                        }).ToListAsync();
           
             result.Data = announcements;
@@ -35,11 +38,19 @@ namespace Ekinci.WebAPI.Business.Services
 
             var announcement = await (from announ in _context.Announcements
                                       where announ.ID == announcementID
+                                      let announPhotos = (from announphoto in _context.AnnouncementPhotos
+                                                           where announphoto.NewsID == announ.ID
+                                                           select new AnnouncementResponse
+                                                           {
+                                                               ID = announphoto.ID,
+                                                               PhotoUrl = announphoto.PhotoUrl
+                                                           }).ToList()
                                       select new GetAnnouncementResponse
                                       {
                                           ID = announ.ID,
                                           Title = announ.Title,
                                           Description = announ.Description,
+                                          AnnouncementPhotos = announPhotos
                                       }).FirstAsync();
             if (announcement == null)
             {

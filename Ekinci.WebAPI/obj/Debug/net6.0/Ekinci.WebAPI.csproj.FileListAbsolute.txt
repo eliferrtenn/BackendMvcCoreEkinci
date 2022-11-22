@@ -58,3 +58,4 @@ C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWe
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\Ekinci.WebAPI.MvcApplicationPartsAssemblyInfo.cs
