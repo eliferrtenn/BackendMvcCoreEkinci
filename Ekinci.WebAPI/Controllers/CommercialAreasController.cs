@@ -15,20 +15,14 @@ namespace Ekinci.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await commercialAreaService.GetAll();
-            return View(result.Data);
+            return Ok(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetCommercialArea(int CommercialAreaID)
         {
             var result = await commercialAreaService.GetCommercialArea(CommercialAreaID);
-            if (result.IsSuccess)
-            {
-                TempData["MessageText"] = result.Message;
-                return View(result.Data);
-            }
-            TempData["MessageText"] = result.Message;
-            return View();
+            return Ok(result);
         }
     }
 }

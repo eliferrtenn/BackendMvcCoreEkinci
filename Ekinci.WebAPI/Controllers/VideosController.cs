@@ -15,19 +15,13 @@ namespace Ekinci.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await videosService.GetAll();
-            return View(result.Data);
+            return Ok(result);
         }
         [HttpGet]
         public async Task<IActionResult> GetVideo(int videoID)
         {
             var result = await videosService.GetVideo(videoID);
-            if (result.IsSuccess)
-            {
-                TempData["MessageText"] = result.Message;
-                return View(result.Data);
-            }
-            TempData["MessageText"] = result.Message;
-            return View();
+            return Ok(result);
         }
     }
 }

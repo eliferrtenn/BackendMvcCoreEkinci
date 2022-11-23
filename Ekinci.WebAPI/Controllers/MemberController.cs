@@ -17,45 +17,22 @@ namespace Ekinci.WebAPI.Controllers
         public async Task<IActionResult> GetMember()
         {
             var result = await memberService.GetMember();
-            return View(result.Data);
-        }
-
-        [HttpGet]
-        public IActionResult UpdateMember()
-        {
-            return View();
+            return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateMember(UpdateMemberRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await memberService.UpdateMember(request);
-                if (!result.IsSuccess)
-                {
-                    TempData["MessageText"] = result.Message;
-                    return View();
-                }
-                TempData["MessageText"] = result.Message;
-            }
-            return View();
+
+            var result = await memberService.UpdateMember(request);
+            return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> DeleteMember()
         {
-            if (ModelState.IsValid)
-            {
-                var result = await memberService.DeleteMember();
-                if (!result.IsSuccess)
-                {
-                    TempData["MessageText"] = result.Message;
-                    return View();
-                }
-                TempData["MessageText"] = result.Message;
-            }
-            return View();
+           var result = await memberService.DeleteMember();
+            return Ok(result);
         }
     }
 }

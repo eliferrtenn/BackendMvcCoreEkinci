@@ -12,42 +12,18 @@ namespace Ekinci.WebAPI.Controllers
         {
             accountService = AccountService;
         }
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await accountService.Login(request);
-                TempData["MessageText"] = result.Message;
-                return RedirectToAction("LoginSmsVerification");
-            }
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult LoginSmsVerification()
-        {
-            return View();
+            var result = await accountService.Login(request);
+            return Ok(result);
         }
         [HttpPost]
         public async Task<IActionResult> LoginSmsVerification(LoginSmsVerificationRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await accountService.LoginSmsVerification(request);
-                if (result.IsSuccess == true)
-                {
-                    TempData["MessageText"] = result.Message;
-                    return RedirectToAction("Home");
-                }
-                TempData["MessageText"] = result.Message;
-            }
-            return View();
+            var result = await accountService.LoginSmsVerification(request);
+            return Ok(result);
         }
 
     }

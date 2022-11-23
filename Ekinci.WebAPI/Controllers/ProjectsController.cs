@@ -15,19 +15,13 @@ namespace Ekinci.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await projectsService.GetAll();
-            return View(result.Data);
+            return Ok(result);
         }
         [HttpGet]
         public async Task<IActionResult> GetProject(int projectID)
         {
             var result = await projectsService.GetProject(projectID);
-            if (result.IsSuccess)
-            {
-                TempData["MessageText"] = result.Message;
-                return View(result.Data);
-            }
-            TempData["MessageText"] = result.Message;
-            return View();
+            return Ok(result);
         }
 
     }
