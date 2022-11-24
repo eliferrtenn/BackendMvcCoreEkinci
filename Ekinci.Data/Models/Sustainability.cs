@@ -2,7 +2,7 @@
 
 namespace Ekinci.Data.Models
 {
-    [Table("Company.Sustainabilities")]
+    [Table("Corporate.Sustainabilities")]
     public class Sustainability
     {
         public int ID { get; set; }

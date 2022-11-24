@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.WebAPI.Controllers
 {
-    public class AccountController : Controller
+    [ApiController]
+    [Route("[controller]/[action]")]
+    public class AccountController : ControllerBase
     {
         private readonly IAccountService accountService;
 

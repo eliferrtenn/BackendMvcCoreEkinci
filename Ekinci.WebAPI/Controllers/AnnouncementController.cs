@@ -1,9 +1,10 @@
-﻿using Ekinci.WebAPI.Business.Interfaces;
+﻿using Ekinci.Common.BaseController;
+using Ekinci.WebAPI.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.WebAPI.Controllers
 {
-    public class AnnouncementController : Controller
+    public class AnnouncementController : APIBaseController
     {
         private readonly IAnnouncementService announcementService;
 

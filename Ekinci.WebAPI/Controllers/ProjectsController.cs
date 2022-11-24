@@ -1,9 +1,10 @@
-﻿using Ekinci.WebAPI.Business.Interfaces;
+﻿using Ekinci.Common.BaseController;
+using Ekinci.WebAPI.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.WebAPI.Controllers
 {
-    public class ProjectsController : Controller
+    public class ProjectsController : APIBaseController
     {
         private readonly IProjectsService projectsService;
 

@@ -2,7 +2,7 @@
 
 namespace Ekinci.Data.Models
 {
-    [Table("Company.Kvkkes")]
+    [Table("Corporate.Kvkkes")]
     public class Kvkk
     {
         public int ID { get; set; }

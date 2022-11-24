@@ -2,7 +2,7 @@
 
 namespace Ekinci.Data.Models
 {
-    [Table("Company.HumanResources")]
+    [Table("Corporate.HumanResources")]
     public class HumanResource
     {
         public int ID { get; set; }

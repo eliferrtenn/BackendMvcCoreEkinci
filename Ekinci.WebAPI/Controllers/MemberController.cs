@@ -1,10 +1,11 @@
-﻿using Ekinci.WebAPI.Business.Interfaces;
+﻿using Ekinci.Common.BaseController;
+using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Requests.MemberRequests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.WebAPI.Controllers
 {
-    public class MemberController : Controller
+    public class MemberController : APIBaseController
     {
         private readonly IMemberService memberService;
 
@@ -31,7 +32,7 @@ namespace Ekinci.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteMember()
         {
-           var result = await memberService.DeleteMember();
+            var result = await memberService.DeleteMember();
             return Ok(result);
         }
     }

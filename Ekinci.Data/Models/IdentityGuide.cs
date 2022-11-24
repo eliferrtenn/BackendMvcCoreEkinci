@@ -2,7 +2,7 @@
 
 namespace Ekinci.Data.Models
 {
-    [Table("Company.IdentityGuides")]
+    [Table("Media.IdentityGuides")]
     public class IdentityGuide
     {
         public int ID { get; set; }

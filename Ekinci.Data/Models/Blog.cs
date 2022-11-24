@@ -2,7 +2,7 @@
 
 namespace Ekinci.Data.Models
 {
-    [Table("Blog.Blogs")]
+    [Table("Media.Blogs")]
     public class Blog 
     {
         public int ID { get; set; }

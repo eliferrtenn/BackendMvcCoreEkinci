@@ -1,9 +1,11 @@
-﻿using Ekinci.WebAPI.Business.Interfaces;
+﻿using Ekinci.Common.BaseController;
+using Ekinci.WebAPI.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.WebAPI.Controllers
 {
-    public class VideosController : Controller
+    
+    public class VideosController : APIBaseController
     {
         private readonly IVideosService videosService;
 

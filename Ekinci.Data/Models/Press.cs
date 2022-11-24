@@ -2,7 +2,7 @@
 
 namespace Ekinci.Data.Models
 {
-    [Table("Company.Presses")]
+    [Table("Media.Presses")]
     public class Press
     {
         public int ID { get; set; }

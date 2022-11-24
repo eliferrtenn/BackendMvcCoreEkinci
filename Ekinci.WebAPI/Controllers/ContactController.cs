@@ -1,9 +1,10 @@
-﻿using Ekinci.WebAPI.Business.Interfaces;
+﻿using Ekinci.Common.BaseController;
+using Ekinci.WebAPI.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.WebAPI.Controllers
 {
-    public class ContactController : Controller
+    public class ContactController : APIBaseController
     {
         private readonly IContactService contactService;
 

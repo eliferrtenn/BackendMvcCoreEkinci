@@ -2,7 +2,7 @@
 
 namespace Ekinci.Data.Models
 {
-    [Table("Project.Project_Photos")]
+    [Table("Project.ProjectPhotos")]
     public class ProjectPhoto
     {
         public int ID { get; set; }

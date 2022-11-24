@@ -1,9 +1,10 @@
-﻿using Ekinci.WebAPI.Business.Interfaces;
+﻿using Ekinci.Common.BaseController;
+using Ekinci.WebAPI.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.WebAPI.Controllers
 {
-    public class CommercialAreasController : Controller
+    public class CommercialAreasController : APIBaseController
     {
         private readonly ICommercialAreaService commercialAreaService;
 
