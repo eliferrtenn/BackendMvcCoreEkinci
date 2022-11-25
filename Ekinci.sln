@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekinci.WebAPI", "Ekinci.WebAPI\Ekinci.WebAPI.csproj", "{3FC416CF-1ECB-45F0-B435-22240056041D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekinci.WebAPI", "Ekinci.WebAPI\Ekinci.WebAPI.csproj", "{3FC416CF-1ECB-45F0-B435-22240056041D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekinci.WebAPI.Business", "Ekinci.WebAPI.Business\Ekinci.WebAPI.Business.csproj", "{2E61B32A-7215-4357-9356-1CC34285D530}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekinci.WebAPI.Business", "Ekinci.WebAPI.Business\Ekinci.WebAPI.Business.csproj", "{2E61B32A-7215-4357-9356-1CC34285D530}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekinci.Data", "Ekinci.Data\Ekinci.Data.csproj", "{347D4E55-A955-46B9-9EEE-8C0C195FDDEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekinci.Data", "Ekinci.Data\Ekinci.Data.csproj", "{347D4E55-A955-46B9-9EEE-8C0C195FDDEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekinci.Common", "Ekinci.Common\Ekinci.Common.csproj", "{6BCD0FE1-CF16-4C70-99D7-21DFA0AEA30C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekinci.Common", "Ekinci.Common\Ekinci.Common.csproj", "{6BCD0FE1-CF16-4C70-99D7-21DFA0AEA30C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekinci.CMS", "Ekinci.CMS\Ekinci.CMS.csproj", "{85E3990B-263D-4A3B-8F14-887E315D6C2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekinci.CMS", "Ekinci.CMS\Ekinci.CMS.csproj", "{85E3990B-263D-4A3B-8F14-887E315D6C2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekinci.CMS.Business", "Ekinci.CMS.Business\Ekinci.CMS.Business.csproj", "{BB1F20C6-2DD7-423E-ADA2-3C766A498518}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekinci.CMS.Business", "Ekinci.CMS.Business\Ekinci.CMS.Business.csproj", "{BB1F20C6-2DD7-423E-ADA2-3C766A498518}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

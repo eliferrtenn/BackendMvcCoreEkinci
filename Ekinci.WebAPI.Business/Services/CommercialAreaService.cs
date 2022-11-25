@@ -8,9 +8,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace Ekinci.WebAPI.Business.Services
 {
-    public class CommercialAreas : BaseService, ICommercialAreaService
+    public class CommercialAreaService : BaseService, ICommercialAreaService
     {
-        public CommercialAreas(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public CommercialAreaService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
         {
         }
 

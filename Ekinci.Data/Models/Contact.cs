@@ -13,6 +13,8 @@ namespace Ekinci.Data.Models
         public string Email { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
+        public string InstagramUrl { get; set; }
+        public string FacebookUrl { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public bool IsEnabled { get; set; } = true;
     }
