@@ -22,7 +22,7 @@ namespace Ekinci.WebAPI.Business.Services
 
         public async Task<ServiceResult<LoginResponse>> Login(LoginRequest request)
         {
-            var result = new ServiceResult<LoginResponse>();
+            var result = new ServiceResult<LoginResponse> { Data = new LoginResponse()};
             var member = await _context.Members.FirstOrDefaultAsync(x => x.MobilePhone == request.MobilePhone);
             if (member == null)
             {
@@ -37,9 +37,13 @@ namespace Ekinci.WebAPI.Business.Services
                 await _context.SaveChangesAsync();
                 result.Data.IsNewUser = true;
             }
-            else
+            else if(member.IsEnabled)
             {
                 result.Data.IsNewUser = false;
+            }
+            else
+            {
+                result.Data.IsNewUser = true;
             }
             var smscode = KeyGenerator.CreateRandomNumber(1000, 9999);
 

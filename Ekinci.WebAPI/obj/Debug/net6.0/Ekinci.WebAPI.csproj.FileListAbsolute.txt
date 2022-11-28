@@ -10,9 +10,7 @@ C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstr
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
-C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.Design.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
@@ -75,3 +73,7 @@ C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\refint\Ekinci.WebAPI.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\Ekinci.WebAPI.pdb
 C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\Ekinci.WebAPI.genruntimeconfig.cache
 C:\Projects\Ekinci\Ekinci.WebAPI\obj\Debug\net6.0\ref\Ekinci.WebAPI.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
