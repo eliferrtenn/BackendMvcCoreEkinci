@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Models\Requests\" />
-    <Folder Include="Models\Responses\" />
-    <Folder Include="Services\" />
+    <Folder Include="Models\Requests\AnnouncementRequests\" />
+    <Folder Include="Models\Responses\AnnouncementResponses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ekinci.Common\Ekinci.Common.csproj" />
+    <ProjectReference Include="..\Ekinci.Data\Ekinci.Data.csproj" />
   </ItemGroup>
 
 </Project>

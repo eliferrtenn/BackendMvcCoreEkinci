@@ -10,3 +10,8 @@ C:\Projects\Ekinci\Ekinci.CMS.Business\obj\Debug\net6.0\Ekinci.CMS.Business.dll
 C:\Projects\Ekinci\Ekinci.CMS.Business\obj\Debug\net6.0\refint\Ekinci.CMS.Business.dll
 C:\Projects\Ekinci\Ekinci.CMS.Business\obj\Debug\net6.0\Ekinci.CMS.Business.pdb
 C:\Projects\Ekinci\Ekinci.CMS.Business\obj\Debug\net6.0\ref\Ekinci.CMS.Business.dll
+C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\Ekinci.Common.dll
+C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\Ekinci.Data.dll
+C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\Ekinci.Common.pdb
+C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\Ekinci.Data.pdb
+C:\Projects\Ekinci\Ekinci.CMS.Business\obj\Debug\net6.0\Ekinci.CMS.Business.csproj.CopyComplete
