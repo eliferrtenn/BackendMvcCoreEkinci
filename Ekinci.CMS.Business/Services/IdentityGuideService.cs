@@ -1,17 +1,11 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.IdentityGuideRequests;
 using Ekinci.CMS.Business.Models.Responses.IdentityGuideResponses;
-using Ekinci.CMS.Business.Models.Responses.IntroResponses;
 using Ekinci.Common.Business;
 using Ekinci.Data.Context;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ekinci.CMS.Business.Services
 {

@@ -4,14 +4,8 @@ using Ekinci.CMS.Business.Models.Responses.KvkkResponses;
 using Ekinci.Common.Business;
 using Ekinci.Data.Context;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ekinci.CMS.Business.Services
 {
@@ -24,15 +18,23 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<GetKvkkResponse>> GetKvkk()
         {
             var result = new ServiceResult<GetKvkkResponse>();
-            var kvkk = await(from kvk in _context.Kvkks
-                             select new GetKvkkResponse
-                             {
-                                 ID = kvk.ID,
-                                 Title = kvk.Title,
-                                 Description = kvk.Description,
-                                 PhotoUrl = kvk.PhotoUrl,
-                                 //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
-                             }).FirstAsync();
+
+
+            if (_context.Kvkks.Count() == 0)
+            {
+                result.SetError("Kvkk bulunamadı");
+                return result;
+            }
+            var kvkk = await (from kvk in _context.Kvkks
+                              select new GetKvkkResponse
+                              {
+                                  ID = kvk.ID,
+                                  Title = kvk.Title,
+                                  Description = kvk.Description,
+                                  PhotoUrl = kvk.PhotoUrl,
+                                  //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                              }).SingleOrDefaultAsync();
+
             result.Data = kvkk;
             return result;
         }

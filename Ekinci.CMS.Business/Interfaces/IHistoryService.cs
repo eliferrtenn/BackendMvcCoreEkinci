@@ -1,6 +1,7 @@
 ﻿using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
 using Ekinci.CMS.Business.Models.Responses.HistoryResponses;
 using Ekinci.Common.Business;
+using Microsoft.AspNetCore.Http;
 
 namespace Ekinci.CMS.Business.Interfaces
 {

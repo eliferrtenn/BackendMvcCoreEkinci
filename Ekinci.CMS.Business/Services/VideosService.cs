@@ -3,15 +3,9 @@ using Ekinci.CMS.Business.Models.Requests.VideosRequests;
 using Ekinci.CMS.Business.Models.Responses.VideosResponses;
 using Ekinci.Common.Business;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ekinci.CMS.Business.Services
 {
@@ -60,15 +54,15 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<List<ListVideosResponses>>> GetAll()
         {
             var result = new ServiceResult<List<ListVideosResponses>>();
-            var videos = await(from vid in _context.Videos
-                               select new ListVideosResponses
-                               {
-                                   ID = vid.ID,
-                                   Title = vid.Title,
-                                   Description = vid.Description,
-                                   VideoUrl = vid.VideoUrl,
-                                   //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
-                               }).ToListAsync();
+            var videos = await (from vid in _context.Videos
+                                select new ListVideosResponses
+                                {
+                                    ID = vid.ID,
+                                    Title = vid.Title,
+                                    Description = vid.Description,
+                                    VideoUrl = vid.VideoUrl,
+                                    //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                }).ToListAsync();
             result.Data = videos;
             return result;
         }

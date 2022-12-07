@@ -6,11 +6,6 @@ using Ekinci.Data.Context;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ekinci.CMS.Business.Services
 {
@@ -23,13 +18,13 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<GetHumanResourceResponse>> GetHumanResource()
         {
             var result = new ServiceResult<GetHumanResourceResponse>();
-            var humanResource = await(from human in _context.HumanResources
-                                      select new GetHumanResourceResponse
-                                      {
-                                          ID = human.ID,
-                                          Title = human.Title,
-                                          Description = human.Description,
-                                      }).FirstAsync();
+            var humanResource = await (from human in _context.HumanResources
+                                       select new GetHumanResourceResponse
+                                       {
+                                           ID = human.ID,
+                                           Title = human.Title,
+                                           Description = human.Description,
+                                       }).FirstAsync();
             result.Data = humanResource;
             return result;
         }

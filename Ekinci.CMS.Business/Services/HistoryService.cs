@@ -4,6 +4,7 @@ using Ekinci.CMS.Business.Models.Responses.HistoryResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
+using Ekinci.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,15 +20,17 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult> AddHistory(AddHistoryRequest request)
         {
             var result = new ServiceResult();
-            var history = await _context.Histories.FirstOrDefaultAsync(x => x.Title == request.Title);
-            if (history != null)
+            var exist = await _context.Histories.FirstOrDefaultAsync(x => x.Title == request.Title);
+            if (exist != null)
             {
                 result.SetError("Bu başlıkta tarihçe zaten kayıtlıdır.");
                 return result;
             }
-            history!.Title = request.Title;
-            history!.StartDate = request.StartDate;
-            history!.EndDate = request.EndDate;
+            var history =new History();
+            history.Title = request.Title;
+            history.StartDate = request.StartDate;
+            history.EndDate = request.EndDate;
+            history.PhotoUrl = request.PhotoUrl;
             //TODO:photourl
             _context.Histories.Add(history);
             await _context.SaveChangesAsync();
@@ -45,7 +48,7 @@ namespace Ekinci.CMS.Business.Services
                 result.SetError("Tarih bilgisi Bulunamadı!");
                 return result;
             }
-            history.IsEnabled = true;
+            history.IsEnabled = false;
             _context.Histories.Update(history);
             await _context.SaveChangesAsync();
 
@@ -79,8 +82,8 @@ namespace Ekinci.CMS.Business.Services
                                    {
                                        ID = hist.ID,
                                        Title = hist.Title,
-                                       StartDate = hist.StartDate.ToFormattedDate(),
-                                       EndDate = hist.EndDate.ToFormattedDate(),
+                                       StartDate = hist.StartDate,
+                                       EndDate = hist.EndDate,
                                        PhotoUrl = hist.PhotoUrl,
                                        //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                    }).FirstAsync();
@@ -102,9 +105,10 @@ namespace Ekinci.CMS.Business.Services
                 result.SetError("Tarih bilgisi Bulunamadı!");
                 return result;
             }
-            history!.Title = request.Title;
-            history!.StartDate = request.StartDate;
-            history!.EndDate = request.EndDate;
+            history.Title = request.Title;
+            history.StartDate = request.StartDate;
+            history.EndDate = request.EndDate;
+            history.PhotoUrl = request.PhotoUrl;
             //TODO:photourl
             _context.Histories.Update(history);
             await _context.SaveChangesAsync();

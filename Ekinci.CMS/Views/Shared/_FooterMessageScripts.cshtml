@@ -1,0 +1,22 @@
+﻿<script>
+    $(function () {
+        if ('@TempData["MessageIcon"]' != "") {
+            Swal.fire({
+                icon: '@TempData["MessageIcon"]',
+                title: 'Sistem Mesajı',
+                text: '@Html.Raw(TempData["MessageText"])',
+                toast: false,
+                allowOutsideClick: false,
+                allowEscapeKey: true,
+                allowEnterKey: true,
+                background: '#FFF',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+        }
+    })
+</script>

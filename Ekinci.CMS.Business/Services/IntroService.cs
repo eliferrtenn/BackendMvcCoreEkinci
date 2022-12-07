@@ -6,11 +6,6 @@ using Ekinci.Data.Context;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ekinci.CMS.Business.Services
 {
@@ -23,15 +18,20 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<GetIntroResponse>> GetIntro()
         {
             var result = new ServiceResult<GetIntroResponse>();
-            var Intro = await(from intro in _context.Intros
-                              select new GetIntroResponse
-                              {
-                                  ID = intro.ID,
-                                  Title = intro.Title,
-                                  Description = intro.Description,
-                                  PhotoUrl = intro.PhotoUrl,
-                                  //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
-                              }).FirstAsync();
+            var Intro = await (from intro in _context.Intros
+                               select new GetIntroResponse
+                               {
+                                   ID = intro.ID,
+                                   Title = intro.Title,
+                                   Description = intro.Description,
+                                   PhotoUrl = intro.PhotoUrl,
+                                   //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                               }).FirstAsync();
+            if (Intro == null)
+            {
+                result.SetError("Tanıtım yok");
+                return result;
+            }
             result.Data = Intro;
             return result;
         }
@@ -45,7 +45,6 @@ namespace Ekinci.CMS.Business.Services
                 result.SetError("Tanıtım kısmı Bulunamadı!");
                 return result;
             }
-
             intro.Title = request.Title;
             intro.Description = request.Description;
             //TODO:Intro fotoğrafı güncelleme işlemi yapılacak

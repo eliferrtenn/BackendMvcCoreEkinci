@@ -4,7 +4,6 @@ using Ekinci.CMS.Business.Models.Requests.PressResponses;
 using Ekinci.CMS.Business.Models.Responses.PressResponses;
 using Ekinci.Common.Business;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -50,13 +49,13 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<List<ListPressesResponse>>> GetAll()
         {
             var result = new ServiceResult<List<ListPressesResponse>>();
-            var presses = await(from press in _context.Press
-                                select new ListPressesResponse
-                                {
-                                    ID = press.ID,
-                                    PhotoUrl = press.PhotoUrl,
-                                    //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
-                                }).ToListAsync();
+            var presses = await (from press in _context.Press
+                                 select new ListPressesResponse
+                                 {
+                                     ID = press.ID,
+                                     PhotoUrl = press.PhotoUrl,
+                                     //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                 }).ToListAsync();
             result.Data = presses;
             return result;
         }

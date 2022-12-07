@@ -1,0 +1,41 @@
+﻿@model Ekinci.CMS.Business.Models.Responses.PressResponses.GetPressResponse
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Basında Ekinci</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="DÜZENLE">&nbsp;
+                <a href="@Url.Action("Index","Press")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <input asp-for="ID" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+                <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">Fotoğraf</label>
+                    <div class="col-lg-8">
+                        <div class="image-input image-input-outline" data-kt-image-input="true">
+                            <div class="image-input-wrapper w-125px h-125px" style="background-image:url(/@Model.PhotoUrl)"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Yükle">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
+                            </label>
+                        </div>
+                        <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

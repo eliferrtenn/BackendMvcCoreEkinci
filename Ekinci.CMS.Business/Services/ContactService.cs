@@ -3,7 +3,6 @@ using Ekinci.CMS.Business.Models.Requests.ContactRequests;
 using Ekinci.CMS.Business.Models.Responses.ContactResponses;
 using Ekinci.Common.Business;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -62,8 +61,28 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<List<ListContactsResponse>>> GetAll()
         {
             var result = new ServiceResult<List<ListContactsResponse>>();
-            var contacts = await(from con in _context.Contacts
-                                 select new ListContactsResponse
+            var contacts = await (from con in _context.Contacts
+                                  select new ListContactsResponse
+                                  {
+                                      ID = con.ID,
+                                      Title = con.Title,
+                                      Location = con.Location,
+                                      MobilePhone = con.MobilePhone,
+                                      LandPhone = con.LandPhone,
+                                      Email = con.Email,
+                                      Longitude = con.Longitude,
+                                      Latitude = con.Latitude,
+                                  }).ToListAsync();
+            result.Data = contacts;
+            return result;
+        }
+
+        public async Task<ServiceResult<GetContactResponse>> GetContact(int ContactID)
+        {
+            var result = new ServiceResult<GetContactResponse>();
+            var contact = await (from con in _context.Contacts
+                                 where con.ID == ContactID
+                                 select new GetContactResponse
                                  {
                                      ID = con.ID,
                                      Title = con.Title,
@@ -73,27 +92,7 @@ namespace Ekinci.CMS.Business.Services
                                      Email = con.Email,
                                      Longitude = con.Longitude,
                                      Latitude = con.Latitude,
-                                 }).ToListAsync();
-            result.Data = contacts;
-            return result;
-        }
-
-        public async Task<ServiceResult<GetContactResponse>> GetContact(int ContactID)
-        {
-            var result = new ServiceResult<GetContactResponse>();
-            var contact = await(from con in _context.Contacts
-                                where con.ID == ContactID
-                                select new GetContactResponse
-                                {
-                                    ID = con.ID,
-                                    Title = con.Title,
-                                    Location = con.Location,
-                                    MobilePhone = con.MobilePhone,
-                                    LandPhone = con.LandPhone,
-                                    Email = con.Email,
-                                    Longitude = con.Longitude,
-                                    Latitude = con.Latitude,
-                                }).FirstAsync();
+                                 }).FirstAsync();
             if (contact == null)
             {
                 result.SetError("İletişim bilgisi bulunamadı");
