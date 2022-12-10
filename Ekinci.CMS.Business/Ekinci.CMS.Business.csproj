@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BunnyCDN.Net.Storage" Version="1.0.4" />
+    <PackageReference Include="RestSharp" Version="108.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Ekinci.Common\Ekinci.Common.csproj" />
     <ProjectReference Include="..\Ekinci.Data\Ekinci.Data.csproj" />
   </ItemGroup>

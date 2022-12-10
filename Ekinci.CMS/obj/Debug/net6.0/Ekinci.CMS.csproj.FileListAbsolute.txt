@@ -76,3 +76,5 @@ C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Ekinci.Common.pdb
 C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Ekinci.Data.pdb
 C:\Projects\Ekinci\Ekinci.CMS\obj\Debug\net6.0\Ekinci.CMS.MvcApplicationPartsAssemblyInfo.cs
 C:\Projects\Ekinci\Ekinci.CMS\obj\Debug\net6.0\Ekinci.CMS.csproj.CopyComplete
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\BunnyCDN.Net.Storage.dll
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\RestSharp.dll

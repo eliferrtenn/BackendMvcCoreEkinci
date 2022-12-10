@@ -7,8 +7,8 @@ namespace Ekinci.CMS.Business.Interfaces
 {
     public interface IHistoryService
     {
-        Task<ServiceResult> AddHistory(AddHistoryRequest request);
-        Task<ServiceResult> UpdateHistory(UpdateHistoryRequest request);
+        Task<ServiceResult> AddHistory(AddHistoryRequest request,IFormFile PhotoUrl);
+        Task<ServiceResult> UpdateHistory(UpdateHistoryRequest request, IFormFile PhotoUrl);
         Task<ServiceResult> DeleteHistory(DeleteHistoryRequest request);
         Task<ServiceResult<List<ListHistoriesResponse>>> GetAll();
         Task<ServiceResult<GetHistoryResponse>> GetHistory(int HistoryID);

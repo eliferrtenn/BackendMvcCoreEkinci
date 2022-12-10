@@ -1,9 +1,10 @@
-﻿@{
+﻿@using Ekinci.CMS.Business.Extensions;
+@{
 }
-
 <div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
     <div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
         <div class="aside-toolbar flex-column-auto" id="kt_aside_toolbar">
+   
             <div class="aside-user d-flex align-items-sm-center justify-content-center py-5">
                 <div class="aside-user-info flex-row-fluid flex-wrap ms-5">
                     <div class="d-flex">
@@ -42,7 +43,6 @@
         </div>
 
         <div class="aside-menu flex-column-fluid">
-            <!--begin::Aside Menu-->
             <div class="hover-scroll-overlay-y px-2 my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="{default: '#kt_aside_toolbar, #kt_aside_footer', lg: '#kt_header, #kt_aside_toolbar, #kt_aside_footer'}" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="5px">
                 <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
                     <div class="menu-item">
@@ -71,9 +71,9 @@
                             <span class="menu-title">KURUMSAL</span>
                             <span class="menu-arrow"></span>
                         </span>
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","Intro")">
+                        <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item ">
+                                <a class="menu-link @Html.ActiveClass("Intro", "Index")" href="@Url.Action("Index","Intro")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -81,7 +81,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","History")">
+                                <a class="menu-link @Html.ActiveClass("History", "Index")" href="@Url.Action("Index","History")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -89,7 +89,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","Sustainability")">
+                                <a class="menu-link @Html.ActiveClass("Sustainability", "Index")" href="@Url.Action("Index","Sustainability")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -97,7 +97,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","HumanResource")">
+                                <a class="menu-link @Html.ActiveClass("HumanResource", "Index")" href="@Url.Action("Index","HumanResource")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -105,7 +105,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","Kvkk")">
+                                <a class="menu-link @Html.ActiveClass("Kvkk", "Index")" href="@Url.Action("Index","Kvkk")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -118,7 +118,7 @@
                         <span class="menu-link">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-flask fa-lg"></i>
+                                    <i class="fa-solid fa-diagram-project fa-lg"></i>
                                 </span>
                             </span>
                             <span class="menu-title">Projeler</span>
@@ -126,7 +126,7 @@
                         </span>
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","Projects")">
+                                <a class="menu-link @Html.ActiveClass("Projects", "Index")" href="@Url.Action("Index","Projects")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -139,7 +139,7 @@
                         <span class="menu-link">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-flask fa-lg"></i>
+                                    <i class="fa-solid fa-chart-area fa-lg"></i>
                                 </span>
                             </span>
                             <span class="menu-title">Ticari Alanlar</span>
@@ -147,7 +147,7 @@
                         </span>
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","CommercialArea")">
+                                <a class="menu-link @Html.ActiveClass("CommercialArea", "Index")" href="@Url.Action("Index","CommercialArea")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -160,7 +160,7 @@
                         <span class="menu-link">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-flask fa-lg"></i>
+                                   <i class="fa-brands fa-medium fa-lg"></i>
                                 </span>
                             </span>
                             <span class="menu-title">MEDYA MERKEZİ</span>
@@ -168,7 +168,7 @@
                         </span>
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","Announcement")">
+                                <a class="menu-link @Html.ActiveClass("Announcement", "Index")" href="@Url.Action("Index","Announcement")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -176,7 +176,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","Blog")">
+                                <a class="menu-link @Html.ActiveClass("Blog", "Index")" href="@Url.Action("Index","Blog")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -184,7 +184,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","Press")">
+                                <a class="menu-link @Html.ActiveClass("Press", "Index")" href="@Url.Action("Index","Press")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -192,7 +192,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","IdentityGuide")">
+                                <a class="menu-link @Html.ActiveClass("IdentityGuide", "Index")" href="@Url.Action("Index","IdentityGuide")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -200,7 +200,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","Videos")">
+                                <a class="menu-link @Html.ActiveClass("Videos", "Index")" href="@Url.Action("Index","Videos")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -213,7 +213,7 @@
                         <span class="menu-link">
                             <span class="menu-icon">
                                 <span class="svg-icon svg-icon-2">
-                                    <i class="fa-solid fa-flask fa-lg"></i>
+                                   <i class="fa-solid fa-address-book fa-lg"></i>
                                 </span>
                             </span>
                             <span class="menu-title">İletişim</span>
@@ -221,7 +221,7 @@
                         </span>
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
-                                <a class="menu-link" href="@Url.Action("Index","Contact")">
+                                <a class="menu-link @Html.ActiveClass("Contact", "Index")" href="@Url.Action("Index","Contact")">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>

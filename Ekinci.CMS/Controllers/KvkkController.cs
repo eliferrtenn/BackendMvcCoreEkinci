@@ -1,6 +1,5 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.KvkRequests;
-using Ekinci.CMS.Business.Models.Requests.SustainabilityRequests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.CMS.Controllers

@@ -1,5 +1,4 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
-using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
 using Ekinci.CMS.Business.Models.Requests.PressRequests;
 using Ekinci.CMS.Business.Models.Requests.PressResponses;
 using Microsoft.AspNetCore.Mvc;

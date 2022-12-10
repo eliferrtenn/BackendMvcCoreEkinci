@@ -1,8 +1,6 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.HumanResourceRequests;
-using Ekinci.CMS.Business.Models.Requests.IntroRequests;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 
 namespace Ekinci.CMS.Controllers
 {

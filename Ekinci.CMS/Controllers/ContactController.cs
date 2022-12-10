@@ -1,6 +1,5 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.ContactRequests;
-using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

@@ -1,7 +1,5 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
-using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
@@ -29,6 +27,6 @@ namespace Ekinci.CMS.Controllers
         public IActionResult Create()
         {
             return View();
-        } 
         }
+    }
 }

@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "BunnyCDN.Net.Storage/1.0.4": {
+        "type": "package",
+        "dependencies": {
+          "System.Text.Json": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/BunnyCDN.Net.Storage.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/BunnyCDN.Net.Storage.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -966,6 +978,19 @@
           }
         }
       },
+      "RestSharp/108.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/RestSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/RestSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "runtime.native.System/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -1742,8 +1767,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "BunnyCDN.Net.Storage": "1.0.4",
           "Ekinci.Common": "1.0.0",
-          "Ekinci.Data": "1.0.0"
+          "Ekinci.Data": "1.0.0",
+          "RestSharp": "108.0.3"
         },
         "compile": {
           "bin/placeholder/Ekinci.CMS.Business.dll": {}
@@ -1788,6 +1815,20 @@
     }
   },
   "libraries": {
+    "BunnyCDN.Net.Storage/1.0.4": {
+      "sha512": "pdUw2kFNUo3O8Y1aDL4SlqgDHiERaYovoser+BmL3vyzVrxl9q1r9ZJKklcAUftQNkUK/I+y+TsRAc5sVXMm1g==",
+      "type": "package",
+      "path": "bunnycdn.net.storage/1.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bunnycdn.net.storage.1.0.4.nupkg.sha512",
+        "bunnycdn.net.storage.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/BunnyCDN.Net.Storage.dll",
+        "lib/netstandard2.1/BunnyCDN.Net.Storage.dll"
+      ]
+    },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
       "sha512": "VloMLDJMf3n/9ic5lCBOa42IBYJgyB1JhzLsL68Zqg+2bEPWfGBj/xCJy/LrKTArN0coOcZp3wyVTZlx0y9pHQ==",
       "type": "package",
@@ -2907,6 +2948,24 @@
         "lib/netstandard2.0/Newtonsoft.Json.Bson.xml",
         "newtonsoft.json.bson.1.0.2.nupkg.sha512",
         "newtonsoft.json.bson.nuspec"
+      ]
+    },
+    "RestSharp/108.0.3": {
+      "sha512": "phq1AkVhqVXHZxvWDV4fJEJKCR5OHNFUGx2Ix8o5EFShS6654oZhth4X2RWvaU/W7UexIswW0T+lTirxfLU2Ow==",
+      "type": "package",
+      "path": "restsharp/108.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net5.0/RestSharp.dll",
+        "lib/net5.0/RestSharp.xml",
+        "lib/net6.0/RestSharp.dll",
+        "lib/net6.0/RestSharp.xml",
+        "lib/netstandard2.0/RestSharp.dll",
+        "lib/netstandard2.0/RestSharp.xml",
+        "restsharp.108.0.3.nupkg.sha512",
+        "restsharp.nuspec",
+        "restsharp.png"
       ]
     },
     "runtime.native.System/4.0.0": {

@@ -46,6 +46,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "BunnyCDN.Net.Storage": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[108.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
