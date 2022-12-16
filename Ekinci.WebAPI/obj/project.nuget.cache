@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "BiaNvlUK1ah7WXI6JIMGRoN8qmudBFyVFXHIb7RIuW3O9ZXZTYmWqMW5F+wFVwvlgo5bEr+ZDERuH/vbXf/hPQ==",
+  "dgSpecHash": "gZfQS6HRR1aAcXWAJBZIUmqL7yUBYrDM0fQyFsXBUTF/PHvNEvWkAnqXzpq1EOWLogEB6VRvSTMtmyZ7eiq/xw==",
   "success": true,
   "projectFilePath": "C:\\Projects\\Ekinci\\Ekinci.WebAPI\\Ekinci.WebAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Elif\\.nuget\\packages\\bunnycdn.net.storage\\1.0.4\\bunnycdn.net.storage.1.0.4.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.11\\microsoft.aspnetcore.authentication.jwtbearer.6.0.11.nupkg.sha512",
@@ -62,6 +63,8 @@
     "C:\\Users\\Elif\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\runtime.native.system\\4.0.0\\runtime.native.system.4.0.0.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\sms.abstractions\\1.0.18\\sms.abstractions.1.0.18.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\sms.iletimerkezi\\1.0.18\\sms.iletimerkezi.1.0.18.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

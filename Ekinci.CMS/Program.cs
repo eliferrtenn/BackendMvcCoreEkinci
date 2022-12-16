@@ -30,10 +30,15 @@ builder.Services.AddScoped<IIntroService, IntroService>();
 builder.Services.AddScoped<IKvkkService, KvkkService>();
 builder.Services.AddScoped<IPressService, PressService>(); 
 builder.Services.AddScoped<IProjectService, ProjectService>(); 
+builder.Services.AddScoped<IProjectStatusService, ProjectStatusService>(); 
 builder.Services.AddScoped<ISustainabilityService, SustainabilityService>(); 
 builder.Services.AddScoped<IUserService, UserService>(); 
 builder.Services.AddScoped<IVideosService, VideosService>();
 #endregion
+
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
+});
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -54,7 +59,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();

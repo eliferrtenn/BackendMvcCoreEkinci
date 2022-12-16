@@ -25,7 +25,7 @@ namespace Ekinci.WebAPI.Business.Services
                                            ID = announ.ID,
                                            Title = announ.Title,
                                            Description = announ.Description,
-                                           ThumbUrl=announ.ThumbUrl,
+                                           ThumbUrl=ekinciUrl+announ.ThumbUrl,
                                        }).ToListAsync();
           
             result.Data = announcements;
@@ -43,7 +43,7 @@ namespace Ekinci.WebAPI.Business.Services
                                                            select new AnnouncementResponse
                                                            {
                                                                ID = announphoto.ID,
-                                                               PhotoUrl = announphoto.PhotoUrl
+                                                               PhotoUrl = ekinciUrl + announphoto.PhotoUrl
                                                            }).ToList()
                                       select new GetAnnouncementResponse
                                       {

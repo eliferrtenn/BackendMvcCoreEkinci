@@ -25,8 +25,7 @@ namespace Ekinci.WebAPI.Business.Services
                                    Title = identity.Title,
                                    BlogDate = identity.BlogDate.ToFormattedDate(),
                                    InstagramUrl = identity.InstagramUrl,
-                                   PhotoUrl = identity.PhotoUrl,
-                                   //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                   PhotoUrl =ekinciUrl+identity.PhotoUrl,
                                }).ToListAsync();
             result.Data = blogs;
             return result;
@@ -43,8 +42,7 @@ namespace Ekinci.WebAPI.Business.Services
                                    Title = identity.Title,
                                    BlogDate = identity.BlogDate.ToFormattedDate(),
                                    InstagramUrl = identity.InstagramUrl,
-                                   PhotoUrl = identity.PhotoUrl,
-                                   //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                   PhotoUrl =ekinciUrl+identity.PhotoUrl,
                                }).FirstAsync();
             if (blogs == null)
             {

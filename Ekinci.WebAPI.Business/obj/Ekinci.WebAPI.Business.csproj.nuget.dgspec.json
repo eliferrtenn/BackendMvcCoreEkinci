@@ -197,9 +197,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "BunnyCDN.Net.Storage": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Sms.IletiMerkezi": {
+              "target": "Package",
+              "version": "[1.0.18, )"
             }
           },
           "imports": [

@@ -27,7 +27,7 @@ namespace Ekinci.WebAPI.Business.Services
                                       StatusID = proj.StatusID,
                                       StatusName = ps.Name,
                                       Title = proj.Title,
-                                      ThumbUrl=proj.ThumbUrl,
+                                      ThumbUrl= ekinciUrl + proj.ThumbUrl,
                                       SubTitle = proj.SubTitle,
                                       Description = proj.Description,
                                       ProjectDate = proj.ProjectDate.ToFormattedDate(),
@@ -49,7 +49,7 @@ namespace Ekinci.WebAPI.Business.Services
                                                       select new ProjectPhotosResponse
                                                       {
                                                           ID = prph.ID,
-                                                          PhotoUrl = prph.PhotoUrl
+                                                          PhotoUrl = ekinciUrl + prph.PhotoUrl
                                                       }).ToList()
                                  where proj.ID == projectID
                                  select new GetProjectResponse

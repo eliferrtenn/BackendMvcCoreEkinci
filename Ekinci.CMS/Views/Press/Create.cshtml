@@ -1,34 +1,42 @@
 ﻿@model Ekinci.CMS.Business.Models.Responses.PressResponses.GetPressResponse
-<form asp-action="Create" enctype="multipart/form-data">
-    <div class="card shadow-sm">
-        <div class="card-header">
-            <h3 class="card-title">Basında Ekinci</h3>
-            <div class="card-toolbar">
-                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="OLUŞTUR">&nbsp;
-                <a href="@Url.Action("Index","Press")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="row mb-6">
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">Fotoğraf</label>
-                    <div class="col-lg-8">
-                        <div class="image-input image-input-outline" data-kt-image-input="true">
-                            <div class="image-input-wrapper w-125px h-125px"></div>
-                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Yükle">
-                                <i class="bi bi-pencil-fill fs-7"></i>
-                                <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
-                            </label>
+<div class="flex-column" id="kt_wrapper">
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <div id="kt_content_container" class="container-xxl">
+                <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h3 class="card-title">Basında Ekinci</h3>
+                                <div class="card-toolbar">
+                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="OLUŞTUR">&nbsp;
+                                    <a href="@Url.Action("Index","Press")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="row mb-6">
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6">Fotoğraf</label>
+                                        <div class="col-lg-8">
+                                            <div class="image-input image-input-outline" data-kt-image-input="true">
+                                                <div class="image-input-wrapper w-125px h-125px"></div>
+                                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Yükle">
+                                                    <i class="bi bi-pencil-fill fs-7"></i>
+                                                    <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
+                                                </label>
+                                            </div>
+                                            <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="card-footer">
-        </div>
     </div>
-</form>
+</div>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

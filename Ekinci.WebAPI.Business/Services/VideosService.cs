@@ -23,8 +23,7 @@ namespace Ekinci.WebAPI.Business.Services
                                     ID = vid.ID,
                                     Title = vid.Title,
                                     Description = vid.Description,
-                                    PhotoUrl = vid.VideoUrl,
-                                    //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                    PhotoUrl = ekinciUrl + vid.VideoUrl,
                                 }).ToListAsync();
             result.Data = videos;
             return result;
@@ -40,8 +39,7 @@ namespace Ekinci.WebAPI.Business.Services
                                     ID = vid.ID,
                                     Title = vid.Title,
                                     Description = vid.Description,
-                                    VideoUrl = vid.VideoUrl,
-                                    //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                    VideoUrl = ekinciUrl + vid.VideoUrl,
                                 }).FirstAsync();
             if (video == null)
             {

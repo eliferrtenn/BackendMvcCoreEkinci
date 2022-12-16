@@ -60,8 +60,7 @@ namespace Ekinci.WebAPI.Business.Services
                                        {
                                            ID = identity.ID,
                                            Title = identity.Title,
-                                           PhotoUrl = identity.PhotoUrl,
-                                           //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                           PhotoUrl = ekinciUrl + identity.PhotoUrl,
                                        }).FirstAsync();
             result.Data = IdentityGuide;
             return result;
@@ -76,8 +75,7 @@ namespace Ekinci.WebAPI.Business.Services
                                    ID = intro.ID,
                                    Title = intro.Title,
                                    Description = intro.Description,
-                                   PhotoUrl = intro.PhotoUrl,
-                                   //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                   PhotoUrl = ekinciUrl + intro.PhotoUrl,
                                }).FirstAsync();
             result.Data = Intro;
             return result;
@@ -92,8 +90,7 @@ namespace Ekinci.WebAPI.Business.Services
                                   ID = kvk.ID,
                                   Title = kvk.Title,
                                   Description = kvk.Description,
-                                  PhotoUrl = kvk.PhotoUrl,
-                                  //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                  PhotoUrl = ekinciUrl + kvk.PhotoUrl,
                               }).FirstAsync();
             result.Data = kvkk;
             return result;
@@ -108,8 +105,7 @@ namespace Ekinci.WebAPI.Business.Services
                                             ID = sustain.ID,
                                             Title = sustain.Title,
                                             Description = sustain.Description,
-                                            PhotoUrl = sustain.PhotoUrl,
-                                            //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                            PhotoUrl = ekinciUrl + sustain.PhotoUrl,
                                         }).FirstAsync();
             result.Data = sustainability;
             return result;

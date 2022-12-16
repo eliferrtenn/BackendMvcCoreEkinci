@@ -26,7 +26,7 @@ namespace Ekinci.WebAPI.Business.Services
                                     Firstname = mem.Firstname,
                                     Lastname = mem.Lastname,
                                     Email = mem.Email,
-                                    ProfilePhotoUrl = mem.ProfilePhotoUrl
+                                    ProfilePhotoUrl = ekinciUrl+mem.ProfilePhotoUrl
                                     //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
                                 }).FirstAsync();
 

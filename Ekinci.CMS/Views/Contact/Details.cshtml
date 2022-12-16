@@ -1,101 +1,81 @@
 ﻿@model Ekinci.CMS.Business.Models.Responses.ContactResponses.GetContactResponse
 
-<div class="">
-    <div class=" flex-column " id="kt_wrapper">
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-            <div class="post d-flex flex-column-fluid" id="kt_post">
-                <div id="kt_content_container" class="container-xxl">
-                    <div class="card mb-5 mb-xl-10">
-                        <div class="card-body pt-9 pb-0">
-                            <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+<div class=" flex-column " id="kt_wrapper">
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <div id="kt_content_container" class="container-xxl">
+                <div class="card mb-5 mb-xl-8" id="kt_profile_details_view">
+                    <div class="cursor-pointer">
+                        <div class="card-header">
+                            <h3 class="card-title">İLETİŞİM</h3>
+                            <div class="card-toolbar">
+                                <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-success align-self-center">DÜZENLE</a>&nbsp;
+                                <a href="@Url.Action("Index","Contact")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
                             </div>
-                            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
-                                <li class="nav-item mt-2">
-                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Genel Bilgi</a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
-                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
-                        <div class="cursor-pointer">
-                            <div class="card-header">
-                                <h3 class="card-title">İLETİŞİM</h3>
-                                <div class="card-toolbar">
-                                    <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-success align-self-center">DÜZENLE</a>&nbsp;
-                                    <a href="@Url.Action("Index","Contact")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
-                                </div>
+                    <div class="card-body p-9">
+                        <div class="row">
+                            <label class="col-lg-2 fw-bold text-muted">Başlık</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.Title</span>
                             </div>
                         </div>
-                        <div class="card-body p-9">
-                            <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Başlık</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Title</span>
-                                </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row">
+                            <label class="col-lg-2 fw-bold text-muted">Konum</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.Location</span>
                             </div>
                         </div>
-                        <div class="card-body p-9">
-                            <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Konum</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Location</span>
-                                </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row ">
+                            <label class="col-lg-2 fw-bold text-muted">Telefon Numarası</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.MobilePhone</span>
                             </div>
                         </div>
-                        <div class="card-body p-9">
-                            <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Telefon Numarası</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">@Model.MobilePhone</span>
-                                </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row mb-2">
+                            <label class="col-lg-2 fw-bold text-muted">Telefon Numarası</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.LandPhone</span>
                             </div>
                         </div>
-                        <div class="card-body p-9">
-                            <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Telefon Numarası</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">@Model.LandPhone</span>
-                                </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row mb-2">
+                            <label class="col-lg-2 fw-bold text-muted">Email</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.Email</span>
                             </div>
                         </div>
-                        <div class="card-body p-9">
-                            <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Email</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Email</span>
-                                </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row mb-2">
+                            <label class="col-lg-2 fw-bold text-muted">Konum Bilgileri</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.Latitude - @Model.Longitude</span>
                             </div>
                         </div>
-                        <div class="card-body p-9">
-                            <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Konum Bilgileri</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Latitude</span>
-                                </div>
+                    </div>
+  
+                    <div class="card-body p-9">
+                        <div class="row mb-2">
+                            <label class="col-lg-2 fw-bold text-muted">İnstagram</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.InstagramUrl</span>
                             </div>
                         </div>
-                        <div class="card-body p-9">
-                            <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Konum Bilgisi</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Longitude</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body p-9">
-                            <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">İnstagram</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">@Model.InstagramUrl</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body p-9">
-                            <div class="row mb-7">
-                                <label class="col-lg-4 fw-bold text-muted">Facebook</label>
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">@Model.FacebookUrl</span>
-                                </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row mb-2">
+                            <label class="col-lg-2 fw-bold text-muted">Facebook</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.FacebookUrl</span>
                             </div>
                         </div>
                     </div>

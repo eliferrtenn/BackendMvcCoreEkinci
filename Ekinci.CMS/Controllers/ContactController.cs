@@ -1,11 +1,12 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.ContactRequests;
+using Ekinci.Common.BaseController;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
-    public class ContactController : Controller
+    public class ContactController : CMSBaseController
     {
         private readonly IContactService contactService;
 
@@ -35,9 +36,12 @@ namespace Ekinci.CMS.Controllers
         {
             var result = await contactService.AddContact(request);
             if (result.IsSuccess)
+            {
+                Message(result);
                 return RedirectToAction("Index");
-
-            return View(result.Message);
+            }
+            Message(result);
+            return View();
         }
         public async Task<IActionResult> Edit(int id)
         {
@@ -49,9 +53,12 @@ namespace Ekinci.CMS.Controllers
         {
             var result = await contactService.UpdateContact(request);
             if (result.IsSuccess)
+            {
+                Message(result);
                 return RedirectToAction("Index");
-
-            return View(result.Message);
+            }
+            Message(result);
+            return View();
         }
         [HttpPost]
         public async Task<JsonResult> Delete(DeleteContactRequest request)

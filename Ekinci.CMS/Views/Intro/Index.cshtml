@@ -1,16 +1,34 @@
 ﻿@model Ekinci.CMS.Business.Models.Responses.IntroResponses.GetIntroResponse
 
-<div class="">
-    <div class=" flex-column " id="kt_wrapper">
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-            <div class="post d-flex flex-column-fluid" id="kt_post">
-                <div id="kt_content_container" class="container-xxl">
-                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
-                        <div class="cursor-pointer">
-                            <div class="card-header">
-                                <h3 class="card-title">BİZ KİMİZ?</h3>
+<div class=" flex-column " id="kt_wrapper">
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <div id="kt_content_container" class="container-xxl">
+                <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                    <div class="cursor-pointer">
+                        <div class="card-header">
+                            <h3 class="card-title">BİZ KİMİZ?</h3>
+                            @if (Model != null)
+                            {
                                 <div class="card-toolbar">
                                     <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-success align-self-center">DÜZENLE</a>
+                                </div>
+                            }
+                            else{
+                            <div class="card-toolbar">
+                                <a asp-action="Create" class="btn btn-success align-self-center">OLUŞTUR</a>
+                            </div>
+                            }
+                        </div>
+                    </div>
+
+                    @if(Model != null)
+                    {
+                        <div class="card-body p-9">
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Fotoğraf</label>
+                                <div class="col-lg-8">
+                                    <img src="@Model.PhotoUrl" alt="image" width="300" />
                                 </div>
                             </div>
                         </div>
@@ -30,9 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-
+                    }
                 </div>
             </div>
         </div>

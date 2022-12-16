@@ -1,5 +1,4 @@
-﻿using BunnyCDN.Net.Storage;
-using Ekinci.CMS.Business.Interfaces;
+﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
 using Ekinci.CMS.Business.Models.Responses.HistoryResponses;
 using Ekinci.Common.Business;
@@ -9,19 +8,17 @@ using Ekinci.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using RestSharp;
-using System.IO;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class HistoryService : BaseService, IHistoryService
     {
-        BunnyCDNStorage bunnyCDNStorage = new BunnyCDNStorage("ekinci", "257e5f3c-55fc-40b8-b00f2a941162-b427-4e2d", "de");
+        const string file = "History/";
 
         public HistoryService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
         {
         }
-        public async Task<ServiceResult> AddHistory(AddHistoryRequest request,IFormFile PhotoUrl)
+        public async Task<ServiceResult> AddHistory(AddHistoryRequest request, IFormFile PhotoUrl)
         {
             var result = new ServiceResult();
             var exist = await _context.Histories.FirstOrDefaultAsync(x => x.Title == request.Title);
@@ -38,21 +35,20 @@ namespace Ekinci.CMS.Business.Services
                 if (PhotoUrl.Length > 0)
                 {
                     var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/History/" + type;
-                    var filePathBunnyCdn = "/ekinci/History/" + type;
+                    var type = file + guid.ToString() + path;
+                    var filePath = "wwwroot/Dosya/" + type;
+                    var filePathBunnyCdn = "/ekinci/" + type;
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await PhotoUrl.CopyToAsync(stream);
                     }
                     await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    history.PhotoUrl = "History/"+type;
+                    history.PhotoUrl = type;
                 }
             }
             history.Title = request.Title;
             history.StartDate = request.StartDate;
             history.EndDate = request.EndDate;
-            //TODO:photourl
             _context.Histories.Add(history);
             await _context.SaveChangesAsync();
 
@@ -80,15 +76,20 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<List<ListHistoriesResponse>>> GetAll()
         {
             var result = new ServiceResult<List<ListHistoriesResponse>>();
+            if (_context.Histories.Count() == 0)
+            {
+                result.SetError("Tarihçe bulunamadı");
+                return result;
+            }
             var histories = await (from hist in _context.Histories
+                                   where hist.IsEnabled == true
                                    select new ListHistoriesResponse
                                    {
                                        ID = hist.ID,
                                        Title = hist.Title,
                                        StartDate = hist.StartDate.ToFormattedDate(),
                                        EndDate = hist.EndDate.ToFormattedDate(),
-                                       PhotoUrl = "https://ekinci.b-cdn.net/"+hist.PhotoUrl,
-                                       //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
                                    }).ToListAsync();
             result.Data = histories;
             return result;
@@ -105,8 +106,7 @@ namespace Ekinci.CMS.Business.Services
                                        Title = hist.Title,
                                        StartDate = hist.StartDate,
                                        EndDate = hist.EndDate,
-                                       PhotoUrl = "https://ekinci.b-cdn.net/" + hist.PhotoUrl,
-                                       //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
                                    }).FirstAsync();
             if (histories == null)
             {
@@ -122,38 +122,43 @@ namespace Ekinci.CMS.Business.Services
             Guid guid = Guid.NewGuid();
             var filePaths = new List<string>();
             var result = new ServiceResult();
-            var history = await _context.Histories.FirstOrDefaultAsync(x => x.ID == request.ID);
-            if (history == null)
+            var exist = await _context.Histories.AnyAsync(x => x.Title == request.Title && x.ID != request.ID);
+            if (exist == false)
             {
-                result.SetError("Tarih bilgisi Bulunamadı!");
-                return result;
-            }
-            if (PhotoUrl != null)
-            {
-                if (PhotoUrl.Length > 0)
+                var history = await _context.Histories.FirstOrDefaultAsync(x => x.ID == request.ID);
+                if (history == null)
                 {
-                    await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + history.PhotoUrl);
-                    var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/History/" + type;
-                    var filePathBunnyCdn = "/ekinci/History/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await PhotoUrl.CopyToAsync(stream);
-                    }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    history.PhotoUrl = "History/"+type;
+                    result.SetError("Tarih bilgisi Bulunamadı!");
+                    return result;
                 }
-
+                if (PhotoUrl != null)
+                {
+                    if (PhotoUrl.Length > 0)
+                    {
+                        await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + history.PhotoUrl);
+                        var path = Path.GetExtension(PhotoUrl.FileName);
+                        var type = file + guid.ToString() + path;
+                        var filePath = "wwwroot/Dosya/" + type;
+                        var filePathBunnyCdn = "/ekinci/" + type;
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await PhotoUrl.CopyToAsync(stream);
+                        }
+                        await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
+                        history.PhotoUrl = type;
+                    }
+                }
+                history.Title = request.Title;
+                history.StartDate = request.StartDate;
+                history.EndDate = request.EndDate;
+                _context.Histories.Update(history);
+                await _context.SaveChangesAsync();
+                result.SetSuccess("Tarihçe  başarıyla güncellendi!");
             }
-            history.Title = request.Title;
-            history.StartDate = request.StartDate;
-            history.EndDate = request.EndDate;
-            //TODO:photourl
-            _context.Histories.Update(history);
-            await _context.SaveChangesAsync();
-
-            result.SetSuccess("Tarihçe  başarıyla güncellendi!");
+            else
+            {
+                result.SetError("Bu başlıkta tarihçe zaten kayıtlıdır.");
+            }
             return result;
         }
     }

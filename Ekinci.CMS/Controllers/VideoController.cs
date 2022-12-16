@@ -1,11 +1,12 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.VideosRequests;
+using Ekinci.Common.BaseController;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
-    public class VideoController : Controller
+    public class VideoController : CMSBaseController
     {
         private readonly IVideosService videosService;
 
@@ -31,13 +32,16 @@ namespace Ekinci.CMS.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(AddVideosRequest request)
+        public async Task<IActionResult> Create(AddVideosRequest request,IFormFile VideoUrl)
         {
-            var result = await videosService.AddVideo(request);
+            var result = await videosService.AddVideo(request,VideoUrl);
             if (result.IsSuccess)
+            {
+                Message(result);
                 return RedirectToAction("Index");
-
-            return View(result.Message);
+            }
+            Message(result);
+            return View();
         }
         public async Task<IActionResult> Edit(int id)
         {
@@ -45,13 +49,16 @@ namespace Ekinci.CMS.Controllers
             return View(result.Data);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(UpdateVideosRequest request)
+        public async Task<IActionResult> Edit(UpdateVideosRequest request,IFormFile VideoUrl)
         {
-            var result = await videosService.UpdateVideo(request);
+            var result = await videosService.UpdateVideo(request,VideoUrl);
             if (result.IsSuccess)
+            {
+                Message(result);
                 return RedirectToAction("Index");
-
-            return View(result.Message);
+            }
+            Message(result);
+            return View();
         }
         [HttpPost]
         public async Task<JsonResult> Delete(DeleteVideosRequest request)

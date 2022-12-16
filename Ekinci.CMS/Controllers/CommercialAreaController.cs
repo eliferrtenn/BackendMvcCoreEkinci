@@ -1,11 +1,13 @@
-﻿using Ekinci.CMS.Business.Interfaces;
+﻿using Ekinci.CMS.Business.Extensions;
+using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.CommercialAreaRequests;
+using Ekinci.Common.BaseController;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
-    public class CommercialAreaController : Controller
+    public class CommercialAreaController : CMSBaseController
     {
         private readonly ICommercialAreaService commercialAreaService;
 
@@ -31,13 +33,16 @@ namespace Ekinci.CMS.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(AddCommercialAreaRequest request)
+        public async Task<IActionResult> Create(AddCommercialAreaRequest request,IFormFile PhotoUrl)
         {
-            var result = await commercialAreaService.AddCommercialArea(request);
+            var result = await commercialAreaService.AddCommercialArea(request, PhotoUrl);
             if (result.IsSuccess)
+            {
+                Message(result);
                 return RedirectToAction("Index");
-
-            return View(result.Message);
+            }
+            Message(result);
+            return View();
         }
         public async Task<IActionResult> Edit(int id)
         {
@@ -45,13 +50,16 @@ namespace Ekinci.CMS.Controllers
             return View(result.Data);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(UpdateCommercialAreaRequest request)
+        public async Task<IActionResult> Edit(UpdateCommercialAreaRequest request,IFormFile PhotoUrl)
         {
-            var result = await commercialAreaService.UpdateCommercialArea(request);
+            var result = await commercialAreaService.UpdateCommercialArea(request, PhotoUrl);
             if (result.IsSuccess)
+            {
+                Message(result);
                 return RedirectToAction("Index");
-
-            return View(result.Message);
+            }
+            Message(result);
+            return View();
         }
         [HttpPost]
         public async Task<JsonResult> Delete(DeleteCommercialAreaRequest request)

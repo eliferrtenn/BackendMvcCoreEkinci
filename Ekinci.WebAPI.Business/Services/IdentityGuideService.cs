@@ -1,5 +1,6 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.IdentityGuideResponse;
 using Ekinci.WebAPI.Business.Models.Responses.IdentityGuideResponses;
 using Microsoft.AspNetCore.Http;
@@ -22,26 +23,22 @@ namespace Ekinci.WebAPI.Business.Services
                                     {
                                         ID = identity.ID,
                                         Title = identity.Title,
-                                        PhotoUrl = identity.PhotoUrl,
-                                        FileUrl = identity.FileUrl,
-                                        //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                        PhotoUrl = ekinciUrl + identity.PhotoUrl,
                                     }).ToListAsync();
             result.Data = identities;
             return result;
         }
 
-        public async Task<ServiceResult<GetIdentityGuideResponse>> GetIdentityGuide(int blogID)
+        public async Task<ServiceResult<GetIdentityGuideResponse>> GetIdentityGuide(int identityID)
         {
             var result = new ServiceResult<GetIdentityGuideResponse>();
             var identities = await (from identity in _context.IdentityGuides
-                                    where identity.ID == blogID
+                                    where identity.ID == identityID
                                     select new GetIdentityGuideResponse
                                     {
                                         ID = identity.ID,
                                         Title = identity.Title,
-                                        PhotoUrl = identity.PhotoUrl,
-                                        FileUrl = identity.FileUrl,
-                                        //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                        PhotoUrl = ekinciUrl + identity.PhotoUrl,
                                     }).FirstAsync();
             if (identities == null)
             {

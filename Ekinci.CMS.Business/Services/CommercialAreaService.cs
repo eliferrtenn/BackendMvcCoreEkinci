@@ -3,29 +3,50 @@ using Ekinci.CMS.Business.Models.Requests.CommercialAreaRequests;
 using Ekinci.CMS.Business.Models.Responses.CommercialAreaResponses;
 using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class CommercialAreaService : BaseService, ICommercialAreaService
     {
+        const string file = "CommercialArea/";
         public CommercialAreaService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
         {
         }
 
-        public async Task<ServiceResult> AddCommercialArea(AddCommercialAreaRequest request)
+        public async Task<ServiceResult> AddCommercialArea(AddCommercialAreaRequest request, IFormFile PhotoUrl)
         {
+            Guid guid = Guid.NewGuid();
+            var filePaths = new List<string>();
             var result = new ServiceResult();
-            var commercialArea = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.Title == request.Title);
-            if (commercialArea != null)
+            var exist = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.Title == request.Title);
+            if (exist != null)
             {
-                result.SetError("Bu isimde Ticari Alan zaten kayıtlıdır.");
+                result.SetError("Bu isimde Ticari Alan adı zaten kayıtlıdır.");
                 return result;
             }
-            commercialArea!.Title = request.Title;
-            //TODO:Ticari alana fotourl ekleme
+            var commercialArea = new CommercialArea();
+            if (PhotoUrl != null)
+            {
+                if (PhotoUrl.Length > 0)
+                {
+                    var path = Path.GetExtension(PhotoUrl.FileName);
+                    var type = file + guid.ToString() + path;
+                    var filePath = "wwwroot/Dosya/" + type;
+                    var filePathBunnyCdn = "/ekinci/" + type;
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await PhotoUrl.CopyToAsync(stream);
+                    }
+                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
+                    commercialArea.PhotoUrl = type;
+                }
+            }
+            commercialArea.Title = request.Title;
             _context.CommercialAreas.Add(commercialArea);
             await _context.SaveChangesAsync();
 
@@ -43,7 +64,7 @@ namespace Ekinci.CMS.Business.Services
                 return result;
             }
 
-            commercialArea.IsEnabled = true;
+            commercialArea.IsEnabled = false;
             _context.CommercialAreas.Update(commercialArea);
             await _context.SaveChangesAsync();
 
@@ -54,13 +75,18 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<List<ListCommercialAreasResponse>>> GetAll()
         {
             var result = new ServiceResult<List<ListCommercialAreasResponse>>();
+            if (_context.CommercialAreas.Count() == 0)
+            {
+                result.SetError("Ticari Alan bulunamadı");
+                return result;
+            }
             var commercials = await (from commercial in _context.CommercialAreas
+                                     where commercial.IsEnabled==true
                                      select new ListCommercialAreasResponse
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl = commercial.PhotoUrl,
-                                         //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                         PhotoUrl =ekinciUrl+commercial.PhotoUrl,
                                      }).ToListAsync();
             result.Data = commercials;
             return result; ;
@@ -76,8 +102,7 @@ namespace Ekinci.CMS.Business.Services
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl = commercial.PhotoUrl,
-                                         //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                         PhotoUrl = ekinciUrl+commercial.PhotoUrl,
                                      }).FirstAsync();
             if (commercials == null)
             {
@@ -89,21 +114,47 @@ namespace Ekinci.CMS.Business.Services
         }
 
 
-        public async Task<ServiceResult> UpdateCommercialArea(UpdateCommercialAreaRequest request)
+        public async Task<ServiceResult> UpdateCommercialArea(UpdateCommercialAreaRequest request,IFormFile PhotoUrl)
         {
+            Guid guid = Guid.NewGuid();
+            var filePaths = new List<string>();
             var result = new ServiceResult();
-            var commercialArea = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.ID == request.ID);
-            if (commercialArea == null)
+            var exist = await _context.Histories.AnyAsync(x => x.Title == request.Title && x.ID != request.ID);
+            if (exist == false)
             {
-                result.SetError("Ticari alan Bulunamadı!");
-                return result;
-            }
-            commercialArea.Title = request.Title;
-            //TODO:Ticari alana fotourl ekleme
-            _context.CommercialAreas.Update(commercialArea);
-            await _context.SaveChangesAsync();
+                var commercialArea = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.ID == request.ID);
+                if (commercialArea == null)
+                {
+                    result.SetError("Ticari alan Bulunamadı!");
+                    return result;
+                }
+                if (PhotoUrl != null)
+                {
+                    if (PhotoUrl.Length > 0)
+                    {
+                        await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + commercialArea.PhotoUrl);
+                        var path = Path.GetExtension(PhotoUrl.FileName);
+                        var type = file + guid.ToString() + path;
+                        var filePath = "wwwroot/Dosya/" + type;
+                        var filePathBunnyCdn = "/ekinci/" + type;
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await PhotoUrl.CopyToAsync(stream);
+                        }
+                        await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
+                        commercialArea.PhotoUrl = type;
+                    }
+                }
+                commercialArea.Title = request.Title;
+                _context.CommercialAreas.Update(commercialArea);
+                await _context.SaveChangesAsync();
 
-            result.SetSuccess("Ticari Alan başarıyla güncellendi!");
+                result.SetSuccess("Ticari Alan başarıyla güncellendi!");
+            }
+            else
+            {
+                result.SetError("Bu Ticari alan adı zaten kayıtlıdır.");
+            }
             return result;
         }
     }

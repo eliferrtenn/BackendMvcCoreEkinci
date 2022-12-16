@@ -21,8 +21,7 @@ namespace Ekinci.WebAPI.Business.Services
                                  select new ListPressResponse
                                  {
                                      ID = press.ID,
-                                     PhotoUrl = press.PhotoUrl,
-                                     //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                     PhotoUrl = ekinciUrl + press.PhotoUrl,
                                  }).ToListAsync();
             result.Data = presses;
             return result;
@@ -36,8 +35,7 @@ namespace Ekinci.WebAPI.Business.Services
                                select new GetPressResponse
                                {
                                    ID = pres.ID,
-                                   PhotoUrl = pres.PhotoUrl,
-                                   //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                   PhotoUrl = ekinciUrl + pres.PhotoUrl,
                                }).FirstAsync();
             if (press == null)
             {

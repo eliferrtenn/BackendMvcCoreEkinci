@@ -1,111 +1,122 @@
 ﻿@model Ekinci.CMS.Business.Models.Responses.ContactResponses.GetContactResponse
-<form asp-action="Create">
-    <div class="card shadow-sm">
-        <div class="card-header">
-            <h3 class="card-title">İletişim</h3>
-            <div class="card-toolbar">
-                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="OLUŞTUR">&nbsp;
-                <a href="@Url.Action("Index","Contact")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+
+
+<div class=" flex-column " id="kt_wrapper">
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <div id="kt_content_container" class="container-xxl">
+                <div class="card mb-5 mb-xl-10">
+                    <form asp-action="Create">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h3 class="card-title">İletişim</h3>
+                                <div class="card-toolbar">
+                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="OLUŞTUR">&nbsp;
+                                    <a href="@Url.Action("Index","Contact")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 mb-5">
+                                        <label asp-for="Title" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="Title" class="form-control" />
+                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-5">
+                                        <label asp-for="Location" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="Location" class="form-control" />
+                                            <span asp-validation-for="Location" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-5">
+                                        <label asp-for="MobilePhone" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="MobilePhone" class="form-control" />
+                                            <span asp-validation-for="MobilePhone" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-5">
+                                        <label asp-for="LandPhone" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="LandPhone" class="form-control" />
+                                            <span asp-validation-for="LandPhone" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-5">
+                                        <label asp-for="Email" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="Email" class="form-control" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-5">
+                                        <label asp-for="Longitude" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="Longitude" class="form-control" />
+                                            <span asp-validation-for="Longitude" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-5">
+                                        <label asp-for="Latitude" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="Latitude" class="form-control" />
+                                            <span asp-validation-for="Latitude" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-5">
+                                        <label asp-for="InstagramUrl" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="InstagramUrl" class="form-control" />
+                                            <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-5">
+                                        <label asp-for="FacebookUrl" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="FacebookUrl" class="form-control" />
+                                            <span asp-validation-for="FacebookUrl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-12 mb-5">
-                    <label asp-for="Title" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="Title" class="form-control" />
-                        <span asp-validation-for="Title" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="Location" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="Location" class="form-control" />
-                        <span asp-validation-for="Location" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="MobilePhone" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="MobilePhone" class="form-control" />
-                        <span asp-validation-for="MobilePhone" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="LandPhone" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="LandPhone" class="form-control" />
-                        <span asp-validation-for="LandPhone" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="Email" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="Longitude" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="Longitude" class="form-control" />
-                        <span asp-validation-for="Longitude" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="Latitude" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="Latitude" class="form-control" />
-                        <span asp-validation-for="Latitude" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="InstagramUrl" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="InstagramUrl" class="form-control" />
-                        <span asp-validation-for="InstagramUrl" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="FacebookUrl" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="FacebookUrl" class="form-control" />
-                        <span asp-validation-for="FacebookUrl" class="text-danger"></span>
-                    </div>
-                </div>    
-                </div>
-        </div>
-        <div class="card-footer">
-        </div>
     </div>
-</form>
+</div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

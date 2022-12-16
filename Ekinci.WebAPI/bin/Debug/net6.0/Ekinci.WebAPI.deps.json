@@ -9,10 +9,22 @@
       "Ekinci.WebAPI/1.0.0": {
         "dependencies": {
           "Ekinci.WebAPI.Business": "1.0.0",
+          "Sms.IletiMerkezi": "1.0.18",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
           "Ekinci.WebAPI.dll": {}
+        }
+      },
+      "BunnyCDN.Net.Storage/1.0.4": {
+        "dependencies": {
+          "System.Text.Json": "4.7.2"
+        },
+        "runtime": {
+          "lib/netstandard2.1/BunnyCDN.Net.Storage.dll": {
+            "assemblyVersion": "1.0.4.0",
+            "fileVersion": "1.0.4.0"
+          }
         }
       },
       "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
@@ -527,6 +539,25 @@
           "Microsoft.NETCore.Targets": "1.1.0"
         }
       },
+      "Sms.Abstractions/1.0.18": {
+        "runtime": {
+          "lib/netstandard2.0/Sms.Abstractions.dll": {
+            "assemblyVersion": "1.0.18.0",
+            "fileVersion": "1.0.18.0"
+          }
+        }
+      },
+      "Sms.IletiMerkezi/1.0.18": {
+        "dependencies": {
+          "Sms.Abstractions": "1.0.18"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Sms.IletiMerkezi.dll": {
+            "assemblyVersion": "1.0.18.0",
+            "fileVersion": "1.0.18.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.2.3": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "3.0.0",
@@ -968,9 +999,11 @@
       },
       "Ekinci.WebAPI.Business/1.0.0": {
         "dependencies": {
+          "BunnyCDN.Net.Storage": "1.0.4",
           "Ekinci.Common": "1.0.0",
           "Ekinci.Data": "1.0.0",
-          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0"
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
+          "Sms.IletiMerkezi": "1.0.18"
         },
         "runtime": {
           "Ekinci.WebAPI.Business.dll": {}
@@ -983,6 +1016,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BunnyCDN.Net.Storage/1.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pdUw2kFNUo3O8Y1aDL4SlqgDHiERaYovoser+BmL3vyzVrxl9q1r9ZJKklcAUftQNkUK/I+y+TsRAc5sVXMm1g==",
+      "path": "bunnycdn.net.storage/1.0.4",
+      "hashPath": "bunnycdn.net.storage.1.0.4.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
       "type": "package",
@@ -1389,6 +1429,20 @@
       "sha512": "sha512-QfS/nQI7k/BLgmLrw7qm7YBoULEvgWnPI+cYsbfCVFTW8Aj+i8JhccxcFMu1RWms0YZzF+UHguNBK4Qn89e2Sg==",
       "path": "runtime.native.system/4.0.0",
       "hashPath": "runtime.native.system.4.0.0.nupkg.sha512"
+    },
+    "Sms.Abstractions/1.0.18": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-y5Bwh3MVqHltNcg32WuhwwpA+29DuIpYINOUg4JCS5eEi75aI6mxxAHfFg2tsjaO4FvFyFD8WdJm+26X84pIVQ==",
+      "path": "sms.abstractions/1.0.18",
+      "hashPath": "sms.abstractions.1.0.18.nupkg.sha512"
+    },
+    "Sms.IletiMerkezi/1.0.18": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RCsGUJWS0Az6E8Kiv3c+lWOhsfKgKd4SiCwqIF45QoLOkIlnpuMSX9j44fWTgaLX2zg7iNYr4BsTluXWVGtC9A==",
+      "path": "sms.iletimerkezi/1.0.18",
+      "hashPath": "sms.iletimerkezi.1.0.18.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.2.3": {
       "type": "package",

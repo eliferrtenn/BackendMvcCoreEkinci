@@ -10,7 +10,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Dosya\AnnouncementPhoto\General\" />
+    <Folder Include="wwwroot\Dosya\AnnouncementPhoto\Thumb\" />
     <Folder Include="wwwroot\Dosya\History\" />
+    <Folder Include="wwwroot\Dosya\Intro\" />
+    <Folder Include="wwwroot\Dosya\HumanResource\" />
+    <Folder Include="wwwroot\Dosya\CommercialArea\" />
+    <Folder Include="wwwroot\Dosya\Blog\" />
+    <Folder Include="wwwroot\Dosya\IdentityGuide\" />
+    <Folder Include="wwwroot\Dosya\Kvkk\" />
+    <Folder Include="wwwroot\Dosya\Project\General\" />
+    <Folder Include="wwwroot\Dosya\Project\Thumb\" />
+    <Folder Include="wwwroot\Dosya\Video\" />
+    <Folder Include="wwwroot\Dosya\Press\" />
+    <Folder Include="wwwroot\Dosya\Sustainability\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
   </ItemGroup>
 
 </Project>

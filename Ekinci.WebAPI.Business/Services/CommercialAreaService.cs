@@ -22,8 +22,7 @@ namespace Ekinci.WebAPI.Business.Services
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl = commercial.PhotoUrl,
-                                         //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                         PhotoUrl = ekinciUrl + commercial.PhotoUrl,
                                      }).ToListAsync();
             result.Data = commercials;
             return result; ;
@@ -39,8 +38,7 @@ namespace Ekinci.WebAPI.Business.Services
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl = commercial.PhotoUrl,
-                                         //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                         PhotoUrl = ekinciUrl + commercial.PhotoUrl,
                                      }).FirstAsync();
             if (commercials == null)
             {

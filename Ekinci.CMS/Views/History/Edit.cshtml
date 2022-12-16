@@ -1,69 +1,78 @@
 ﻿@model Ekinci.CMS.Business.Models.Responses.HistoryResponses.GetHistoryResponse
 
-<form asp-action="Edit" enctype="multipart/form-data">
-    <div class="card shadow-sm">
-        <div class="card-header">
-            <h3 class="card-title">Tarihçe</h3>
-            <div class="card-toolbar">
-                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="DÜZENLE">&nbsp;
-                <a href="@Url.Action("Index","History")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-12 mb-5">
-                    <input asp-for="ID" type="hidden" class="form-control" aria-describedby="basic-addon1" />
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                </div>
-                <div class="row mb-6">
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">Fotoğraf</label>
-                    <div class="col-lg-8">
-                        <div class="image-input image-input-outline" data-kt-image-input="true">
-                            <div class="image-input-wrapper w-125px h-125px" style="background-image:url(/@Model.PhotoUrl)"></div>
-                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Yükle">
-                                <i class="bi bi-pencil-fill fs-7"></i>
-                                <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
-                            </label>
+<div class="flex-column" id="kt_wrapper">
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <div id="kt_content_container" class="container-xxl">
+                <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h3 class="card-title">Tarihçe</h3>
+                                <div class="card-toolbar">
+                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="DÜZENLE">&nbsp;
+                                    <a href="@Url.Action("Index","History")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 mb-5">
+                                        <input asp-for="ID" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    </div>
+                                    <div class="row mb-6">
+                                        <label class="col-lg-2 col-form-label fw-bold fs-6">Fotoğraf</label>
+                                        <div class="col-lg-10">
+                                            <div class="image-input image-input-outline" data-kt-image-input="true">
+                                                <div class="image-input-wrapper w-300px h-300px" style="background-image:url(@Model.PhotoUrl)"></div>
+                                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Yükle">
+                                                    <i class="bi bi-pencil-fill fs-7"></i>
+                                                    <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
+                                                </label>
+                                            </div>
+                                            <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-5">
+                                        <label asp-for="Title" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="Title" class="form-control" />
+                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-5">
+                                        <label asp-for="StartDate" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="StartDate" class="form-control" />
+                                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-5">
+                                        <label asp-for="EndDate" class="control-label"></label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="EndDate" class="form-control" />
+                                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="Title" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="Title" class="form-control" />
-                        <span asp-validation-for="Title" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="StartDate" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="StartDate" class="form-control" />
-                        <span asp-validation-for="StartDate" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-5">
-                    <label asp-for="EndDate" class="control-label"></label>
-                    <div class="input-group form-group mb-5">
-                        <span class="input-group-text" id="basic-addon1">
-                            <i class="fa-solid fa-align-justify"></i>
-                        </span>
-                        <input asp-for="EndDate" class="form-control" />
-                        <span asp-validation-for="EndDate" class="text-danger"></span>
-                    </div>
+                    </form>
                 </div>
             </div>
-        </div>
-        <div class="card-footer">
         </div>
     </div>
-</form>
+</div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

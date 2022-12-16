@@ -25,8 +25,7 @@ namespace Ekinci.WebAPI.Business.Services
                                        Title = hist.Title,
                                        StartDate = hist.StartDate.ToFormattedDate(),
                                        EndDate = hist.EndDate.ToFormattedDate(),
-                                       PhotoUrl = hist.PhotoUrl,
-                                       //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
                                    }).ToListAsync();
             result.Data = histories;
             return result;
@@ -43,8 +42,7 @@ namespace Ekinci.WebAPI.Business.Services
                                        Title = hist.Title,
                                        StartDate = hist.StartDate.ToFormattedDate(),
                                        EndDate = hist.EndDate.ToFormattedDate(),
-                                       PhotoUrl = hist.PhotoUrl,
-                                       //TODO : resim kaydettiğin yere göre profilePhotoUrl i değiştir ve tam adres gönder.
+                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
                                    }).FirstAsync();
             if (histories == null)
             {

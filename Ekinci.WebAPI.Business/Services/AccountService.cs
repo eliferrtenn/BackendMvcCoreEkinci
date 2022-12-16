@@ -46,7 +46,6 @@ namespace Ekinci.WebAPI.Business.Services
                 result.Data.IsNewUser = true;
             }
             var smscode = KeyGenerator.CreateRandomNumber(1000, 9999);
-
             //TODO : sms gönderme işlemi.
 
             member.SmsCode = smscode.ToString();

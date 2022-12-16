@@ -77,3 +77,6 @@ C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentic
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Sms.Abstractions.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Sms.IletiMerkezi.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\BunnyCDN.Net.Storage.dll
