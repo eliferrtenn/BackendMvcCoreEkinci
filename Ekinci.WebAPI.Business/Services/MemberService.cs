@@ -1,17 +1,19 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Requests.MemberRequests;
 using Ekinci.WebAPI.Business.Models.Responses.MemberResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.WebAPI.Business.Services
 {
     public class MemberService : BaseService, IMemberService
     {
-        public MemberService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public MemberService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 

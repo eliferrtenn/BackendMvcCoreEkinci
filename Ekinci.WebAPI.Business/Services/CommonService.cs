@@ -1,6 +1,7 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
+using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.BlogResponses;
 using Ekinci.WebAPI.Business.Models.Responses.HumanResourceResponse;
@@ -11,12 +12,13 @@ using Ekinci.WebAPI.Business.Models.Responses.SustainabilityResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.WebAPI.Business.Services
 {
     public class CommonService : BaseService, ICommonService
     {
-        public CommonService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public CommonService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 
@@ -75,6 +77,9 @@ namespace Ekinci.WebAPI.Business.Services
                                    ID = intro.ID,
                                    Title = intro.Title,
                                    Description = intro.Description,
+                                   SquareMeter= intro.SquareMeter,
+                                   YearCount= intro.YearCount,
+                                   CommercialAreaCount= intro.CommercialAreaCount,
                                    PhotoUrl = ekinciUrl + intro.PhotoUrl,
                                }).FirstAsync();
             result.Data = Intro;

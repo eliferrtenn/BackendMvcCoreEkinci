@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekinci.CMS", "Ekinci.CMS\Ek
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ekinci.CMS.Business", "Ekinci.CMS.Business\Ekinci.CMS.Business.csproj", "{BB1F20C6-2DD7-423E-ADA2-3C766A498518}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ekinci.Resources", "Ekinci.Resources\Ekinci.Resources.csproj", "{89FE2E15-4771-45A3-B3FE-9BCC212930D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{BB1F20C6-2DD7-423E-ADA2-3C766A498518}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB1F20C6-2DD7-423E-ADA2-3C766A498518}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB1F20C6-2DD7-423E-ADA2-3C766A498518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89FE2E15-4771-45A3-B3FE-9BCC212930D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89FE2E15-4771-45A3-B3FE-9BCC212930D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89FE2E15-4771-45A3-B3FE-9BCC212930D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89FE2E15-4771-45A3-B3FE-9BCC212930D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

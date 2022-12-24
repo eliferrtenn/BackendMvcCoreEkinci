@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gZfQS6HRR1aAcXWAJBZIUmqL7yUBYrDM0fQyFsXBUTF/PHvNEvWkAnqXzpq1EOWLogEB6VRvSTMtmyZ7eiq/xw==",
+  "dgSpecHash": "YHxvmYO0+4vzAR6dm/yvgXNkFS3Gcsl4WrsEfGPC/ZvMWZ26+Q4FCyN/Ar436a+38DbVLKhFxzIfJz8NJndVKw==",
   "success": true,
   "projectFilePath": "C:\\Projects\\Ekinci\\Ekinci.WebAPI\\Ekinci.WebAPI.csproj",
   "expectedPackageFiles": [
@@ -42,8 +42,10 @@
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.dependencymodel\\2.1.0\\microsoft.extensions.dependencymodel.2.1.0.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\2.2.0\\microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\2.2.0\\microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.localization\\6.0.12\\microsoft.extensions.localization.6.0.12.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.localization.abstractions\\6.0.12\\microsoft.extensions.localization.abstractions.6.0.12.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.logging\\6.0.0\\microsoft.extensions.logging.6.0.0.nupkg.sha512",
-    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.3\\microsoft.extensions.logging.abstractions.6.0.3.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.objectpool\\2.2.0\\microsoft.extensions.objectpool.2.2.0.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",

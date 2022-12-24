@@ -1,0 +1,16 @@
+C:\Projects\Ekinci\Ekinci.Resources\bin\Debug\net6.0\Ekinci.Resources.deps.json
+C:\Projects\Ekinci\Ekinci.Resources\bin\Debug\net6.0\Ekinci.Resources.dll
+C:\Projects\Ekinci\Ekinci.Resources\bin\Debug\net6.0\Ekinci.Resources.pdb
+C:\Projects\Ekinci\Ekinci.Resources\bin\Debug\net6.0\tr\Ekinci.Resources.resources.dll
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\Ekinci.Resources.csproj.AssemblyReference.cache
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\Ekinci.Resources.Resources.CommonResource.tr.resources
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\Ekinci.Resources.csproj.GenerateResource.cache
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\Ekinci.Resources.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\Ekinci.Resources.AssemblyInfoInputs.cache
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\Ekinci.Resources.AssemblyInfo.cs
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\Ekinci.Resources.csproj.CoreCompileInputs.cache
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\tr\Ekinci.Resources.resources.dll
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\Ekinci.Resources.dll
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\refint\Ekinci.Resources.dll
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\Ekinci.Resources.pdb
+C:\Projects\Ekinci\Ekinci.Resources\obj\Debug\net6.0\ref\Ekinci.Resources.dll

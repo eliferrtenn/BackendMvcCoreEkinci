@@ -15,3 +15,6 @@ C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\Ekinci.Data.dll
 C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\Ekinci.Common.pdb
 C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\Ekinci.Data.pdb
 C:\Projects\Ekinci\Ekinci.CMS.Business\obj\Debug\net6.0\Ekinci.CMS.Business.csproj.CopyComplete
+C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\Ekinci.Resources.dll
+C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\Ekinci.Resources.pdb
+C:\Projects\Ekinci\Ekinci.CMS.Business\bin\Debug\net6.0\tr\Ekinci.Resources.resources.dll

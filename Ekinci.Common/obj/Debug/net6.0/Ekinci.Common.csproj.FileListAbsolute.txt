@@ -10,3 +10,7 @@ C:\Projects\Ekinci\Ekinci.Common\obj\Debug\net6.0\Ekinci.Common.dll
 C:\Projects\Ekinci\Ekinci.Common\obj\Debug\net6.0\refint\Ekinci.Common.dll
 C:\Projects\Ekinci\Ekinci.Common\obj\Debug\net6.0\Ekinci.Common.pdb
 C:\Projects\Ekinci\Ekinci.Common\obj\Debug\net6.0\ref\Ekinci.Common.dll
+C:\Projects\Ekinci\Ekinci.Common\bin\Debug\net6.0\Ekinci.Resources.dll
+C:\Projects\Ekinci\Ekinci.Common\bin\Debug\net6.0\Ekinci.Resources.pdb
+C:\Projects\Ekinci\Ekinci.Common\bin\Debug\net6.0\tr\Ekinci.Resources.resources.dll
+C:\Projects\Ekinci\Ekinci.Common\obj\Debug\net6.0\Ekinci.Common.csproj.CopyComplete

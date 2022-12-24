@@ -2,16 +2,19 @@
 using Ekinci.CMS.Business.Models.Requests.UserRequests;
 using Ekinci.CMS.Business.Models.Responses.UserResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class UserService : BaseService, IUserService
     {
-        public UserService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public UserService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
 

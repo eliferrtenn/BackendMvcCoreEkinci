@@ -1,12 +1,13 @@
-﻿using Ekinci.CMS.Business.Extensions;
-using Ekinci.CMS.Business.Interfaces;
+﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.CommercialAreaRequests;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class CommercialAreaController : CMSBaseController
     {
         private readonly ICommercialAreaService commercialAreaService;
@@ -33,7 +34,7 @@ namespace Ekinci.CMS.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(AddCommercialAreaRequest request,IFormFile PhotoUrl)
+        public async Task<IActionResult> Create(AddCommercialAreaRequest request, IFormFile PhotoUrl)
         {
             var result = await commercialAreaService.AddCommercialArea(request, PhotoUrl);
             if (result.IsSuccess)
@@ -50,7 +51,7 @@ namespace Ekinci.CMS.Controllers
             return View(result.Data);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(UpdateCommercialAreaRequest request,IFormFile PhotoUrl)
+        public async Task<IActionResult> Edit(UpdateCommercialAreaRequest request, IFormFile PhotoUrl)
         {
             var result = await commercialAreaService.UpdateCommercialArea(request, PhotoUrl);
             if (result.IsSuccess)

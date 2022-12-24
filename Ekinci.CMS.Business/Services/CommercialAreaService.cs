@@ -2,19 +2,22 @@
 using Ekinci.CMS.Business.Models.Requests.CommercialAreaRequests;
 using Ekinci.CMS.Business.Models.Responses.CommercialAreaResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class CommercialAreaService : BaseService, ICommercialAreaService
     {
         const string file = "CommercialArea/";
-        public CommercialAreaService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+
+        public CommercialAreaService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
 
@@ -26,7 +29,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu isimde Ticari Alan adı zaten kayıtlıdır.");
+                result.SetError(_localizer["CommercialAreaWithNameAlreadyExist"]);
                 return result;
             }
             var commercialArea = new CommercialArea();
@@ -50,7 +53,7 @@ namespace Ekinci.CMS.Business.Services
             _context.CommercialAreas.Add(commercialArea);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Ticari Alan başarıyla eklendi!");
+            result.SetSuccess(_localizer["CommercialAreaAdded"]);
             return result;
         }
 
@@ -60,7 +63,7 @@ namespace Ekinci.CMS.Business.Services
             var commercialArea = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (commercialArea == null)
             {
-                result.SetError("Ticari Alan Bulunamadı!");
+                result.SetError(_localizer["CommercialAreaNotFound"]);
                 return result;
             }
 
@@ -68,7 +71,7 @@ namespace Ekinci.CMS.Business.Services
             _context.CommercialAreas.Update(commercialArea);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Ticari alan silindi.");
+            result.SetSuccess(_localizer["CommercialAreaDeleted"]);
             return result;
         }
 
@@ -77,16 +80,16 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListCommercialAreasResponse>>();
             if (_context.CommercialAreas.Count() == 0)
             {
-                result.SetError("Ticari Alan bulunamadı");
+                result.SetError(_localizer["CommercialAreaNotFound"]);
                 return result;
             }
             var commercials = await (from commercial in _context.CommercialAreas
-                                     where commercial.IsEnabled==true
+                                     where commercial.IsEnabled == true
                                      select new ListCommercialAreasResponse
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl =ekinciUrl+commercial.PhotoUrl,
+                                         PhotoUrl = ekinciUrl + commercial.PhotoUrl,
                                      }).ToListAsync();
             result.Data = commercials;
             return result; ;
@@ -102,11 +105,11 @@ namespace Ekinci.CMS.Business.Services
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl = ekinciUrl+commercial.PhotoUrl,
+                                         PhotoUrl = ekinciUrl + commercial.PhotoUrl,
                                      }).FirstAsync();
             if (commercials == null)
             {
-                result.SetError("Ticari alan bulunamadı");
+                result.SetError(_localizer["CommercialAreaNotFound"]);
                 return result;
             }
             result.Data = commercials;
@@ -114,7 +117,7 @@ namespace Ekinci.CMS.Business.Services
         }
 
 
-        public async Task<ServiceResult> UpdateCommercialArea(UpdateCommercialAreaRequest request,IFormFile PhotoUrl)
+        public async Task<ServiceResult> UpdateCommercialArea(UpdateCommercialAreaRequest request, IFormFile PhotoUrl)
         {
             Guid guid = Guid.NewGuid();
             var filePaths = new List<string>();
@@ -125,7 +128,7 @@ namespace Ekinci.CMS.Business.Services
                 var commercialArea = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (commercialArea == null)
                 {
-                    result.SetError("Ticari alan Bulunamadı!");
+                    result.SetError(_localizer["CommercialAreaNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
@@ -149,11 +152,11 @@ namespace Ekinci.CMS.Business.Services
                 _context.CommercialAreas.Update(commercialArea);
                 await _context.SaveChangesAsync();
 
-                result.SetSuccess("Ticari Alan başarıyla güncellendi!");
+                result.SetSuccess(_localizer["CommercialAreaUpdated"]);
             }
             else
             {
-                result.SetError("Bu Ticari alan adı zaten kayıtlıdır.");
+                result.SetError(_localizer["CommercialAreaWithNameAlreadyExist"]);
             }
             return result;
         }

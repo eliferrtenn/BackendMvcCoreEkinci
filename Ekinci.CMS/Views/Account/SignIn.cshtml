@@ -1,0 +1,42 @@
+﻿@model Ekinci.CMS.Business.Models.Requests.AccountRequests.LoginRequest
+@{
+    Layout = "_LayoutPublic";
+}
+    <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed">
+        <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+            <a href="#" class="mb-8 text-center">
+
+                <img alt="Logo" src="~/assets/media/logos/ekinciLogo.png" class="h-xl-50px h-lg-px mb-4" />
+            </a>
+            <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+                <form class="form w-100" novalidate="novalidate" asp-action="SignIn">
+                    <div class="text-center mb-10">
+                        <h1 class="text-dark mb-3">Giriş Yap</h1>
+                    </div>
+                    <div class="fv-row mb-10">
+                        <input type="text" asp-for="Email" placeholder="E-Posta" class="form-control form-control-solid" autocomplete="off" />
+                        <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="Email"></span>
+                    </div>
+                    <div class="fv-row mb-10">
+                        <input type="text" asp-for="Password" placeholder="Şifre" class="form-control form-control-solid" autocomplete="off" />
+                        <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="Password"></span>
+                    </div>
+                    <div class="d-flex flex-stack">
+                        <div class="m-0">
+                            <button type="submit" class="btn btn-primary me-2 flex-shrink-0">Giriş Yapınız</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-10">
+                    <div></div>
+                    <a href="/Account/ForgotPassword" class="link-primary">@_localizer["ForgotPassword"]</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

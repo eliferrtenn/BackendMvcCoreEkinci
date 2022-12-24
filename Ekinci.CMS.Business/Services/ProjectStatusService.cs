@@ -1,18 +1,19 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
-using Ekinci.CMS.Business.Models.Responses.ProjectResponses;
 using Ekinci.CMS.Business.Models.Responses.ProjectStatusResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class ProjectStatusService : BaseService, IProjectStatusService
     {
-        public ProjectStatusService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public ProjectStatusService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
 
@@ -37,7 +38,7 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<GetProjectStatusResponse>> GetProjectStatus(int projectStatusID)
         {
             var result = new ServiceResult<GetProjectStatusResponse>();
-            var statuses = await(from status in _context.ProjectStatus
+            var statuses = await (from status in _context.ProjectStatus
                                   where status.ID == projectStatusID
                                   select new GetProjectStatusResponse
                                   {

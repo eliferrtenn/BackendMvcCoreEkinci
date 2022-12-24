@@ -2,11 +2,13 @@
 using Ekinci.CMS.Business.Models.Requests.PressRequests;
 using Ekinci.CMS.Business.Models.Requests.PressResponses;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class PressController : CMSBaseController
     {
         private readonly IPressService pressService;

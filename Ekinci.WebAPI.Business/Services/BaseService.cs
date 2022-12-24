@@ -1,7 +1,9 @@
 ﻿using BunnyCDN.Net.Storage;
 using Ekinci.Data.Context;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using System.Security.Claims;
 
 namespace Ekinci.WebAPI.Business.Services
@@ -11,16 +13,17 @@ namespace Ekinci.WebAPI.Business.Services
         protected EkinciContext _context;
         protected IConfiguration _configuration;
         protected IHttpContextAccessor _httpContext;
+        protected IStringLocalizer<CommonResource> _localizer;
         protected BunnyCDNStorage bunnyCDNStorage = new BunnyCDNStorage("ekinci", "257e5f3c-55fc-40b8-b00f2a941162-b427-4e2d", "de");
         protected const string ekinciUrl = "https://ekinci.b-cdn.net/";
 
-        public BaseService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext)
+        public BaseService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer)
         {
             _context = context;
             _configuration = configuration;
             _httpContext = httpContext;
+            _localizer = localizer;
         }
-
         public int CurrentUserID
         {
             get

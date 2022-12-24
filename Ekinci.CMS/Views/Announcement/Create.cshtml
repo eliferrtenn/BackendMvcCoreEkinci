@@ -1,10 +1,10 @@
-﻿@model Ekinci.CMS.Business.Models.Responses.AnnouncementResponses.GetAnnouncementResponse
+﻿@model Ekinci.CMS.Business.Models.Requests.AnnouncementRequests.AddAnnouncementRequest
 @using Microsoft.AspNetCore.Antiforgery
 @inject IAntiforgery antiforgery
 @{
     var tokenSet = antiforgery.GetAndStoreTokens(Context);
 }
-<div class=" flex-column " id="kt_wrapper">
+<div class="flex-column" id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <div id="kt_content_container" class="container-xxl">
@@ -12,16 +12,15 @@
                     <form asp-action="Create" enctype="multipart/form-data">
                         <div class="card shadow-sm">
                             <div class="card-header">
-                                <h3 class="card-title">Haber/Duyuru</h3>
+                                <h3 class="card-title">@_localizer["AnnouncementTitle"]</h3>
                                 <div class="card-toolbar">
-                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="OLUŞTUR">&nbsp;
-                                    <a href="@Url.Action("Index","Announcement")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="@_localizer["Create"]">&nbsp;
+                                    <a href="@Url.Action("Index","Announcement")" class="btn btn-danger btn-hover-rotate-start">@_localizer["TurnBack"]</a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="row mb-6">
-                                        <label class="col-lg-2 col-form-label fw-bold fs-6">Kapak Fotoğrafı</label>
                                         <div class="col-lg-10">
                                             <div class="image-input image-input-outline" data-kt-image-input="true">
                                                 <div class="image-input-wrapper w-300px h-300px"></div>
@@ -30,11 +29,11 @@
                                                     <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
                                                 </label>
                                             </div>
-                                            <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
+                                            <div class="form-text">@_localizer["UploadImageHelpText"]</div>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Title" class="control-label"></label>
+                                        <label  class="control-label">@_localizer["Title"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -44,7 +43,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Description" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Description"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -52,10 +51,20 @@
                                             <input asp-for="Description" class="form-control" />
                                             <span asp-validation-for="Description" class="text-danger"></span>
                                         </div>
+                                    </div>                   
+                                    <div class="col-md-12 mb-5">
+                                        <label class="control-label">@_localizer["AnnouncementDate"]</label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="AnnouncementDate" class="form-control" />
+                                            <span asp-validation-for="AnnouncementDate" class="text-danger"></span>
+                                        </div>
                                     </div>
                                     <div class="col-md-12 form-group mb-5">
                                         <div class="col-md-10">
-                                            <p>DUYURU FOTOĞRAFLARINI YÜKLEYİN : </p>
+                                            <p>@_localizer["AnnouncementPhotosDescription"] </p>
                                             <input type="file" name="PhotoUrls" multiple>
                                         </div>
                                     </div>

@@ -1,13 +1,13 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
-using Ekinci.CMS.Business.Models.Requests.HumanResourceRequests;
 using Ekinci.CMS.Business.Models.Requests.KvkkRequests;
 using Ekinci.CMS.Business.Models.Requests.KvkRequests;
-using Ekinci.CMS.Business.Services;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class KvkkController : CMSBaseController
     {
         private readonly IKvkkService kvkkService;
@@ -45,9 +45,9 @@ namespace Ekinci.CMS.Controllers
             return View(result.Data);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(UpdateKvkkResponse request,IFormFile PhotoUrl)
+        public async Task<IActionResult> Edit(UpdateKvkkResponse request, IFormFile PhotoUrl)
         {
-            var result = await kvkkService.UpdateKvkk(request,PhotoUrl);
+            var result = await kvkkService.UpdateKvkk(request, PhotoUrl);
             if (result.IsSuccess)
             {
                 Message(result);

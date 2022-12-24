@@ -3,10 +3,12 @@ using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
 using Ekinci.CMS.Business.Models.Requests.HumanResourceRequests;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class HumanResourceController : CMSBaseController
     {
         private readonly IHumanResourceService humanResourceService;

@@ -4,15 +4,6 @@
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <div id="kt_content_container" class="container-xxl">
-                @if (TempData["MessageStatus"] != null && TempData["MessageText"] != null)
-                {
-                    <div class="alert alert-primary">
-                        <div class="d-flex flex-column">
-                            <h4 class="mb-1 text-dark">@TempData["MessageStatus"]</h4>
-                            <span>@TempData["MessageText"]</span>
-                        </div>
-                    </div>
-                }
                 <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                     <form asp-action="Create" enctype="multipart/form-data">
                         <div class="card shadow-sm">
@@ -26,7 +17,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="row mb-6">
-                                        <label class="col-lg-4 col-form-label fw-bold fs-6">Fotoğraf</label>
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6">@_localizer["PhotoUrl"]</label>
                                         <div class="col-lg-8">
                                             <div class="image-input image-input-outline" data-kt-image-input="true">
                                                 <div class="image-input-wrapper w-125px h-125px"></div>
@@ -39,7 +30,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Title" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Title"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -49,7 +40,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="BlogDate" class="control-label"></label>
+                                        <label class="control-label">@_localizer["BlogDate"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -59,7 +50,7 @@
                                         </div>
                                     </div>       
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="InstagramUrl" class="control-label"></label>
+                                        <label class="control-label">@_localizer["InstagramUrl"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>

@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ox9rS8iQxoQS3xB2j7UhqgALX2d21A4M3MHg7Q3eE5XdAOaGmVgZVbVgQYsrDknzKyMLIqPWioV6SaEDSuFanw==",
+  "success": true,
+  "projectFilePath": "C:\\Projects\\Ekinci\\Ekinci.Resources\\Ekinci.Resources.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.localization\\6.0.12\\microsoft.extensions.localization.6.0.12.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.localization.abstractions\\6.0.12\\microsoft.extensions.localization.abstractions.6.0.12.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.3\\microsoft.extensions.logging.abstractions.6.0.3.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\Elif\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

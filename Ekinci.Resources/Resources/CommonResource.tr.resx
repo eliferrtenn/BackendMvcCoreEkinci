@@ -1,0 +1,591 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Dil Değiştir</value>
+  </data>
+  <data name="Current_Language_ID" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Pasif</value>
+  </data>
+  <data name="EMail" xml:space="preserve">
+    <value>E-Posta</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Aktif</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>İngilizce</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Resim</value>
+  </data>
+  <data name="RecordAdded" xml:space="preserve">
+    <value>Kayıt başarıyla eklendi.</value>
+  </data>
+  <data name="RecordAlreadyExist" xml:space="preserve">
+    <value>Bu kayıt bulunmaktadır.</value>
+  </data>
+  <data name="RecordApproved" xml:space="preserve">
+    <value>Kayıt Onaylandı.</value>
+  </data>
+  <data name="RecordDeleted" xml:space="preserve">
+    <value>Kayıt başarıyla silindi.</value>
+  </data>
+  <data name="RecordNotAdded" xml:space="preserve">
+    <value>Kayıt eklenemedi.</value>
+  </data>
+  <data name="RecordNotFound" xml:space="preserve">
+    <value>Aradığınız kayıt bulunamadı.</value>
+  </data>
+  <data name="RecordRejected" xml:space="preserve">
+    <value>Kayıt onaylanmadı.</value>
+  </data>
+  <data name="RecordsUpdated" xml:space="preserve">
+    <value>Bilgiler başarıyla güncellendi.</value>
+  </data>
+  <data name="RecordUpdated" xml:space="preserve">
+    <value>Kayıt başarıyla güncellendi. </value>
+  </data>
+  <data name="RecordWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu isimde kayıt bulunmaktadır.</value>
+  </data>
+  <data name="ResettingYourPassword" xml:space="preserve">
+    <value>Şifrenizi sıfırlayarak ilerlemek için lütfen gerekli bilgileri doldurunuz.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="SmsSendedForLogin" xml:space="preserve">
+    <value>Ekinci uygulamasına giriş için sms kodu cep telefonunuza gönderilmiştir.</value>
+  </data>
+  <data name="SmsVerificationText" xml:space="preserve">
+    <value>Ekinci uygulamasına giriş için şifreniz  :</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="Turkish" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Güncelle</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Kullanıcı</value>
+  </data>
+  <data name="UserEmailOrMobilePhoneExist" xml:space="preserve">
+    <value>Bu telefon numarası veya email ile kayıtlı kullanıcı bulunmaktadır.</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Kullanıcı bulunamadı.</value>
+  </data>
+  <data name="ValidationForDate" xml:space="preserve">
+    <value>Lütfen geçerli bir tarih giriniz.</value>
+  </data>
+  <data name="ValidationForEmail" xml:space="preserve">
+    <value>Lütfen geçerli bir e-posta adresi giriniz.</value>
+  </data>
+  <data name="ValidationForMax" xml:space="preserve">
+    <value>Lütfen {0} değerine eşit ya da daha küçük bir değer giriniz.</value>
+  </data>
+  <data name="ValidationForMaxLength" xml:space="preserve">
+    <value>Lütfen en fazla {1} karakter uzunluğunda bir değer giriniz.</value>
+  </data>
+  <data name="ValidationForMin" xml:space="preserve">
+    <value>Lütfen {0} değerine eşit ya da daha büyük bir değer giriniz.</value>
+  </data>
+  <data name="ValidationForMinLength" xml:space="preserve">
+    <value>Lütfen en az {1} karakter uzunluğunda bir değer giriniz.</value>
+  </data>
+  <data name="ValidationForNumber" xml:space="preserve">
+    <value>Lütfen geçerli bir sayı giriniz.</value>
+  </data>
+  <data name="ValidationForPasswordsMustBeSame" xml:space="preserve">
+    <value>Şifreler aynı olmalıdır.</value>
+  </data>
+  <data name="ValidationForPhone" xml:space="preserve">
+    <value>Lütfen geçerli bir telefon numarası giriniz.</value>
+  </data>
+  <data name="ValidationForRangeLength" xml:space="preserve">
+    <value>Lütfen en az {0} ve en fazla {1} uzunluğunda bir değer giriniz.</value>
+  </data>
+  <data name="ValidationForRequired" xml:space="preserve">
+    <value>Bu alan boş olmamalıdır.</value>
+  </data>
+  <data name="ValidationForUrl" xml:space="preserve">
+    <value>Lütfen geçerli bir web adresi (URL) giriniz.</value>
+  </data>
+  <data name="VerificationCodeIsExpired" xml:space="preserve">
+    <value>Doğrulama kodunun süresi geçmiş. Lütfen tekrar deneyiniz.</value>
+  </data>
+  <data name="VerificationCodeIsNotValid" xml:space="preserve">
+    <value>Doğrulama kodu geçerli değil. Lütfen tekrar deneyiniz.</value>
+  </data>
+  <data name="ProfilePhoto" xml:space="preserve">
+    <value>Profil Fotoğrafı</value>
+  </data>
+  <data name="UploadImageHelpText" xml:space="preserve">
+    <value>Lütfen png, jpg, jpeg resim formatlarından birini yükleyiniz.</value>
+  </data>
+  <data name="EmailSentForPassword" xml:space="preserve">
+    <value>Mail adresinize yeni şifreniz gönderilmiştir.</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Başarılı işlem.</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Dikkat</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Kayıt Tarihi</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Bitiş Tarihi</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Başlangıç Tarihi</value>
+  </data>
+  <data name="PhotoUrl" xml:space="preserve">
+    <value>Fotoğraf</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Başlık</value>
+  </data>
+  <data name="AnnouncementAdded" xml:space="preserve">
+    <value>Haber/Duyuru başarıyla eklendi.</value>
+  </data>
+  <data name="AnnouncementDeleted" xml:space="preserve">
+    <value>Haber/Duyuru başarıyla silindi.</value>
+  </data>
+  <data name="AnnouncementNotFound" xml:space="preserve">
+    <value>Aradığınız haber/duyuru bulunamadı.</value>
+  </data>
+  <data name="AnnouncementPhoto" xml:space="preserve">
+    <value>Fotoğraf</value>
+  </data>
+  <data name="AnnouncementPhotos" xml:space="preserve">
+    <value>Haber/Duyuru Fotoğrafları</value>
+  </data>
+  <data name="AnnouncementUpdated" xml:space="preserve">
+    <value>Haber/Duyuru başarıyla güncellendi.</value>
+  </data>
+  <data name="AnnouncementWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta haber/duyuru bulunmaktadır.</value>
+  </data>
+  <data name="PhotoDeleted" xml:space="preserve">
+    <value>Fotoğraf slindi</value>
+  </data>
+  <data name="ThumbUrl" xml:space="preserve">
+    <value>Kapak Fotoğrafı</value>
+  </data>
+  <data name="aaa" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ApartmentCount" xml:space="preserve">
+    <value>Daire Sayısı</value>
+  </data>
+  <data name="DeliveryDate" xml:space="preserve">
+    <value>Teslim Tarihi</value>
+  </data>
+  <data name="FileUrl" xml:space="preserve">
+    <value>Dosya</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="ProjectDate" xml:space="preserve">
+    <value>Proje Tarihi</value>
+  </data>
+  <data name="SquareMeter" xml:space="preserve">
+    <value>Yaşam Alanı(m2)</value>
+  </data>
+  <data name="SubTitle" xml:space="preserve">
+    <value>Alt Başlık</value>
+  </data>
+  <data name="BlogDate" xml:space="preserve">
+    <value>Blog Tarihi</value>
+  </data>
+  <data name="InstagramUrl" xml:space="preserve">
+    <value>İnstagram Adresi</value>
+  </data>
+  <data name="VideoUrl" xml:space="preserve">
+    <value>Video Adresi</value>
+  </data>
+  <data name="FacebookUrl" xml:space="preserve">
+    <value>Facebook Adresi</value>
+  </data>
+  <data name="LandPhone" xml:space="preserve">
+    <value>Telefon Numarası</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Adres</value>
+  </data>
+  <data name="MobilePhone" xml:space="preserve">
+    <value>Mobil Telefon Numarası</value>
+  </data>
+  <data name="BlogAdded" xml:space="preserve">
+    <value>Blog başarıyla eklendi.</value>
+  </data>
+  <data name="BlogDeleted" xml:space="preserve">
+    <value>Blog başarıyla silindi.</value>
+  </data>
+  <data name="BlogNotFound" xml:space="preserve">
+    <value>Blog bulunamadı.</value>
+  </data>
+  <data name="BlogUpdated" xml:space="preserve">
+    <value>Blog başarıyla güncellendi.</value>
+  </data>
+  <data name="BlogWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta blog zaten kayıtlıdır.</value>
+  </data>
+  <data name="CommercialAreaAdded" xml:space="preserve">
+    <value>Ticari alan başarıyla eklendi.</value>
+  </data>
+  <data name="CommercialAreaDeleted" xml:space="preserve">
+    <value>Ticari alan başarıyla silindi.</value>
+  </data>
+  <data name="CommercialAreaNotFound" xml:space="preserve">
+    <value>Ticari alan bulunamadı.</value>
+  </data>
+  <data name="CommercialAreaUpdated" xml:space="preserve">
+    <value>Ticari alan başarıyla güncellendi.</value>
+  </data>
+  <data name="CommericalAreaWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta ticari alan zaten kayıtlıdır.</value>
+  </data>
+  <data name="ContactAdded" xml:space="preserve">
+    <value>İletişim bilgileri başarıyla eklendi.</value>
+  </data>
+  <data name="ContactDeleted" xml:space="preserve">
+    <value>İletişim bilgileri başarıyla silindi.</value>
+  </data>
+  <data name="ContactNotFound" xml:space="preserve">
+    <value>İletişim bilgileri bulunamadı.</value>
+  </data>
+  <data name="ContactUpdated" xml:space="preserve">
+    <value>İletişim bilgileri başarıyla güncellendi.</value>
+  </data>
+  <data name="ContactWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta iletişim bilgisi zaten kayıtlıdır.</value>
+  </data>
+  <data name="HistoryAdded" xml:space="preserve">
+    <value>Tarihçe başarıyla eklendi.</value>
+  </data>
+  <data name="HistoryDeleted" xml:space="preserve">
+    <value>Tarihçe başarıyla silindi.</value>
+  </data>
+  <data name="HistoryNotFound" xml:space="preserve">
+    <value>Tarihçe bulunamadı.</value>
+  </data>
+  <data name="HistoryUpdated" xml:space="preserve">
+    <value>Tarihçe başarıyla güncellendi.</value>
+  </data>
+  <data name="HistoryWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta tarihçe zaten kayıtlıdır.</value>
+  </data>
+  <data name="HumanResourceAdded" xml:space="preserve">
+    <value>İnsan kaynakları başarıyla eklendi.</value>
+  </data>
+  <data name="HumanResourceDeleted" xml:space="preserve">
+    <value>İnsan kaynakları başarıyla silindi.</value>
+  </data>
+  <data name="HumanResourceNotFound" xml:space="preserve">
+    <value>İnsan kaynakları bulunamadı.</value>
+  </data>
+  <data name="HumanResourceUpdated" xml:space="preserve">
+    <value>İnsan kaynakları başarıyla güncellendi.</value>
+  </data>
+  <data name="HumanResourceWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta insan kaynakları zaten kayıtlıdır.</value>
+  </data>
+  <data name="IdentityGuideAdded" xml:space="preserve">
+    <value>Kurumsal kimlik rehberi başarıyla eklendi.</value>
+  </data>
+  <data name="IdentityGuideDeleted" xml:space="preserve">
+    <value>Kurumsal kimlik rehberi başarıyla silindi.</value>
+  </data>
+  <data name="IdentityGuideNotFound" xml:space="preserve">
+    <value>Kurumsal Kimlik rehberi bulunamadı.</value>
+  </data>
+  <data name="IdentityGuideUpdated" xml:space="preserve">
+    <value>Kurumsal kimlik rehberi başarıyla güncellendi.</value>
+  </data>
+  <data name="IdentityGuideWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta kurumsal kimlik rehberi zaten kayıtlıdır.</value>
+  </data>
+  <data name="IntroAdded" xml:space="preserve">
+    <value>Tanıtım başarıyla eklendi.</value>
+  </data>
+  <data name="IntroDeleted" xml:space="preserve">
+    <value>Tanıtım başarıyla silindi</value>
+  </data>
+  <data name="IntroNotFound" xml:space="preserve">
+    <value>Aradığınız tanıtım bulunamadı.</value>
+  </data>
+  <data name="IntroUpdated" xml:space="preserve">
+    <value>Tanıtım başarıyla güncellendi.</value>
+  </data>
+  <data name="IntroWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta tanıtım zaten kayıtlıdır.</value>
+  </data>
+  <data name="KvkkAdded" xml:space="preserve">
+    <value>Kvkk başarıyla eklendi.</value>
+  </data>
+  <data name="KvkkDeleted" xml:space="preserve">
+    <value>Kvkk başarıyla silindi.</value>
+  </data>
+  <data name="KvkkNotFound" xml:space="preserve">
+    <value>Kvkk bulunamadı.</value>
+  </data>
+  <data name="KvkkUpdated" xml:space="preserve">
+    <value>Kvkk başarıyla güncellendi.</value>
+  </data>
+  <data name="KvkkWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta kvkk zaten kayıtlıdır.</value>
+  </data>
+  <data name="PressAdded" xml:space="preserve">
+    <value>Basın başarıyla eklendi.</value>
+  </data>
+  <data name="PressAlreadyExist" xml:space="preserve">
+    <value>Basın zaten kayıtlıdır.</value>
+  </data>
+  <data name="PressDeleted" xml:space="preserve">
+    <value>Basın başarıyla silindi.</value>
+  </data>
+  <data name="PressNotFound" xml:space="preserve">
+    <value>Basın bulunamadı.</value>
+  </data>
+  <data name="PressUpdated" xml:space="preserve">
+    <value>Basın başarıyla güncellendi.</value>
+  </data>
+  <data name="ProjectAdded" xml:space="preserve">
+    <value>Proje başarıyla eklendi.</value>
+  </data>
+  <data name="ProjectDeleted" xml:space="preserve">
+    <value>Proje başarıyla silindi.</value>
+  </data>
+  <data name="ProjectNotFound" xml:space="preserve">
+    <value>Proje bulunamadı.</value>
+  </data>
+  <data name="ProjectPhotoDeleted" xml:space="preserve">
+    <value>Projenin fotoğrafı başarıyla silindi.</value>
+  </data>
+  <data name="ProjectPhotoNotFound" xml:space="preserve">
+    <value>Projenin fotoğrafı bulunamadı.</value>
+  </data>
+  <data name="ProjectUpdated" xml:space="preserve">
+    <value>Proje başarıyla güncellendi.</value>
+  </data>
+  <data name="ProjectWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta proje zaten kayıtlıdır.</value>
+  </data>
+  <data name="SustainabilityAdded" xml:space="preserve">
+    <value>Sürdürülebilirlik başarıyla eklendi.</value>
+  </data>
+  <data name="SustainabilityDeleted" xml:space="preserve">
+    <value>Sürdürülebilirlik başarıyla silindi.</value>
+  </data>
+  <data name="SustainabilityNotFound" xml:space="preserve">
+    <value>Sürdürülebilirlik bulunamadı.</value>
+  </data>
+  <data name="SustainabilityUpdated" xml:space="preserve">
+    <value>Sürdürülebilirlik başarıyla güncellendi.</value>
+  </data>
+  <data name="SustainabilityWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta sürdürülebilirlik zaten kayıtlıdır.</value>
+  </data>
+  <data name="VideoAdded" xml:space="preserve">
+    <value>Video başarıyla eklendi.</value>
+  </data>
+  <data name="VideoDeleted" xml:space="preserve">
+    <value>Video başarıyla silindi.</value>
+  </data>
+  <data name="VideoNotFound" xml:space="preserve">
+    <value>Video bulunamadı.</value>
+  </data>
+  <data name="VideoUpdated" xml:space="preserve">
+    <value>Video başarıyla güncellendi.</value>
+  </data>
+  <data name="VideoWithNameAlreadyExist" xml:space="preserve">
+    <value>Bu başlıkta video zaten kayıtlıdır.</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Şifremi Unuttum</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>İptal Et</value>
+  </data>
+  <data name="Firstame" xml:space="preserve">
+    <value>İsim</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>İsim Soyisim</value>
+  </data>
+  <data name="Lastname" xml:space="preserve">
+    <value>Soyisim</value>
+  </data>
+  <data name="TurnBack" xml:space="preserve">
+    <value>Geri Dön</value>
+  </data>
+  <data name="MyUserInformation" xml:space="preserve">
+    <value>Bilgilerim</value>
+  </data>
+  <data name="AnnouncementPhotosDescription" xml:space="preserve">
+    <value>HABER/DUYURU FOTOĞRAFLARINI YÜKLEYİN.</value>
+  </data>
+  <data name="AnnouncementTitle" xml:space="preserve">
+    <value>Haber/Duyuru</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Oluştur</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Düzenle</value>
+  </data>
+  <data name="HistoryTitle" xml:space="preserve">
+    <value>Tarihçe</value>
+  </data>
+  <data name="HumanResourceTitle" xml:space="preserve">
+    <value>İnsan Kaynakları</value>
+  </data>
+  <data name="IntroTitle" xml:space="preserve">
+    <value>Biz Kimiz?</value>
+  </data>
+  <data name="SustainabilityTitle" xml:space="preserve">
+    <value>Sürdürülebilirlik</value>
+  </data>
+  <data name="AnnouncementDate" xml:space="preserve">
+    <value>Duyuru Tarihi</value>
+  </data>
+  <data name="CommercialAreaCount" xml:space="preserve">
+    <value>Ticari Alan </value>
+  </data>
+  <data name="YearCount" xml:space="preserve">
+    <value>Kaçıncı yıl</value>
+  </data>
+</root>

@@ -1,6 +1,6 @@
 ﻿@model Ekinci.CMS.Business.Models.Responses.KvkkResponses.GetKvkkResponse
 
-<div class=" flex-column " id="kt_wrapper">
+<div class="flex-column" id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <div id="kt_content_container" class="container-xxl">
@@ -21,7 +21,7 @@
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     </div>
                                     <div class="row mb-6">
-                                        <label class="col-lg-2 col-form-label fw-bold fs-6">Fotoğraf</label>
+                                        <label class="col-lg-2 col-form-label fw-bold fs-6">@_localizer["PhotoUrl"]</label>
                                         <div class="col-lg-10">
                                             <div class="image-input image-input-outline" data-kt-image-input="true">
                                                 <div class="image-input-wrapper w-300px h-300px" style="background-image:url(@Model.PhotoUrl)"></div>
@@ -34,7 +34,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Title" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Title"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -44,7 +44,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Description" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Description"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -54,8 +54,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
                             </div>
                         </div>
                     </form>

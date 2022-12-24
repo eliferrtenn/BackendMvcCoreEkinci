@@ -3,19 +3,22 @@ using Ekinci.CMS.Business.Models.Requests.KvkkRequests;
 using Ekinci.CMS.Business.Models.Requests.KvkRequests;
 using Ekinci.CMS.Business.Models.Responses.KvkkResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class KvkkService : BaseService, IKvkkService
     {
         const string file = "Kvkk/";
-        public KvkkService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+
+        public KvkkService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
 
@@ -25,7 +28,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Kvkks.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu başlıkta kvkk zaten kayıtlıdır.");
+                result.SetError(_localizer["KvkkWithNameAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -52,7 +55,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Kvkks.Add(kvkk);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Kvkk başarıyla eklendi!");
+            result.SetSuccess(_localizer["KvkkAdded"]);
             return result;
         }
 
@@ -61,7 +64,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<GetKvkkResponse>();
             if (_context.Kvkks.Count() == 0)
             {
-                result.SetError("Kvkk bulunamadı");
+                result.SetError(_localizer["KvkkNotFound"]);
                 return result;
             }
             var kvkk = await (from kvk in _context.Kvkks
@@ -70,7 +73,7 @@ namespace Ekinci.CMS.Business.Services
                                   ID = kvk.ID,
                                   Title = kvk.Title,
                                   Description = kvk.Description,
-                                  PhotoUrl =ekinciUrl+kvk.PhotoUrl,
+                                  PhotoUrl = ekinciUrl + kvk.PhotoUrl,
                               }).SingleOrDefaultAsync();
 
             result.Data = kvkk;
@@ -82,10 +85,10 @@ namespace Ekinci.CMS.Business.Services
             Guid guid = Guid.NewGuid();
             var filePaths = new List<string>();
             var result = new ServiceResult();
-                var kvkk = await _context.Kvkks.FirstOrDefaultAsync(x => x.ID == request.ID);
+            var kvkk = await _context.Kvkks.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (kvkk == null)
             {
-                result.SetError("Kvkk Bulunamadı!");
+                result.SetError(_localizer["KvkkNotFound"]);
                 return result;
             }
             if (PhotoUrl != null)
@@ -109,7 +112,7 @@ namespace Ekinci.CMS.Business.Services
             kvkk.Description = request.Description;
             _context.Kvkks.Update(kvkk);
             await _context.SaveChangesAsync();
-            result.SetSuccess("Kvkk başarıyla güncellendi!");
+            result.SetSuccess(_localizer["KvkkUpdated"]);
             return result;
         }
     }

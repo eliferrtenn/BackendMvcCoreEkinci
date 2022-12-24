@@ -2,19 +2,22 @@
 using Ekinci.CMS.Business.Models.Requests.IntroRequests;
 using Ekinci.CMS.Business.Models.Responses.IntroResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class IntroService : BaseService, IIntroService
     {
         const string file = "Intro/";
-        public IntroService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+
+        public IntroService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
 
@@ -24,7 +27,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Intros.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu başlıkta tanıtım zaten kayıtlıdır.");
+                result.SetError(_localizer["IntroWithNameAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -48,9 +51,12 @@ namespace Ekinci.CMS.Business.Services
             }
             intro.Title = request.Title;
             intro.Description = request.Description;
+            intro.SquareMeter = request.SquareMeter;
+            intro.YearCount = request.YearCount;
+            intro.CommercialAreaCount = request.CommercialAreaCount;
             _context.Intros.Add(intro);
             await _context.SaveChangesAsync();
-            result.SetSuccess("Tanıtım başarıyla eklendi!");
+            result.SetSuccess(_localizer["IntroAdded"]);
             return result;
         }
 
@@ -59,7 +65,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<GetIntroResponse>();
             if (_context.Intros.Count() == 0)
             {
-                result.SetError("Tanıtım yok");
+                result.SetError(_localizer["IntoNotFound"]);
                 return result;
             }
             var Intro = await (from intro in _context.Intros
@@ -68,13 +74,16 @@ namespace Ekinci.CMS.Business.Services
                                    ID = intro.ID,
                                    Title = intro.Title,
                                    Description = intro.Description,
-                                   PhotoUrl = ekinciUrl+intro.PhotoUrl,
+                                   SquareMeter = intro.SquareMeter,
+                                   YearCount = intro.YearCount,
+                                   CommercialAreaCount = intro.CommercialAreaCount,
+                                   PhotoUrl = ekinciUrl + intro.PhotoUrl,
                                }).FirstAsync();
             result.Data = Intro;
             return result;
         }
 
-        public async Task<ServiceResult> UpdateIntro(UpdateIntroRequest request,IFormFile PhotoUrl)
+        public async Task<ServiceResult> UpdateIntro(UpdateIntroRequest request, IFormFile PhotoUrl)
         {
             Guid guid = Guid.NewGuid();
             var filePaths = new List<string>();
@@ -85,7 +94,7 @@ namespace Ekinci.CMS.Business.Services
                 var intro = await _context.Intros.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (intro == null)
                 {
-                    result.SetError("Tanıtım kısmı Bulunamadı!");
+                    result.SetError(_localizer["IntroNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
@@ -107,15 +116,17 @@ namespace Ekinci.CMS.Business.Services
                 }
                 intro.Title = request.Title;
                 intro.Description = request.Description;
+                intro.SquareMeter = request.SquareMeter;
+                intro.YearCount = request.YearCount;
+                intro.CommercialAreaCount = request.CommercialAreaCount;
                 _context.Intros.Update(intro);
                 await _context.SaveChangesAsync();
-                result.SetSuccess("Tanıtım kısmı başarıyla güncellendi!");
+                result.SetSuccess(_localizer["IntroUpdated"]);
             }
             else
             {
-                result.SetError("Bu başlıkta tanıtım  zaten kayıtlıdır.");
+                result.SetError(_localizer["IntroWithNameAlreadyExist"]);
             }
-
             return result;
         }
     }

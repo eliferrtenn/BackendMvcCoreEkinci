@@ -1,16 +1,18 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Data.Context;
+using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.CommercialAreaResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.WebAPI.Business.Services
 {
     public class CommercialAreaService : BaseService, ICommercialAreaService
     {
-        public CommercialAreaService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public CommercialAreaService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 

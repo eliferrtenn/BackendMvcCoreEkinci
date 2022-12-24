@@ -1,17 +1,19 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
+using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.BlogResponses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.WebAPI.Business.Services
 {
     public class BlogService : BaseService, IBlogService
     {
-        public BlogService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public BlogService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 

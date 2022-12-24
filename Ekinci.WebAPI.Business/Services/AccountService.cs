@@ -1,28 +1,32 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Common.Helpers;
 using Ekinci.Common.JwtModels;
+using Ekinci.Common.SMSSender;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Requests.AccountRequests;
 using Ekinci.WebAPI.Business.Models.Responses.AccountResponses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using System.Security.Claims;
 
 namespace Ekinci.WebAPI.Business.Services
 {
     public class AccountService : BaseService, IAccountService
     {
+        private readonly ISMSSender smsSender;
 
-        public AccountService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public AccountService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 
         public async Task<ServiceResult<LoginResponse>> Login(LoginRequest request)
         {
-            var result = new ServiceResult<LoginResponse> { Data = new LoginResponse()};
+            var result = new ServiceResult<LoginResponse> { Data = new LoginResponse() };
             var member = await _context.Members.FirstOrDefaultAsync(x => x.MobilePhone == request.MobilePhone);
             if (member == null)
             {
@@ -37,7 +41,7 @@ namespace Ekinci.WebAPI.Business.Services
                 await _context.SaveChangesAsync();
                 result.Data.IsNewUser = true;
             }
-            else if(member.IsEnabled)
+            else if (member.IsEnabled)
             {
                 result.Data.IsNewUser = false;
             }
@@ -45,10 +49,20 @@ namespace Ekinci.WebAPI.Business.Services
             {
                 result.Data.IsNewUser = true;
             }
-            var smscode = KeyGenerator.CreateRandomNumber(1000, 9999);
-            //TODO : sms gönderme işlemi.
+            var smsCode = string.Empty;
+            if (request.MobilePhone == "909090909090" || request.MobilePhone == "905070033286") // Sabit numarayla giriş yapmak için Bu numara IOS ve Android ekibine verilecek.
+            {
+                smsCode = "2020";
+            }
+            else
+            {
+                smsCode = KeyGenerator.CreateRandomNumber(1000, 9999).ToString();
 
-            member.SmsCode = smscode.ToString();
+                var smsText = _localizer["SmsVerificationText"] + smsCode;
+                var smsResult = await smsSender.SendAsync(request.MobilePhone, smsText);
+            }
+
+            member.SmsCode = smsCode.ToString();
             member.SmsCodeExpireDate = DateTime.Now.AddMinutes(3);
             _context.Members.Update(member);
             await _context.SaveChangesAsync();

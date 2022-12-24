@@ -2,12 +2,15 @@
 using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
 using Ekinci.CMS.Business.Models.Responses.HistoryResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
@@ -15,16 +18,17 @@ namespace Ekinci.CMS.Business.Services
     {
         const string file = "History/";
 
-        public HistoryService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public HistoryService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
+
         public async Task<ServiceResult> AddHistory(AddHistoryRequest request, IFormFile PhotoUrl)
         {
             var result = new ServiceResult();
             var exist = await _context.Histories.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu başlıkta tarihçe zaten kayıtlıdır.");
+                result.SetError(_localizer["HistoryWithNameAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -52,7 +56,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Histories.Add(history);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Tarihçe başarıyla eklendi!");
+            result.SetSuccess(_localizer["HistoryAdded"]);
             return result;
         }
 
@@ -62,14 +66,14 @@ namespace Ekinci.CMS.Business.Services
             var history = await _context.Histories.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (history == null)
             {
-                result.SetError("Tarih bilgisi Bulunamadı!");
+                result.SetError(_localizer["HistoryNotFound"]);
                 return result;
             }
             history.IsEnabled = false;
             _context.Histories.Update(history);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Tarih bilgisi silindi.");
+            result.SetSuccess(_localizer["HistoryDeleted"]);
             return result;
         }
 
@@ -78,7 +82,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListHistoriesResponse>>();
             if (_context.Histories.Count() == 0)
             {
-                result.SetError("Tarihçe bulunamadı");
+                result.SetError(_localizer["HistoryNotFound"]);
                 return result;
             }
             var histories = await (from hist in _context.Histories
@@ -110,7 +114,7 @@ namespace Ekinci.CMS.Business.Services
                                    }).FirstAsync();
             if (histories == null)
             {
-                result.SetError("Tarihçe bulunamadı");
+                result.SetError(_localizer["HistoryNotFound"]);
                 return result;
             }
             result.Data = histories;
@@ -128,7 +132,7 @@ namespace Ekinci.CMS.Business.Services
                 var history = await _context.Histories.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (history == null)
                 {
-                    result.SetError("Tarih bilgisi Bulunamadı!");
+                    result.SetError(_localizer["HistoryNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
@@ -153,11 +157,11 @@ namespace Ekinci.CMS.Business.Services
                 history.EndDate = request.EndDate;
                 _context.Histories.Update(history);
                 await _context.SaveChangesAsync();
-                result.SetSuccess("Tarihçe  başarıyla güncellendi!");
+                result.SetSuccess(_localizer["HistoryUpdated"]);
             }
             else
             {
-                result.SetError("Bu başlıkta tarihçe zaten kayıtlıdır.");
+                result.SetError(_localizer["HistoryWithNameAlreadyExist"]);
             }
             return result;
         }

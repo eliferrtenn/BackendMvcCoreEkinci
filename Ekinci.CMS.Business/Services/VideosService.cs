@@ -2,29 +2,32 @@
 using Ekinci.CMS.Business.Models.Requests.VideosRequests;
 using Ekinci.CMS.Business.Models.Responses.VideosResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class VideosService : BaseService, IVideosService
     {
         const string file = "Video/";
-        public VideosService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+
+        public VideosService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
 
-        public async Task<ServiceResult> AddVideo(AddVideosRequest request,IFormFile VideoUrl)
+        public async Task<ServiceResult> AddVideo(AddVideosRequest request, IFormFile VideoUrl)
         {
             var result = new ServiceResult();
             var exist = await _context.Videos.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu isimde video zaten kayıtlıdır.");
+                result.SetError(_localizer["VideoWithNameAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -51,7 +54,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Videos.Add(video);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Video başarıyla eklendi!");
+            result.SetSuccess(_localizer["VideoAdded"]);
             return result;
         }
 
@@ -61,14 +64,14 @@ namespace Ekinci.CMS.Business.Services
             var video = await _context.Videos.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (video == null)
             {
-                result.SetError("Video Bulunamadı!");
+                result.SetError(_localizer["VideoNotFound"]);
                 return result;
             }
 
             video.IsEnabled = false;
             _context.Videos.Update(video);
             await _context.SaveChangesAsync();
-            result.SetSuccess("Video silindi.");
+            result.SetSuccess(_localizer["VideoDeleted"]);
             return result;
         }
 
@@ -77,17 +80,17 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListVideosResponses>>();
             if (_context.Videos.Count() == 0)
             {
-                result.SetError("Videolar bulunamadı");
+                result.SetError(_localizer["VideoNotFound"]);
                 return result;
             }
             var videos = await (from vid in _context.Videos
-                                where vid.IsEnabled==true
+                                where vid.IsEnabled == true
                                 select new ListVideosResponses
                                 {
                                     ID = vid.ID,
                                     Title = vid.Title,
                                     Description = vid.Description,
-                                    VideoUrl = ekinciUrl+vid.VideoUrl,
+                                    VideoUrl = ekinciUrl + vid.VideoUrl,
                                 }).ToListAsync();
             result.Data = videos;
             return result;
@@ -103,18 +106,18 @@ namespace Ekinci.CMS.Business.Services
                                    ID = vid.ID,
                                    Title = vid.Title,
                                    Description = vid.Description,
-                                   VideoUrl =ekinciUrl+ vid.VideoUrl,
+                                   VideoUrl = ekinciUrl + vid.VideoUrl,
                                }).FirstAsync();
             if (video == null)
             {
-                result.SetError("Video bulunamadı");
+                result.SetError(_localizer["VideoNotFound"]);
                 return result;
             }
             result.Data = video;
             return result;
         }
 
-        public async Task<ServiceResult> UpdateVideo(UpdateVideosRequest request,IFormFile VideoUrl)
+        public async Task<ServiceResult> UpdateVideo(UpdateVideosRequest request, IFormFile VideoUrl)
         {
             Guid guid = Guid.NewGuid();
             var filePaths = new List<string>();
@@ -122,7 +125,7 @@ namespace Ekinci.CMS.Business.Services
             var video = await _context.Videos.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (video == null)
             {
-                result.SetError("Video Bulunamadı!");
+                result.SetError(_localizer["VideoNotFound"]);
                 return result;
             }
             if (VideoUrl != null)
@@ -151,7 +154,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Videos.Update(video);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Video başarıyla güncellendi!");
+            result.SetSuccess(_localizer["VideoUpdated"]);
             return result;
         }
     }

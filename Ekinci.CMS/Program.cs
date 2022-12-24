@@ -1,5 +1,9 @@
+using Ekinci.CMS.Business.Constants;
 using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Services;
+using Ekinci.Common.Caching;
+using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities;
 using Ekinci.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
@@ -16,9 +20,16 @@ builder.Services.AddDbContext<EkinciContext>(options =>
 #region Core Services
 builder.Services.AddSingleton<IMemoryCache, MemoryCache>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICacheManager, CacheManager>();
+builder.Services.AddScoped<AppSettingsKeys>();
+builder.Services.AddScoped<Ekinci.Common.Caching.AppSettingsKeys>();
+builder.Services.AddScoped<IMailService, MailManager>();
 #endregion
 
+
 #region Services
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IAppSettingsService, AppSettingService>();
 builder.Services.AddScoped<IAnnouncementService, AnnouncementService>();
 builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<ICommercialAreaService, CommercialAreaService>();
@@ -36,6 +47,15 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IVideosService, VideosService>();
 #endregion
 
+#region Authentication
+builder.Services.AddAuthentication(CookieNames.AuthCookieName)
+    .AddCookie(CookieNames.AuthCookieName, options =>
+    {
+        options.LoginPath = new PathString("/Account/SignIn");
+        options.AccessDeniedPath = new PathString("/Account/Forbidden");
+    });
+#endregion
+
 builder.Services.AddSession(options => {
     options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
 });
@@ -43,6 +63,9 @@ builder.Services.AddSession(options => {
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+#region Localization
+builder.Services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
+#endregion
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -62,10 +85,17 @@ app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
+var appsettings = app.Services.CreateScope().ServiceProvider.GetRequiredService<IAppSettingsService>();
+await appsettings.LoadAllSettingsToCache();
+
+var appsettingsKeys = app.Services.CreateScope().ServiceProvider.GetRequiredService<Ekinci.Common.Caching.AppSettingsKeys>();
+StringExtensions._appSettingsKeys = appsettingsKeys;
 app.Run();

@@ -2,19 +2,22 @@
 using Ekinci.CMS.Business.Models.Requests.IdentityGuideRequests;
 using Ekinci.CMS.Business.Models.Responses.IdentityGuideResponses;
 using Ekinci.Common.Business;
-using Ekinci.Common.Extentions;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class IdentityGuideService : BaseService, IIdentityGuideService
     {
         const string file = "IdentityGuide/";
-        public IdentityGuideService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+
+        public IdentityGuideService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
 
@@ -24,7 +27,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.IdentityGuides.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu başlıkta kurumsal kimlik zaten kayıtlıdır.");
+                result.SetError(_localizer["IdentityGuideWithNameAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -50,7 +53,7 @@ namespace Ekinci.CMS.Business.Services
             _context.IdentityGuides.Add(identityGuide);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Kurumsal kimlik başarıyla eklendi!");
+            result.SetSuccess(_localizer["IdentityGuideAdded"]);
             return result;
         }
 
@@ -60,14 +63,14 @@ namespace Ekinci.CMS.Business.Services
             var identityGuide = await _context.IdentityGuides.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (identityGuide == null)
             {
-                result.SetError("Kurumsal kimlik bilgisi Bulunamadı!");
+                result.SetError(_localizer["IdentityGuideNotFound"]);
                 return result;
             }
             identityGuide.IsEnabled = false;
             _context.IdentityGuides.Update(identityGuide);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Kurumsal kimlik bilgisi silindi.");
+            result.SetSuccess(_localizer["IdentityGuideDeleted"]);
             return result;
         }
 
@@ -76,16 +79,16 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListIdentityGuideResponse>>();
             if (_context.IdentityGuides.Count() == 0)
             {
-                result.SetError("Kurumsal kimlik bulunamadı");
+                result.SetError(_localizer["IdentityGuideNotFound"]);
                 return result;
             }
-            var identities = await(from identity in _context.IdentityGuides
-                                  where identity.IsEnabled == true
-                                  select new ListIdentityGuideResponse
-                                  {
-                                      ID = identity.ID,
-                                      PhotoUrl = ekinciUrl + identity.PhotoUrl,
-                                  }).ToListAsync();
+            var identities = await (from identity in _context.IdentityGuides
+                                    where identity.IsEnabled == true
+                                    select new ListIdentityGuideResponse
+                                    {
+                                        ID = identity.ID,
+                                        PhotoUrl = ekinciUrl + identity.PhotoUrl,
+                                    }).ToListAsync();
             result.Data = identities;
             return result;
         }
@@ -93,17 +96,17 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<GetIdentityGuideResponse>> GetIdentityGuide(int IdentityGuideID)
         {
             var result = new ServiceResult<GetIdentityGuideResponse>();
-            var histories = await(from hist in _context.Histories
-                                  where hist.ID == IdentityGuideID
-                                  select new GetIdentityGuideResponse
-                                  {
-                                      ID = hist.ID,
-                                      Title = hist.Title,
-                                      PhotoUrl = ekinciUrl + hist.PhotoUrl,
-                                  }).FirstAsync();
+            var histories = await (from hist in _context.Histories
+                                   where hist.ID == IdentityGuideID
+                                   select new GetIdentityGuideResponse
+                                   {
+                                       ID = hist.ID,
+                                       Title = hist.Title,
+                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
+                                   }).FirstAsync();
             if (histories == null)
             {
-                result.SetError("Kurumsal Kimlik bulunamadı");
+                result.SetError(_localizer["IdentityGuideNotFound"]);
                 return result;
             }
             result.Data = histories;
@@ -121,7 +124,7 @@ namespace Ekinci.CMS.Business.Services
                 var history = await _context.IdentityGuides.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (history == null)
                 {
-                    result.SetError("Kurumsal kimlik bilgisi Bulunamadı!");
+                    result.SetError(_localizer["IdentityGuideNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
@@ -147,11 +150,11 @@ namespace Ekinci.CMS.Business.Services
                 }
                 history.Title = request.Title;
                 await _context.SaveChangesAsync();
-                result.SetSuccess("Kurumsal kimlik başarıyla güncellendi!");
+                result.SetSuccess(_localizer["IdentityGuideUpdated"]);
             }
             else
             {
-                result.SetError("Bu başlıkta kurumsal kimlik zaten kayıtlıdır.");
+                result.SetError(_localizer["IdentityGuideWithNameAlreadyExist"]);
             }
             return result;
         }

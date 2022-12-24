@@ -2,18 +2,22 @@
 using Ekinci.CMS.Business.Models.Requests.HumanResourceRequests;
 using Ekinci.CMS.Business.Models.Responses.HumanResourceResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class HumanResourceService : BaseService, IHumanResourceService
     {
         const string file = "HumanResource/";
-        public HumanResourceService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+
+        public HumanResourceService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
 
@@ -23,7 +27,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.HumanResources.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu başlıkta insan kaynakları zaten kayıtlıdır.");
+                result.SetError(_localizer["HumanResourceWithNameAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -50,7 +54,7 @@ namespace Ekinci.CMS.Business.Services
             _context.HumanResources.Add(human);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("İnsan Kaynakları başarıyla eklendi!");
+            result.SetSuccess(_localizer["HumanResourceAdded"]);
             return result;
         }
 
@@ -59,7 +63,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<GetHumanResourceResponse>();
             if (_context.HumanResources.Count() == 0)
             {
-                result.SetError("İnsan kaynakları bulunamadı");
+                result.SetError(_localizer["HumanResourceNotFound"]);
                 return result;
             }
             var humanResource = await (from human in _context.HumanResources
@@ -85,7 +89,7 @@ namespace Ekinci.CMS.Business.Services
                 var humanResource = await _context.HumanResources.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (humanResource == null)
                 {
-                    result.SetError("İnsan Kaynakları Bulunamadı!");
+                    result.SetError(_localizer["HumanResourceNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
@@ -109,11 +113,11 @@ namespace Ekinci.CMS.Business.Services
                 humanResource.Description = request.Description;
                 _context.HumanResources.Update(humanResource);
                 await _context.SaveChangesAsync();
-                result.SetSuccess("İnsan Kaynakları başarıyla güncellendi!");
+                result.SetSuccess(_localizer["HumanResourceUpdated"]);
             }
             else
             {
-                result.SetError("Bu başlıkta İnsan Kaynakları zaten kayıtlıdır.");
+                result.SetError(_localizer["HumanResourceWithNameAlreadyExist"]);
             }
             return result;
         }

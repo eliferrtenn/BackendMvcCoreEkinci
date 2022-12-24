@@ -3,10 +3,12 @@ using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
 using Ekinci.CMS.Business.Models.Requests.IntroRequests;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class IntroController : CMSBaseController
     {
         private readonly IIntroService introService;

@@ -13,7 +13,7 @@
                     <div class="card shadow-sm">
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-3 mb-1">Tarihçe</span>
+                                <span class="card-label fw-bolder fs-3 mb-1">@_localizer["HistoryTitle"]</span>
                             </h3>
                             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover">
                                 <a href="@Url.Action("Create","History")" class="btn btn-sm btn btn-success">
@@ -23,7 +23,7 @@
                                             <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                         </svg>
                                     </span>
-                                    YENİ TARİHÇE
+                                    @_localizer["Create"]
                                 </a>
                             </div>
                         </div>
@@ -34,10 +34,10 @@
                                     <table class="table align-middle table-row-dashed fs-6 gy-5 table-responsive" id="kt_customers_table">
                                         <thead>
                                             <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
-                                                <th class="min-w-125px">Başlık</th>
-                                                <th class="min-w-125px">Başlangıç Tarihi</th>
-                                                <th class="min-w-125px">Bitiş Tarihi</th>
-                                                <th class="min-w-125px">Fotoğraf</th>
+                                                <th class="min-w-125px">@_localizer["Title"]</th>
+                                                <th class="min-w-125px">@_localizer["StartDate"]</th>
+                                                <th class="min-w-125px">@_localizer["EndDate"]</th>
+                                                <th class="min-w-125px">@_localizer["PhotoUrl"]</th>
                                                 <th class="text-end min-w-70px"></th>
                                             </tr>
                                         </thead>
@@ -90,7 +90,6 @@
                                     </table>
                                 </div>
                             </div>
-
                         }
                     </div>
                 </div>
@@ -157,4 +156,4 @@
             });
         }
     </script>
-}
+}n 

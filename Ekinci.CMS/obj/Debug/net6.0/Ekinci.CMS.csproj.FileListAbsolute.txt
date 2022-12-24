@@ -83,3 +83,12 @@ C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Langua
 C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
 C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
 C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\FluentValidation.dll
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Microsoft.Extensions.Localization.dll
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Microsoft.Extensions.Localization.Abstractions.dll
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Ekinci.Resources.dll
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\Ekinci.Resources.pdb
+C:\Projects\Ekinci\Ekinci.CMS\bin\Debug\net6.0\tr\Ekinci.Resources.resources.dll

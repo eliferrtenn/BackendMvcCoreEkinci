@@ -1,12 +1,13 @@
-﻿using Ekinci.CMS.Business.Extensions;
-using Ekinci.CMS.Business.Interfaces;
+﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.AnnouncementRequests;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class AnnouncementController : CMSBaseController
     {
         private readonly IAnnouncementService announcementService;
@@ -31,12 +32,13 @@ namespace Ekinci.CMS.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var model = new AddAnnouncementRequest();
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> Create(AddAnnouncementRequest request, IEnumerable<IFormFile> PhotoUrls, IFormFile PhotoUrl)
         {
-            var result = await announcementService.AddAnnouncement(request, PhotoUrls,PhotoUrl);
+            var result = await announcementService.AddAnnouncement(request, PhotoUrls, PhotoUrl);
             if (result.IsSuccess)
             {
                 Message(result);
@@ -61,8 +63,9 @@ namespace Ekinci.CMS.Controllers
                 Message(result);
                 return RedirectToAction("Index");
             }
+            var errorResultData = await announcementService.GetAnnouncement(request.ID);
             Message(result);
-            return View();
+            return View(errorResultData.Data);
         }
 
         [HttpPost]
@@ -79,6 +82,6 @@ namespace Ekinci.CMS.Controllers
             var ajaxResult = JsonConvert.SerializeObject(result);
             return Json(ajaxResult);
         }
- 
+
     }
 }

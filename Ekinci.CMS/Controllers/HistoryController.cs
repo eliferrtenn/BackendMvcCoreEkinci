@@ -1,12 +1,13 @@
-﻿using Ekinci.CMS.Business.Extensions;
-using Ekinci.CMS.Business.Interfaces;
+﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class HistoryController : CMSBaseController
     {
         private readonly IHistoryService historyService;

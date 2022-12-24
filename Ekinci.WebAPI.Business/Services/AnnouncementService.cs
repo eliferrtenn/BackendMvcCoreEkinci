@@ -1,18 +1,21 @@
 ﻿using Ekinci.Common.Business;
+using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.AnnouncementResponses;
 using Ekinci.WebAPI.Business.Models.Responses.ProjectResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.WebAPI.Business.Services
 {
     public class AnnouncementService : BaseService, IAnnouncementService
     {
-        public AnnouncementService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public AnnouncementService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 
@@ -20,11 +23,13 @@ namespace Ekinci.WebAPI.Business.Services
         {
             var result = new ServiceResult<List<ListAnnouncementsResponse>>();
             var announcements = await (from announ in _context.Announcements
+                                       where announ.IsEnabled==true
                                        select new ListAnnouncementsResponse
                                        {
                                            ID = announ.ID,
                                            Title = announ.Title,
                                            Description = announ.Description,
+                                           AnnouncementDate=announ.AnnouncementDate.ToFormattedDate(),
                                            ThumbUrl=ekinciUrl+announ.ThumbUrl,
                                        }).ToListAsync();
           
@@ -50,6 +55,7 @@ namespace Ekinci.WebAPI.Business.Services
                                           ID = announ.ID,
                                           Title = announ.Title,
                                           Description = announ.Description,
+                                          AnnouncementDate = announ.AnnouncementDate.ToFormattedDate(),
                                           AnnouncementPhotos = announPhotos
                                       }).FirstAsync();
             if (announcement == null)

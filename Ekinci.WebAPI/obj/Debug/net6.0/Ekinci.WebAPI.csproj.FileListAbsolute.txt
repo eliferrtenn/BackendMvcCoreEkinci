@@ -80,3 +80,9 @@ C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Sms.Abstractions.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Sms.IletiMerkezi.dll
 C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\BunnyCDN.Net.Storage.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Localization.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Localization.Abstractions.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Ekinci.Resources.dll
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\Ekinci.Resources.pdb
+C:\Projects\Ekinci\Ekinci.WebAPI\bin\Debug\net6.0\tr\Ekinci.Resources.resources.dll

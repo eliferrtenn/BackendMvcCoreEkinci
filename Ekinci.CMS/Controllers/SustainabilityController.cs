@@ -1,12 +1,12 @@
-﻿using Ekinci.CMS.Business.Extensions;
-using Ekinci.CMS.Business.Interfaces;
-using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
+﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.SustainabilityRequests;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class SustainabilityController : CMSBaseController
     {
         private readonly ISustainabilityService sustainabilityService;
@@ -45,9 +45,9 @@ namespace Ekinci.CMS.Controllers
             return View(result.Data);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(UpdateSustainabilityRequest request,IFormFile PhotoUrl)
+        public async Task<IActionResult> Edit(UpdateSustainabilityRequest request, IFormFile PhotoUrl)
         {
-            var result = await sustainabilityService.UpdateSustainability(request,PhotoUrl);
+            var result = await sustainabilityService.UpdateSustainability(request, PhotoUrl);
             if (result.IsSuccess)
             {
                 Message(result);

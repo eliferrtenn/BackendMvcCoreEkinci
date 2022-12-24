@@ -2,12 +2,15 @@
 using Ekinci.CMS.Business.Models.Requests.ProjectRequests;
 using Ekinci.CMS.Business.Models.Responses.ProjectResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
@@ -16,9 +19,9 @@ namespace Ekinci.CMS.Business.Services
         const string fileThumb = "Project/Thumb/";
         const string file = "Project/General/";
         private readonly IProjectStatusService projectStatusService;
-        public ProjectService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IProjectStatusService _projectStatusService) : base(context, configuration, httpContext)
+
+        public ProjectService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
-            projectStatusService = _projectStatusService;
         }
 
         public async Task<ServiceResult> AddProject(AddProjectRequest request, IEnumerable<IFormFile> PhotoUrls, IFormFile PhotoUrl)
@@ -27,7 +30,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Projects.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu başlıkta proje zaten kayıtlıdır.");
+                result.SetError(_localizer["ProjectWithNameAlreadyExist"]);
                 return result;
             }
             var project = new Projects();
@@ -87,7 +90,7 @@ namespace Ekinci.CMS.Business.Services
                 }
             }
             await _context.SaveChangesAsync();
-            result.SetSuccess("Prohe başarıyla eklendi!");
+            result.SetSuccess(_localizer["ProjectAdded"]);
             return result;
         }
 
@@ -97,13 +100,13 @@ namespace Ekinci.CMS.Business.Services
             var projectPhoto = await _context.ProjectPhotos.FirstOrDefaultAsync(x => x.ID == projectPhotoID);
             if (projectPhoto == null)
             {
-                result.SetError("Proje fotoğrafı Bulunamadı!");
+                result.SetError(_localizer["ProjectPhotoNotFound"]);
                 return result;
             }
             projectPhoto.IsEnabled = false;
             _context.ProjectPhotos.Update(projectPhoto);
             await _context.SaveChangesAsync();
-            result.SetSuccess("Projede fotoğraf silindi.");
+            result.SetSuccess(_localizer["ProjectPhotoDeleted"]);
             return result;
         }
 
@@ -113,13 +116,13 @@ namespace Ekinci.CMS.Business.Services
             var project = await _context.Projects.FirstOrDefaultAsync(x => x.ID == projecttID);
             if (project == null)
             {
-                result.SetError("Proje Bulunamadı!");
+                result.SetError(_localizer["ProjectNotFound"]);
                 return result;
             }
             project.IsEnabled = false;
             _context.Projects.Update(project);
             await _context.SaveChangesAsync();
-            result.SetSuccess("Proje silindi.");
+            result.SetSuccess(_localizer["ProjectDeleted"]);
             return result;
         }
 
@@ -143,6 +146,7 @@ namespace Ekinci.CMS.Business.Services
                                       ApartmentCount = proj.ApartmentCount,
                                       SquareMeter = proj.SquareMeter,
                                   }).ToListAsync();
+            //TODO:NULL OLMA İHTİMALİNİ VER
             result.Data = projects;
             return result;
         }
@@ -179,7 +183,7 @@ namespace Ekinci.CMS.Business.Services
                                  }).FirstAsync();
             if (project == null)
             {
-                result.SetError("Proje bulunamadı");
+                result.SetError(_localizer["ProjectNotFound"]);
                 return result;
             }
             result.Data = project;
@@ -192,13 +196,13 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Projects.AnyAsync(x => x.Title == request.Title && x.ID != request.ID);
             if (exist == true)
             {
-                result.SetError("Bu başlıkta proje zaten kayıtlıdır.");
+                result.SetError(_localizer["ProjectWithNameAlreadyExist"]);
                 return result;
             }
             var project = await _context.Projects.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (project == null)
             {
-                result.SetError("Proje Bulunamadı!");
+                result.SetError(_localizer["ProjectNotFound"]);
                 return result;
             }
             else
@@ -259,7 +263,7 @@ namespace Ekinci.CMS.Business.Services
                     }
                 }
                 await _context.SaveChangesAsync();
-                result.SetSuccess("Proje başarıyla güncellendi!");
+                result.SetSuccess(_localizer["ProjectUpdated"]);
                 return result;
             }
 

@@ -78,6 +78,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 #endregion
+#region Localization
+builder.Services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
+#endregion
 
 var app = builder.Build();
 

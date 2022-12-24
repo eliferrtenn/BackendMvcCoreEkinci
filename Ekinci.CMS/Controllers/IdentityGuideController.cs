@@ -1,13 +1,13 @@
-﻿using Ekinci.CMS.Business.Extensions;
-using Ekinci.CMS.Business.Interfaces;
-using Ekinci.CMS.Business.Models.Requests.HistoryRequests;
+﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.IdentityGuideRequests;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class IdentityGuideController : CMSBaseController
     {
         private readonly IIdentityGuideService identityGuideService;

@@ -1,17 +1,19 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
+using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.HistoryResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.WebAPI.Business.Services
 {
     public class HistoryService : BaseService, IHistoryService
     {
-        public HistoryService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+        public HistoryService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 
@@ -19,6 +21,7 @@ namespace Ekinci.WebAPI.Business.Services
         {
             var result = new ServiceResult<List<ListHistoriesResponse>>();
             var histories = await (from hist in _context.Histories
+                                   where hist.IsEnabled==true
                                    select new ListHistoriesResponse
                                    {
                                        ID = hist.ID,

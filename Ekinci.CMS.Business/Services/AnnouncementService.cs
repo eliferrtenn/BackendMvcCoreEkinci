@@ -3,11 +3,14 @@ using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.AnnouncementRequests;
 using Ekinci.CMS.Business.Models.Responses.AnnouncementResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using System;
 
 namespace Ekinci.CMS.Business.Services
@@ -16,16 +19,18 @@ namespace Ekinci.CMS.Business.Services
     {
         const string fileThumb = "AnnouncementPhoto/Thumb/";
         const string file = "AnnouncementPhoto/General/";
-        public AnnouncementService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+
+        public AnnouncementService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
+
         public async Task<ServiceResult> AddAnnouncement(AddAnnouncementRequest request, IEnumerable<IFormFile> PhotoUrls,IFormFile PhotoUrl)
         {
             var result = new ServiceResult();
             var exist = await _context.Announcements.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu başlıkta haber/duyuru zaten kayıtlıdır.");
+                result.SetError(_localizer["AnnouncementWithNameAlreadyExist"]);
                 return result;
             }
             var announcement = new Announcement();
@@ -49,6 +54,7 @@ namespace Ekinci.CMS.Business.Services
             }
             announcement.Title = request.Title;
             announcement.Description = request.Description;
+            announcement.AnnouncementDate = request.AnnouncementDate;
             _context.Announcements.Add(announcement);
             await _context.SaveChangesAsync();
             var id = announcement.ID;
@@ -77,7 +83,7 @@ namespace Ekinci.CMS.Business.Services
                 }
             }
             await _context.SaveChangesAsync();
-            result.SetSuccess("Duyuru-haber başarıyla eklendi!");
+            result.SetSuccess(_localizer["AnnouncementAdded"]);
             return result;
         }
 
@@ -86,7 +92,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListAnnouncementsResponse>>();
             if (_context.Announcements.Count() == 0)
             {
-                result.SetError("Haber/Duyuru bulunamadı");
+                result.SetError(_localizer["AnnouncementNotFound"]);
                 return result;
             }
             var announcements = await (from announ in _context.Announcements
@@ -96,6 +102,7 @@ namespace Ekinci.CMS.Business.Services
                                            ID = announ.ID,
                                            Title = announ.Title,
                                            Description = announ.Description,
+                                           AnnouncementDate=announ.AnnouncementDate,
                                            ThumbUrl =ekinciUrl+announ.ThumbUrl,
                                        }).ToListAsync();
 
@@ -122,12 +129,13 @@ namespace Ekinci.CMS.Business.Services
                                           ID = announ.ID,
                                           Title = announ.Title,
                                           Description = announ.Description,
+                                          AnnouncementDate=announ.AnnouncementDate,
                                           ThumbUrl=ekinciUrl+announ.ThumbUrl,
                                           AnnouncementPhotos = announPhotos
                                       }).FirstAsync();
             if (announcement == null)
             {
-                result.SetError("Duyuru bulunamadı");
+                result.SetError(_localizer["AnnouncementNotFound"]);
                 return result;
             }
             result.Data = announcement;
@@ -140,29 +148,29 @@ namespace Ekinci.CMS.Business.Services
             var history = await _context.AnnouncementPhotos.FirstOrDefaultAsync(x => x.ID == announcementPhotoID);
             if (history == null)
             {
-                result.SetError("Duyuru fotoğrafı Bulunamadı!");
+                result.SetError(_localizer["AnnouncementNotFound"]);
                 return result;
             }
             history.IsEnabled = false;
             _context.AnnouncementPhotos.Update(history);
             await _context.SaveChangesAsync();
-            result.SetSuccess("Fotoğraf silindi.");
+            result.SetSuccess(_localizer["PhotoDeleted"]);
             return result;
         }
 
         public async Task<ServiceResult> UpdateAnnouncement(UpdateAnnouncementRequest request, IEnumerable<IFormFile> PhotoUrls, IFormFile PhotoUrl)
         {
             var result = new ServiceResult();
-            var exist = await _context.Histories.AnyAsync(x => x.Title == request.Title && x.ID != request.ID);
+            var exist = await _context.Announcements.AnyAsync(x => x.Title == request.Title && x.ID != request.ID);
             if (exist == true)
             {
-                result.SetError("Bu başlıkta haber/duyuru zaten kayıtlıdır.");
+                result.SetError(_localizer["AnnouncementWithNameAlreadyExist"]);
                 return result;
             }
             var announcement = await _context.Announcements.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (announcement == null)
             {
-                result.SetError("Tarih bilgisi Bulunamadı!");
+                result.SetError(_localizer["AnnouncementNotFound"]);
                 return result;
             }
             else
@@ -188,6 +196,7 @@ namespace Ekinci.CMS.Business.Services
                 }
                 announcement.Title = request.Title;
                 announcement.Description = request.Description;
+                announcement.AnnouncementDate = request.AnnouncementDate;
                 _context.Announcements.Update(announcement);
                 await _context.SaveChangesAsync();
                 var id = announcement.ID;
@@ -216,7 +225,7 @@ namespace Ekinci.CMS.Business.Services
                     }
                 }
                 await _context.SaveChangesAsync();
-                result.SetSuccess("Duyuru-haber başarıyla eklendi!");
+                result.SetSuccess(_localizer["AnnouncementUpdated"]);
                 return result;
             }
 
@@ -229,13 +238,13 @@ namespace Ekinci.CMS.Business.Services
             var announcement = await _context.Announcements.FirstOrDefaultAsync(x => x.ID == announcementID);
             if (announcement == null)
             {
-                result.SetError("Duyuru Bulunamadı!");
+                result.SetError(_localizer["AnnouncementNotFound"]);
                 return result;
             }
             announcement.IsEnabled = false;
             _context.Announcements.Update(announcement);
             await _context.SaveChangesAsync();
-            result.SetSuccess("Duyuru silindi.");
+            result.SetSuccess(_localizer["AnnouncementDeleted"]);
             return result;
         }
     }

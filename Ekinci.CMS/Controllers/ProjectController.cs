@@ -1,23 +1,23 @@
-﻿using Ekinci.CMS.Business.Extensions;
-using Ekinci.CMS.Business.Interfaces;
-using Ekinci.CMS.Business.Models.Requests.AnnouncementRequests;
+﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.ProjectRequests;
 using Ekinci.Common.BaseController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
 {
+    [Authorize]
     public class ProjectController : CMSBaseController
     {
         private readonly IProjectService projectService;
         private readonly IProjectStatusService projectStatusService;
 
-        public ProjectController(IProjectService _projectService,IProjectStatusService _projectStatusService)
+        public ProjectController(IProjectService _projectService, IProjectStatusService _projectStatusService)
         {
             projectService = _projectService;
-            projectStatusService= _projectStatusService;
+            projectStatusService = _projectStatusService;
         }
         public async Task<IActionResult> Index()
         {
@@ -33,7 +33,7 @@ namespace Ekinci.CMS.Controllers
         public async Task<IActionResult> Create()
         {
             var result1 = await projectStatusService.GetAll();
-                ViewBag.StatusID = new SelectList(result1.Data, "ID", "Name");
+            ViewBag.StatusID = new SelectList(result1.Data, "ID", "Name");
             return View();
         }
         [HttpPost]

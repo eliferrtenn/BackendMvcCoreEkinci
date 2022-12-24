@@ -10,14 +10,14 @@
                             <div class="card-header">
                                 <h3 class="card-title">Biz Kimiz?</h3>
                                 <div class="card-toolbar">
-                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="OLUŞTUR">&nbsp;
-                                    <a href="@Url.Action("Index","Intro")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="@_localizer["Create"]">&nbsp;
+                                    <a href="@Url.Action("Index","Intro")" class="btn btn-danger btn-hover-rotate-start">@_localizer["TurnBack"]</a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="row mb-6">
-                                        <label class="col-lg-2 col-form-label fw-bold fs-6">Fotoğraf</label>
+                                        <label class="col-lg-2 col-form-label fw-bold fs-6">@_localizer["PhotoUrl"]</label>
                                         <div class="col-lg-10">
                                             <div class="image-input image-input-outline" data-kt-image-input="true">
                                                 <div class="image-input-wrapper w-300px h-300px"></div>
@@ -30,7 +30,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Title" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Title"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -40,7 +40,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Description" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Description"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -48,10 +48,38 @@
                                             <textarea rows="10" cols="40" asp-for="Description" class="form-control"></textarea>
                                             <span asp-validation-for="Description" class="text-danger"></span>
                                         </div>
+                                    </div>         
+                                    <div class="col-md-12 mb-5">
+                                        <label class="control-label">@_localizer["SquareMeter"]</label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="SquareMeter" class="form-control" />
+                                            <span asp-validation-for="SquareMeter" class="text-danger"></span>
+                                        </div>
+                                    </div>        
+                                    <div class="col-md-12 mb-5">
+                                        <label class="control-label">@_localizer["YearCount"]</label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="YearCount" class="form-control" />
+                                            <span asp-validation-for="YearCount" class="text-danger"></span>
+                                        </div>
+                                    </div>        
+                                    <div class="col-md-12 mb-5">
+                                        <label class="control-label">@_localizer["CommercialAreaCount"]</label>
+                                        <div class="input-group form-group mb-5">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fa-solid fa-align-justify"></i>
+                                            </span>
+                                            <input asp-for="CommercialAreaCount" class="form-control" />
+                                            <span asp-validation-for="CommercialAreaCount" class="text-danger"></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
                             </div>
                         </div>
                     </form>
@@ -60,7 +88,6 @@
         </div>
     </div>
 </div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

@@ -22,7 +22,7 @@
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Title" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Title"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -32,7 +32,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Location" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Location"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -41,8 +41,8 @@
                                             <span asp-validation-for="Location" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-5">
-                                        <label asp-for="MobilePhone" class="control-label"></label>
+                                    <div class="col-md-6 mb-5">
+                                        <label class="control-label">@_localizer["MobilePhone"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -51,8 +51,8 @@
                                             <span asp-validation-for="MobilePhone" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-5">
-                                        <label asp-for="LandPhone" class="control-label"></label>
+                                    <div class="col-md-6 mb-5">
+                                        <label class="control-label">@_localizer["LandPhone"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Email" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Email"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -71,8 +71,8 @@
                                             <span asp-validation-for="Email" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-5">
-                                        <label asp-for="Longitude" class="control-label"></label>
+                                    <div class="col-md-6 mb-5">
+                                        <label class="control-label">@_localizer["Longitude"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -81,8 +81,8 @@
                                             <span asp-validation-for="Longitude" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-5">
-                                        <label asp-for="Latitude" class="control-label"></label>
+                                    <div class="col-md-6 mb-5">
+                                        <label class="control-label">@_localizer["Latitude"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -92,7 +92,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="InstagramUrl" class="control-label"></label>
+                                        <label class="control-label">@_localizer["InstagramUrl"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="FacebookUrl" class="control-label"></label>
+                                        <label class="control-label">@_localizer["FacebookUrl"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -112,8 +112,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
                             </div>
                         </div>
                     </form>

@@ -9,6 +9,7 @@ namespace Ekinci.Data.Context
         {
         }
         public DbSet<Blog> Blog { get; set; }
+        public DbSet<AppSettings> AppSettings { get; set; }
         public DbSet<CommercialArea> CommercialAreas { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<History> Histories { get; set; }

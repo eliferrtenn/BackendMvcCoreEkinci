@@ -30,7 +30,7 @@
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     </div>
                                     <div class="row mb-6">
-                                        <label class="col-lg-4 col-form-label fw-bold fs-6">Fotoğraf</label>
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6">@_localizer["PhotoUrl"]</label>
                                         <div class="col-lg-8">
                                             <div class="image-input image-input-outline" data-kt-image-input="true">
                                                 <div class="image-input-wrapper w-125px h-125px" style="background-image:url(@Model.PhotoUrl)"></div>
@@ -43,7 +43,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="Title" class="control-label"></label>
+                                        <label class="control-label">@_localizer["Title"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="BlogDate" class="control-label"></label>
+                                        <label class="control-label">@_localizer["BlogDate"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -63,7 +63,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label asp-for="InstagramUrl" class="control-label"></label>
+                                        <label class="control-label">@_localizer["InstagramUrl"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>

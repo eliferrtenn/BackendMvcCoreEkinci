@@ -2,18 +2,22 @@
 using Ekinci.CMS.Business.Models.Requests.SustainabilityRequests;
 using Ekinci.CMS.Business.Models.Responses.SustainabilityResponses;
 using Ekinci.Common.Business;
+using Ekinci.Common.Caching;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
+using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace Ekinci.CMS.Business.Services
 {
     public class SustainabilityService : BaseService, ISustainabilityService
     {
         const string file = "Sustainability/";
-        public SustainabilityService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext) : base(context, configuration, httpContext)
+
+        public SustainabilityService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
         {
         }
 
@@ -23,7 +27,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Sustainabilities.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError("Bu başlıkta sürdürülebilirlik zaten kayıtlıdır.");
+                result.SetError(_localizer["SustainabilityWithNameAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -49,7 +53,7 @@ namespace Ekinci.CMS.Business.Services
             sustainability.Description = request.Description;
             _context.Sustainabilities.Add(sustainability);
             await _context.SaveChangesAsync();
-            result.SetSuccess("Tarihçe başarıyla eklendi!");
+            result.SetSuccess(_localizer["SustainabilityAdded"]);
             return result;
         }
         public async Task<ServiceResult<GetSustainabilityResponse>> GetSustainability()
@@ -58,7 +62,7 @@ namespace Ekinci.CMS.Business.Services
 
             if (_context.Sustainabilities.Count() == 0)
             {
-                result.SetError("Sürdürülebilirlik bulunamadı");
+                result.SetError(_localizer["SustainabilityNotFound"]);
                 return result;
             }
 
@@ -86,7 +90,7 @@ namespace Ekinci.CMS.Business.Services
                 var sustainability = await _context.Sustainabilities.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (sustainability == null)
                 {
-                    result.SetError("Sürdürülebilirlik Bulunamadı!");
+                    result.SetError(_localizer["SustainabilityNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
@@ -110,7 +114,7 @@ namespace Ekinci.CMS.Business.Services
                 sustainability.Description = request.Description;
                 _context.Sustainabilities.Update(sustainability);
                 await _context.SaveChangesAsync();
-                result.SetSuccess("Sürdürülebilirlik başarıyla güncellendi!");
+                result.SetSuccess(_localizer["SustainabilityUpdated"]);
             }
             return result;
         }

@@ -73,6 +73,10 @@
       "PackagePath": "staticwebassets\\Dosya\\AnnouncementPhoto\\General\\fbf7ff46-743c-4f05-9a08-5334d261275c.png"
     },
     {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\AnnouncementPhoto\\General\\fca8c21f-4728-4e7a-96bc-369c48316c0d.png",
+      "PackagePath": "staticwebassets\\Dosya\\AnnouncementPhoto\\General\\fca8c21f-4728-4e7a-96bc-369c48316c0d.png"
+    },
+    {
       "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\AnnouncementPhoto\\Thumb2f0f2c80-2203-4b10-95bd-4365d45e1b54.png",
       "PackagePath": "staticwebassets\\Dosya\\AnnouncementPhoto\\Thumb2f0f2c80-2203-4b10-95bd-4365d45e1b54.png"
     },
@@ -81,8 +85,16 @@
       "PackagePath": "staticwebassets\\Dosya\\AnnouncementPhoto\\Thumb\\3eca21b9-6bf4-4034-8614-32c030c6bae6.png"
     },
     {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\AnnouncementPhoto\\Thumb\\485f38ab-df6a-415f-b5c4-5acf6e6168d6.PNG",
+      "PackagePath": "staticwebassets\\Dosya\\AnnouncementPhoto\\Thumb\\485f38ab-df6a-415f-b5c4-5acf6e6168d6.PNG"
+    },
+    {
       "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\AnnouncementPhoto\\Thumb\\8f09be86-c0cc-458a-97fc-ab6100a20368.png",
       "PackagePath": "staticwebassets\\Dosya\\AnnouncementPhoto\\Thumb\\8f09be86-c0cc-458a-97fc-ab6100a20368.png"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\AnnouncementPhoto\\Thumb\\9ab7663b-77aa-402e-b26b-b4e55e062268.png",
+      "PackagePath": "staticwebassets\\Dosya\\AnnouncementPhoto\\Thumb\\9ab7663b-77aa-402e-b26b-b4e55e062268.png"
     },
     {
       "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\AnnouncementPhoto\\Thumb\\d5a8f51e-5c3c-490c-ad91-8e62afa1acd0.png",
