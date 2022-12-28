@@ -3,6 +3,8 @@ using Ekinci.CMS.Business.Models.Requests.IdentityGuideRequests;
 using Ekinci.CMS.Business.Models.Responses.IdentityGuideResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -17,7 +19,7 @@ namespace Ekinci.CMS.Business.Services
     {
         const string file = "IdentityGuide/";
 
-        public IdentityGuideService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public IdentityGuideService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -27,7 +29,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.IdentityGuides.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError(_localizer["IdentityGuideWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -37,23 +39,20 @@ namespace Ekinci.CMS.Business.Services
             {
                 if (PhotoUrl.Length > 0)
                 {
-                    var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = file + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                    if (!fileUploadResult.IsSuccess)
                     {
-                        await PhotoUrl.CopyToAsync(stream);
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
                     }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    identityGuide.PhotoUrl = type;
+                    identityGuide.PhotoUrl = fileUploadResult.FileName;
                 }
             }
             identityGuide.Title = request.Title;
             _context.IdentityGuides.Add(identityGuide);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["IdentityGuideAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
 
@@ -63,14 +62,14 @@ namespace Ekinci.CMS.Business.Services
             var identityGuide = await _context.IdentityGuides.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (identityGuide == null)
             {
-                result.SetError(_localizer["IdentityGuideNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             identityGuide.IsEnabled = false;
             _context.IdentityGuides.Update(identityGuide);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["IdentityGuideDeleted"]);
+            result.SetSuccess(_localizer["RecordDeleted"]);
             return result;
         }
 
@@ -79,37 +78,38 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListIdentityGuideResponse>>();
             if (_context.IdentityGuides.Count() == 0)
             {
-                result.SetError(_localizer["IdentityGuideNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
-            var identities = await (from identity in _context.IdentityGuides
+            var identityGuides = await (from identity in _context.IdentityGuides
                                     where identity.IsEnabled == true
                                     select new ListIdentityGuideResponse
                                     {
                                         ID = identity.ID,
-                                        PhotoUrl = ekinciUrl + identity.PhotoUrl,
+                                        Title=identity.Title,
+                                        PhotoUrl = identity.PhotoUrl.PrepareCDNUrl(file),
                                     }).ToListAsync();
-            result.Data = identities;
+            result.Data = identityGuides;
             return result;
         }
 
         public async Task<ServiceResult<GetIdentityGuideResponse>> GetIdentityGuide(int IdentityGuideID)
         {
             var result = new ServiceResult<GetIdentityGuideResponse>();
-            var histories = await (from hist in _context.Histories
+            var identityGuide = await (from hist in _context.Histories
                                    where hist.ID == IdentityGuideID
                                    select new GetIdentityGuideResponse
                                    {
                                        ID = hist.ID,
                                        Title = hist.Title,
-                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
+                                       PhotoUrl = hist.PhotoUrl.PrepareCDNUrl(file),
                                    }).FirstAsync();
-            if (histories == null)
+            if (identityGuide == null)
             {
-                result.SetError(_localizer["IdentityGuideNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
-            result.Data = histories;
+            result.Data = identityGuide;
             return result;
         }
 
@@ -121,40 +121,32 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.IdentityGuides.AnyAsync(x => x.Title == request.Title && x.ID != request.ID);
             if (exist == false)
             {
-                var history = await _context.IdentityGuides.FirstOrDefaultAsync(x => x.ID == request.ID);
-                if (history == null)
+                var identityGuide = await _context.IdentityGuides.FirstOrDefaultAsync(x => x.ID == request.ID);
+                if (identityGuide == null)
                 {
-                    result.SetError(_localizer["IdentityGuideNotFound"]);
+                    result.SetError(_localizer["RecordNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
                 {
                     if (PhotoUrl.Length > 0)
                     {
-                        await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + history.PhotoUrl);
-                        var path = Path.GetExtension(PhotoUrl.FileName);
-                        var type = file + guid.ToString() + path;
-                        var filePath = "wwwroot/Dosya/" + type;
-                        var filePathBunnyCdn = "/ekinci/" + type;
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                        if (!fileUploadResult.IsSuccess)
                         {
-                            await PhotoUrl.CopyToAsync(stream);
+                            result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                            return result;
                         }
-                        await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                        history.PhotoUrl = type;
+                        identityGuide.PhotoUrl = fileUploadResult.FileName;
                     }
                 }
-                else
-                {
-                    history.PhotoUrl = request.PhotoUrl;
-                }
-                history.Title = request.Title;
+                identityGuide.Title = request.Title;
                 await _context.SaveChangesAsync();
-                result.SetSuccess(_localizer["IdentityGuideUpdated"]);
+                result.SetSuccess(_localizer["RecordUpdated"]);
             }
             else
             {
-                result.SetError(_localizer["IdentityGuideWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
             }
             return result;
         }

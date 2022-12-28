@@ -1,4 +1,5 @@
 ﻿using BunnyCDN.Net.Storage;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
@@ -14,8 +15,7 @@ namespace Ekinci.WebAPI.Business.Services
         protected IConfiguration _configuration;
         protected IHttpContextAccessor _httpContext;
         protected IStringLocalizer<CommonResource> _localizer;
-        protected BunnyCDNStorage bunnyCDNStorage = new BunnyCDNStorage("ekinci", "257e5f3c-55fc-40b8-b00f2a941162-b427-4e2d", "de");
-        protected const string ekinciUrl = "https://ekinci.b-cdn.net/";
+
 
         public BaseService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer)
         {

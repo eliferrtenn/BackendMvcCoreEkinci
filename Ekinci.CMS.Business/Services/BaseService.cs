@@ -1,5 +1,6 @@
 ﻿using BunnyCDN.Net.Storage;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
@@ -15,16 +16,17 @@ namespace Ekinci.CMS.Business.Services
         protected IConfiguration _configuration;
         protected IHttpContextAccessor _httpContext;
         protected IStringLocalizer<CommonResource> _localizer;
-        protected BunnyCDNStorage bunnyCDNStorage = new BunnyCDNStorage("ekinci", "257e5f3c-55fc-40b8-b00f2a941162-b427-4e2d", "de");
-        protected const string ekinciUrl = "https://ekinci.b-cdn.net/";
         protected AppSettingsKeys _appSettingsKeys;
-        public BaseService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys)
+        protected FileUpload _fileUpload;
+
+        public BaseService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys,FileUpload fileUpload)
         {
             _context = context;
             _configuration = configuration;
             _httpContext = httpContext;
             _localizer = localizer;
             _appSettingsKeys = appSettingsKeys;
+            _fileUpload = fileUpload;
         }
 
         public int CurrentUserID

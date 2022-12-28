@@ -3,6 +3,8 @@ using Ekinci.CMS.Business.Models.Requests.VideosRequests;
 using Ekinci.CMS.Business.Models.Responses.VideosResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -17,44 +19,37 @@ namespace Ekinci.CMS.Business.Services
     {
         const string file = "Video/";
 
-        public VideosService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public VideosService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
-        public async Task<ServiceResult> AddVideo(AddVideosRequest request, IFormFile VideoUrl)
+        public async Task<ServiceResult> AddVideo(AddVideosRequest request, IFormFile PhotoUrl)
         {
             var result = new ServiceResult();
             var exist = await _context.Videos.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError(_localizer["VideoWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
-            Guid guid = Guid.NewGuid();
-            var filePaths = new List<string>();
             var video = new Videos();
-            if (VideoUrl != null)
-            {
-                if (VideoUrl.Length > 0)
+            if(PhotoUrl!= null) {
+                var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                if (!fileUploadResult.IsSuccess)
                 {
-                    var path = Path.GetExtension(VideoUrl.FileName);
-                    var type = file + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await VideoUrl.CopyToAsync(stream);
-                    }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    video.VideoUrl = type;
+                    result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                    return result;
                 }
+                video.PhotoUrl = fileUploadResult.FileName;
             }
+
             video.Title = request.Title;
             video.Description = request.Description;
+            video.VideoUrl = request.VideoUrl;
             _context.Videos.Add(video);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["VideoAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
 
@@ -64,14 +59,14 @@ namespace Ekinci.CMS.Business.Services
             var video = await _context.Videos.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (video == null)
             {
-                result.SetError(_localizer["VideoNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
 
             video.IsEnabled = false;
             _context.Videos.Update(video);
             await _context.SaveChangesAsync();
-            result.SetSuccess(_localizer["VideoDeleted"]);
+            result.SetSuccess(_localizer["RecordDeleted"]);
             return result;
         }
 
@@ -80,7 +75,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListVideosResponses>>();
             if (_context.Videos.Count() == 0)
             {
-                result.SetError(_localizer["VideoNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             var videos = await (from vid in _context.Videos
@@ -90,7 +85,8 @@ namespace Ekinci.CMS.Business.Services
                                     ID = vid.ID,
                                     Title = vid.Title,
                                     Description = vid.Description,
-                                    VideoUrl = ekinciUrl + vid.VideoUrl,
+                                    VideoUrl = vid.VideoUrl,
+                                    PhotoUrl=vid.PhotoUrl.PrepareCDNUrl(file),
                                 }).ToListAsync();
             result.Data = videos;
             return result;
@@ -106,18 +102,19 @@ namespace Ekinci.CMS.Business.Services
                                    ID = vid.ID,
                                    Title = vid.Title,
                                    Description = vid.Description,
-                                   VideoUrl = ekinciUrl + vid.VideoUrl,
+                                   VideoUrl = vid.VideoUrl,
+                                   PhotoUrl = vid.PhotoUrl.PrepareCDNUrl(file),
                                }).FirstAsync();
             if (video == null)
             {
-                result.SetError(_localizer["VideoNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             result.Data = video;
             return result;
         }
 
-        public async Task<ServiceResult> UpdateVideo(UpdateVideosRequest request, IFormFile VideoUrl)
+        public async Task<ServiceResult> UpdateVideo(UpdateVideosRequest request, IFormFile PhotoUrl)
         {
             Guid guid = Guid.NewGuid();
             var filePaths = new List<string>();
@@ -125,36 +122,26 @@ namespace Ekinci.CMS.Business.Services
             var video = await _context.Videos.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (video == null)
             {
-                result.SetError(_localizer["VideoNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
-            if (VideoUrl != null)
+            if(PhotoUrl != null)
             {
-                if (VideoUrl.Length > 0)
+                var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                if (!fileUploadResult.IsSuccess)
                 {
-                    await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + video.VideoUrl);
-                    var path = Path.GetExtension(VideoUrl.FileName);
-                    var type = file + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await VideoUrl.CopyToAsync(stream);
-                    }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    video.VideoUrl = type;
+                    result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                    return result;
                 }
-            }
-            else
-            {
-                video.VideoUrl = request.VideoUrl;
+                video.PhotoUrl = fileUploadResult.FileName;
             }
             video.Title = request.Title;
             video.Description = request.Description;
+            video.VideoUrl = request.VideoUrl;
             _context.Videos.Update(video);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["VideoUpdated"]);
+            result.SetSuccess(_localizer["RecordUpdated"]);
             return result;
         }
     }

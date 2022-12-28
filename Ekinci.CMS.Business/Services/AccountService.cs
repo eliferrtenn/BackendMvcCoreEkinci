@@ -6,6 +6,7 @@ using Ekinci.Common.Caching;
 using Ekinci.Common.Extentions;
 using Ekinci.Common.Helpers;
 using Ekinci.Common.Utilities;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Microsoft.AspNetCore.Authentication;
@@ -21,7 +22,7 @@ namespace Ekinci.CMS.Business.Services
     {
         private readonly IMailService mailService;
 
-        public AccountService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys,IMailService _mailService) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public AccountService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload,IMailService _mailService) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
             mailService = _mailService;
         }
@@ -145,7 +146,7 @@ namespace Ekinci.CMS.Business.Services
             var member = await _context.Users.FirstOrDefaultAsync(x => x.ID == CurrentUserID);
             if (member == null)
             {
-                result.SetError("Kullanıcı Bulunamadı!");
+                result.SetError(_localizer["UserNotFound"]);
                 return result;
             }
 
@@ -157,7 +158,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Users.Update(member);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Kullanıcı başarıyla güncellendi!");
+            result.SetSuccess(_localizer["UserUpdated"]);
             return result;
         }
     }

@@ -4,6 +4,7 @@ using Ekinci.CMS.Business.Services;
 using Ekinci.Common.Caching;
 using Ekinci.Common.Extentions;
 using Ekinci.Common.Utilities;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
@@ -24,6 +25,8 @@ builder.Services.AddScoped<ICacheManager, CacheManager>();
 builder.Services.AddScoped<AppSettingsKeys>();
 builder.Services.AddScoped<Ekinci.Common.Caching.AppSettingsKeys>();
 builder.Services.AddScoped<IMailService, MailManager>();
+builder.Services.AddScoped<IFTPClient, FTPClient>();
+builder.Services.AddScoped<FileUpload>();
 #endregion
 
 
@@ -43,6 +46,7 @@ builder.Services.AddScoped<IPressService, PressService>();
 builder.Services.AddScoped<IProjectService, ProjectService>(); 
 builder.Services.AddScoped<IProjectStatusService, ProjectStatusService>(); 
 builder.Services.AddScoped<ISustainabilityService, SustainabilityService>(); 
+builder.Services.AddScoped<ITechnicalServiceDemandService, TechnicalServiceDemandService>(); 
 builder.Services.AddScoped<IUserService, UserService>(); 
 builder.Services.AddScoped<IVideosService, VideosService>();
 #endregion

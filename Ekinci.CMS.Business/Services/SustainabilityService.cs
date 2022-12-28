@@ -3,6 +3,8 @@ using Ekinci.CMS.Business.Models.Requests.SustainabilityRequests;
 using Ekinci.CMS.Business.Models.Responses.SustainabilityResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -17,7 +19,7 @@ namespace Ekinci.CMS.Business.Services
     {
         const string file = "Sustainability/";
 
-        public SustainabilityService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public SustainabilityService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -27,7 +29,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Sustainabilities.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError(_localizer["SustainabilityWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -37,23 +39,20 @@ namespace Ekinci.CMS.Business.Services
             {
                 if (PhotoUrl.Length > 0)
                 {
-                    var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = file + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                    if (!fileUploadResult.IsSuccess)
                     {
-                        await PhotoUrl.CopyToAsync(stream);
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
                     }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    sustainability.PhotoUrl = type;
+                    sustainability.PhotoUrl = fileUploadResult.FileName;
                 }
             }
             sustainability.Title = request.Title;
             sustainability.Description = request.Description;
             _context.Sustainabilities.Add(sustainability);
             await _context.SaveChangesAsync();
-            result.SetSuccess(_localizer["SustainabilityAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
         public async Task<ServiceResult<GetSustainabilityResponse>> GetSustainability()
@@ -62,18 +61,18 @@ namespace Ekinci.CMS.Business.Services
 
             if (_context.Sustainabilities.Count() == 0)
             {
-                result.SetError(_localizer["SustainabilityNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
 
             var sustainability = await (from sustain in _context.Sustainabilities
-                                        where sustain.IsEnabled==true
+                                        where sustain.IsEnabled == true
                                         select new GetSustainabilityResponse
                                         {
                                             ID = sustain.ID,
                                             Title = sustain.Title,
                                             Description = sustain.Description,
-                                            PhotoUrl = ekinciUrl + sustain.PhotoUrl,
+                                            PhotoUrl = sustain.PhotoUrl.PrepareCDNUrl(file),
                                         }).FirstAsync();
             result.Data = sustainability;
             return result;
@@ -90,31 +89,27 @@ namespace Ekinci.CMS.Business.Services
                 var sustainability = await _context.Sustainabilities.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (sustainability == null)
                 {
-                    result.SetError(_localizer["SustainabilityNotFound"]);
+                    result.SetError(_localizer["RecordNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
                 {
                     if (PhotoUrl.Length > 0)
                     {
-                        await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + sustainability.PhotoUrl);
-                        var path = Path.GetExtension(PhotoUrl.FileName);
-                        var type = file + guid.ToString() + path;
-                        var filePath = "wwwroot/Dosya/" + type;
-                        var filePathBunnyCdn = "/ekinci/" + type;
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                        if (!fileUploadResult.IsSuccess)
                         {
-                            await PhotoUrl.CopyToAsync(stream);
+                            result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                            return result;
                         }
-                        await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                        sustainability.PhotoUrl = type;
+                        sustainability.PhotoUrl = fileUploadResult.FileName;
                     }
                 }
                 sustainability.Title = request.Title;
                 sustainability.Description = request.Description;
                 _context.Sustainabilities.Update(sustainability);
                 await _context.SaveChangesAsync();
-                result.SetSuccess(_localizer["SustainabilityUpdated"]);
+                result.SetSuccess(_localizer["RecordUpdated"]);
             }
             return result;
         }

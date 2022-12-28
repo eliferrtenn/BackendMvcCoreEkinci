@@ -1,4 +1,5 @@
 ﻿using Ekinci.Common.Business;
+using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
@@ -13,6 +14,8 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class IdentityGuideService : BaseService, IIdentityGuideService
     {
+        const string file = "IdentityGuide/";
+
         public IdentityGuideService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
@@ -25,7 +28,7 @@ namespace Ekinci.WebAPI.Business.Services
                                     {
                                         ID = identity.ID,
                                         Title = identity.Title,
-                                        PhotoUrl = ekinciUrl + identity.PhotoUrl,
+                                        PhotoUrl = identity.PhotoUrl.PrepareCDNUrl(file),
                                     }).ToListAsync();
             result.Data = identities;
             return result;
@@ -40,7 +43,7 @@ namespace Ekinci.WebAPI.Business.Services
                                     {
                                         ID = identity.ID,
                                         Title = identity.Title,
-                                        PhotoUrl = ekinciUrl + identity.PhotoUrl,
+                                        PhotoUrl =identity.PhotoUrl.PrepareCDNUrl(file),
                                     }).FirstAsync();
             if (identities == null)
             {

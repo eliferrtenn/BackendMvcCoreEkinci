@@ -13,6 +13,7 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class BlogService : BaseService, IBlogService
     {
+        const string file = "Blog/";
         public BlogService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
@@ -20,14 +21,14 @@ namespace Ekinci.WebAPI.Business.Services
         public async Task<ServiceResult<List<ListBlogResponse>>> GetAll()
         {
             var result = new ServiceResult<List<ListBlogResponse>>();
-            var blogs = await (from identity in _context.Blog
+            var blogs = await (from blog in _context.Blog
                                select new ListBlogResponse
                                {
-                                   ID = identity.ID,
-                                   Title = identity.Title,
-                                   BlogDate = identity.BlogDate.ToFormattedDate(),
-                                   InstagramUrl = identity.InstagramUrl,
-                                   PhotoUrl =ekinciUrl+identity.PhotoUrl,
+                                   ID = blog.ID,
+                                   Title = blog.Title,
+                                   BlogDate = blog.BlogDate.ToFormattedDate(),
+                                   InstagramUrl = blog.InstagramUrl,
+                                   PhotoUrl =blog.PhotoUrl.PrepareCDNUrl(file),
                                }).ToListAsync();
             result.Data = blogs;
             return result;
@@ -36,15 +37,15 @@ namespace Ekinci.WebAPI.Business.Services
         public async Task<ServiceResult<GetBlogResponse>> GetBlog(int blogID)
         {
             var result = new ServiceResult<GetBlogResponse>();
-            var blogs = await (from identity in _context.Blog
-                               where identity.ID == blogID
+            var blogs = await (from blog in _context.Blog
+                               where blog.ID == blogID
                                select new GetBlogResponse
                                {
-                                   ID = identity.ID,
-                                   Title = identity.Title,
-                                   BlogDate = identity.BlogDate.ToFormattedDate(),
-                                   InstagramUrl = identity.InstagramUrl,
-                                   PhotoUrl =ekinciUrl+identity.PhotoUrl,
+                                   ID = blog.ID,
+                                   Title = blog.Title,
+                                   BlogDate = blog.BlogDate.ToFormattedDate(),
+                                   InstagramUrl = blog.InstagramUrl,
+                                   PhotoUrl =blog.PhotoUrl.PrepareCDNUrl(file),
                                }).FirstAsync();
             if (blogs == null)
             {

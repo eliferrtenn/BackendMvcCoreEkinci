@@ -1,11 +1,9 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
 using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.AnnouncementResponses;
-using Ekinci.WebAPI.Business.Models.Responses.ProjectResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +13,8 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class AnnouncementService : BaseService, IAnnouncementService
     {
+        const string fileThumb = "AnnouncementPhoto/Thumb/";
+        const string file = "AnnouncementPhoto/General/";
         public AnnouncementService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
@@ -23,16 +23,16 @@ namespace Ekinci.WebAPI.Business.Services
         {
             var result = new ServiceResult<List<ListAnnouncementsResponse>>();
             var announcements = await (from announ in _context.Announcements
-                                       where announ.IsEnabled==true
+                                       where announ.IsEnabled == true
                                        select new ListAnnouncementsResponse
                                        {
                                            ID = announ.ID,
                                            Title = announ.Title,
                                            Description = announ.Description,
-                                           AnnouncementDate=announ.AnnouncementDate.ToFormattedDate(),
-                                           ThumbUrl=ekinciUrl+announ.ThumbUrl,
+                                           AnnouncementDate = announ.AnnouncementDate.ToFormattedDate(),
+                                           ThumbUrl = announ.ThumbUrl.PrepareCDNUrl(fileThumb),
                                        }).ToListAsync();
-          
+
             result.Data = announcements;
             return result;
         }
@@ -44,12 +44,12 @@ namespace Ekinci.WebAPI.Business.Services
             var announcement = await (from announ in _context.Announcements
                                       where announ.ID == announcementID
                                       let announPhotos = (from announphoto in _context.AnnouncementPhotos
-                                                           where announphoto.NewsID == announ.ID
-                                                           select new AnnouncementResponse
-                                                           {
-                                                               ID = announphoto.ID,
-                                                               PhotoUrl = ekinciUrl + announphoto.PhotoUrl
-                                                           }).ToList()
+                                                          where announphoto.NewsID == announ.ID
+                                                          select new AnnouncementResponse
+                                                          {
+                                                              ID = announphoto.ID,
+                                                              PhotoUrl = announphoto.PhotoUrl.PrepareCDNUrl(file)
+                                                          }).ToList()
                                       select new GetAnnouncementResponse
                                       {
                                           ID = announ.ID,

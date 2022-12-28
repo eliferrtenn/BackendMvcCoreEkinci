@@ -3,6 +3,8 @@ using Ekinci.CMS.Business.Models.Requests.IntroRequests;
 using Ekinci.CMS.Business.Models.Responses.IntroResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
+using System.Reflection.Metadata;
 
 namespace Ekinci.CMS.Business.Services
 {
@@ -17,7 +20,7 @@ namespace Ekinci.CMS.Business.Services
     {
         const string file = "Intro/";
 
-        public IntroService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public IntroService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -27,7 +30,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Intros.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError(_localizer["IntroWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -37,16 +40,13 @@ namespace Ekinci.CMS.Business.Services
             {
                 if (PhotoUrl.Length > 0)
                 {
-                    var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = file + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                    if (!fileUploadResult.IsSuccess)
                     {
-                        await PhotoUrl.CopyToAsync(stream);
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
                     }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    intro.PhotoUrl = type;
+                    intro.PhotoUrl = fileUploadResult.FileName;
                 }
             }
             intro.Title = request.Title;
@@ -56,7 +56,7 @@ namespace Ekinci.CMS.Business.Services
             intro.CommercialAreaCount = request.CommercialAreaCount;
             _context.Intros.Add(intro);
             await _context.SaveChangesAsync();
-            result.SetSuccess(_localizer["IntroAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
 
@@ -65,7 +65,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<GetIntroResponse>();
             if (_context.Intros.Count() == 0)
             {
-                result.SetError(_localizer["IntoNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             var Intro = await (from intro in _context.Intros
@@ -77,7 +77,7 @@ namespace Ekinci.CMS.Business.Services
                                    SquareMeter = intro.SquareMeter,
                                    YearCount = intro.YearCount,
                                    CommercialAreaCount = intro.CommercialAreaCount,
-                                   PhotoUrl = ekinciUrl + intro.PhotoUrl,
+                                   PhotoUrl = intro.PhotoUrl.PrepareCDNUrl(file),
                                }).FirstAsync();
             result.Data = Intro;
             return result;
@@ -94,24 +94,20 @@ namespace Ekinci.CMS.Business.Services
                 var intro = await _context.Intros.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (intro == null)
                 {
-                    result.SetError(_localizer["IntroNotFound"]);
+                    result.SetError(_localizer["RecordNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
                 {
                     if (PhotoUrl.Length > 0)
                     {
-                        await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + intro.PhotoUrl);
-                        var path = Path.GetExtension(PhotoUrl.FileName);
-                        var type = file + guid.ToString() + path;
-                        var filePath = "wwwroot/Dosya/" + type;
-                        var filePathBunnyCdn = "/ekinci/" + type;
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                        if (!fileUploadResult.IsSuccess)
                         {
-                            await PhotoUrl.CopyToAsync(stream);
+                            result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                            return result;
                         }
-                        await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                        intro.PhotoUrl = type;
+                        intro.PhotoUrl = fileUploadResult.FileName;
                     }
                 }
                 intro.Title = request.Title;
@@ -121,11 +117,11 @@ namespace Ekinci.CMS.Business.Services
                 intro.CommercialAreaCount = request.CommercialAreaCount;
                 _context.Intros.Update(intro);
                 await _context.SaveChangesAsync();
-                result.SetSuccess(_localizer["IntroUpdated"]);
+                result.SetSuccess(_localizer["RecordUpdated"]);
             }
             else
             {
-                result.SetError(_localizer["IntroWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
             }
             return result;
         }

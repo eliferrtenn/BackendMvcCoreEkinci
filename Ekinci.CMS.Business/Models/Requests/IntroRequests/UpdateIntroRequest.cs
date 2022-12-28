@@ -6,8 +6,8 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public string PhotoUrl { get; set; }
-        public int SquareMeter { get; set; }
+        public float SquareMeter { get; set; }
         public int YearCount { get; set; }
-        public int CommercialAreaCount { get; set; }
+        public float CommercialAreaCount { get; set; }
     }
 }

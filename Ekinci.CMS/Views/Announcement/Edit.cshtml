@@ -12,7 +12,7 @@
                     <form asp-action="Edit" enctype="multipart/form-data">
                         <div class="card shadow-sm">
                             <div class="card-header">
-                                <h3 class="card-title">Haber/Duyuru</h3>
+                                <h3 class="card-title">@_localizer["AnnouncementTitle"]</h3>
                                 <div class="card-toolbar">
                                     <input type="submit" class="btn btn-success btn-hover-rotate-end" value="@_localizer["Update"]">&nbsp;
                                     <a href="@Url.Action("Index","Announcement")" class="btn btn-danger btn-hover-rotate-start">@_localizer["TurnBack"]</a>
@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
-                                        <label class="control-label">@_localizer["AnnouncementDate"]</label>
+                                        <label class="control-label">@_localizer["Date"]</label>
                                         <div class="input-group form-group mb-5">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <i class="fa-solid fa-align-justify"></i>
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-md-12 form-group mb-5">
                                         <div class="col-md-10">
-                                            <p>DUYURU FOTOĞRAFLARINI YÜKLEYİN : </p>
+                                            <p>@_localizer["UploadPhotos"] </p>
                                             <input type="file" name="PhotoUrls" multiple>
                                         </div>
                                     </div>
@@ -76,7 +76,7 @@
                                                     <table class="table align-middle table-row-dashed fs-6 gy-5 table-responsive" id="kt_customers_table">
                                                         <thead>
                                                             <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
-                                                                <th class="min-w-125px">@_localizer["AnnouncementPhoto"]</th>
+                                                                <th class="min-w-125px">@_localizer["Photos"]</th>
                                                                 <th class="text-end min-w-70px"></th>
                                                             </tr>
                                                         </thead>

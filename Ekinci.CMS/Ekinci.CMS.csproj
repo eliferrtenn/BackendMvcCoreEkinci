@@ -24,6 +24,7 @@
     <Folder Include="wwwroot\Dosya\Video\" />
     <Folder Include="wwwroot\Dosya\Press\" />
     <Folder Include="wwwroot\Dosya\Sustainability\" />
+    <Folder Include="wwwroot\Temp\" />
   </ItemGroup>
 
   <ItemGroup>

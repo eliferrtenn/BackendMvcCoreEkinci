@@ -273,18 +273,6 @@
   <data name="Title" xml:space="preserve">
     <value>Başlık</value>
   </data>
-  <data name="AnnouncementAdded" xml:space="preserve">
-    <value>Haber/Duyuru başarıyla eklendi.</value>
-  </data>
-  <data name="AnnouncementDeleted" xml:space="preserve">
-    <value>Haber/Duyuru başarıyla silindi.</value>
-  </data>
-  <data name="AnnouncementNotFound" xml:space="preserve">
-    <value>Aradığınız haber/duyuru bulunamadı.</value>
-  </data>
-  <data name="AnnouncementPhoto" xml:space="preserve">
-    <value>Fotoğraf</value>
-  </data>
   <data name="AnnouncementPhotos" xml:space="preserve">
     <value>Haber/Duyuru Fotoğrafları</value>
   </data>
@@ -299,9 +287,6 @@
   </data>
   <data name="ThumbUrl" xml:space="preserve">
     <value>Kapak Fotoğrafı</value>
-  </data>
-  <data name="aaa" xml:space="preserve">
-    <value />
   </data>
   <data name="ApartmentCount" xml:space="preserve">
     <value>Daire Sayısı</value>
@@ -327,9 +312,6 @@
   <data name="SubTitle" xml:space="preserve">
     <value>Alt Başlık</value>
   </data>
-  <data name="BlogDate" xml:space="preserve">
-    <value>Blog Tarihi</value>
-  </data>
   <data name="InstagramUrl" xml:space="preserve">
     <value>İnstagram Adresi</value>
   </data>
@@ -347,21 +329,6 @@
   </data>
   <data name="MobilePhone" xml:space="preserve">
     <value>Mobil Telefon Numarası</value>
-  </data>
-  <data name="BlogAdded" xml:space="preserve">
-    <value>Blog başarıyla eklendi.</value>
-  </data>
-  <data name="BlogDeleted" xml:space="preserve">
-    <value>Blog başarıyla silindi.</value>
-  </data>
-  <data name="BlogNotFound" xml:space="preserve">
-    <value>Blog bulunamadı.</value>
-  </data>
-  <data name="BlogUpdated" xml:space="preserve">
-    <value>Blog başarıyla güncellendi.</value>
-  </data>
-  <data name="BlogWithNameAlreadyExist" xml:space="preserve">
-    <value>Bu başlıkta blog zaten kayıtlıdır.</value>
   </data>
   <data name="CommercialAreaAdded" xml:space="preserve">
     <value>Ticari alan başarıyla eklendi.</value>
@@ -402,42 +369,6 @@
   <data name="HistoryNotFound" xml:space="preserve">
     <value>Tarihçe bulunamadı.</value>
   </data>
-  <data name="HistoryUpdated" xml:space="preserve">
-    <value>Tarihçe başarıyla güncellendi.</value>
-  </data>
-  <data name="HistoryWithNameAlreadyExist" xml:space="preserve">
-    <value>Bu başlıkta tarihçe zaten kayıtlıdır.</value>
-  </data>
-  <data name="HumanResourceAdded" xml:space="preserve">
-    <value>İnsan kaynakları başarıyla eklendi.</value>
-  </data>
-  <data name="HumanResourceDeleted" xml:space="preserve">
-    <value>İnsan kaynakları başarıyla silindi.</value>
-  </data>
-  <data name="HumanResourceNotFound" xml:space="preserve">
-    <value>İnsan kaynakları bulunamadı.</value>
-  </data>
-  <data name="HumanResourceUpdated" xml:space="preserve">
-    <value>İnsan kaynakları başarıyla güncellendi.</value>
-  </data>
-  <data name="HumanResourceWithNameAlreadyExist" xml:space="preserve">
-    <value>Bu başlıkta insan kaynakları zaten kayıtlıdır.</value>
-  </data>
-  <data name="IdentityGuideAdded" xml:space="preserve">
-    <value>Kurumsal kimlik rehberi başarıyla eklendi.</value>
-  </data>
-  <data name="IdentityGuideDeleted" xml:space="preserve">
-    <value>Kurumsal kimlik rehberi başarıyla silindi.</value>
-  </data>
-  <data name="IdentityGuideNotFound" xml:space="preserve">
-    <value>Kurumsal Kimlik rehberi bulunamadı.</value>
-  </data>
-  <data name="IdentityGuideUpdated" xml:space="preserve">
-    <value>Kurumsal kimlik rehberi başarıyla güncellendi.</value>
-  </data>
-  <data name="IdentityGuideWithNameAlreadyExist" xml:space="preserve">
-    <value>Bu başlıkta kurumsal kimlik rehberi zaten kayıtlıdır.</value>
-  </data>
   <data name="IntroAdded" xml:space="preserve">
     <value>Tanıtım başarıyla eklendi.</value>
   </data>
@@ -452,21 +383,6 @@
   </data>
   <data name="IntroWithNameAlreadyExist" xml:space="preserve">
     <value>Bu başlıkta tanıtım zaten kayıtlıdır.</value>
-  </data>
-  <data name="KvkkAdded" xml:space="preserve">
-    <value>Kvkk başarıyla eklendi.</value>
-  </data>
-  <data name="KvkkDeleted" xml:space="preserve">
-    <value>Kvkk başarıyla silindi.</value>
-  </data>
-  <data name="KvkkNotFound" xml:space="preserve">
-    <value>Kvkk bulunamadı.</value>
-  </data>
-  <data name="KvkkUpdated" xml:space="preserve">
-    <value>Kvkk başarıyla güncellendi.</value>
-  </data>
-  <data name="KvkkWithNameAlreadyExist" xml:space="preserve">
-    <value>Bu başlıkta kvkk zaten kayıtlıdır.</value>
   </data>
   <data name="PressAdded" xml:space="preserve">
     <value>Basın başarıyla eklendi.</value>
@@ -579,13 +495,34 @@
   <data name="SustainabilityTitle" xml:space="preserve">
     <value>Sürdürülebilirlik</value>
   </data>
-  <data name="AnnouncementDate" xml:space="preserve">
-    <value>Duyuru Tarihi</value>
-  </data>
   <data name="CommercialAreaCount" xml:space="preserve">
     <value>Ticari Alan </value>
   </data>
   <data name="YearCount" xml:space="preserve">
     <value>Kaçıncı yıl</value>
+  </data>
+  <data name="TechnicalServiceDemandtNotFound" xml:space="preserve">
+    <value>Teknik servis isteği bulunamadı.</value>
+  </data>
+  <data name="TechnicalServiceDemandSendPersonel" xml:space="preserve">
+    <value>Teknik servis personeline başarılı bir mesaj gitmiştir.</value>
+  </data>
+  <data name="UserUpdated" xml:space="preserve">
+    <value>Kullanıcı başarıyla güncellendi.</value>
+  </data>
+  <data name="BlogTitle" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="Photos" xml:space="preserve">
+    <value>Fotoğraflar</value>
+  </data>
+  <data name="UploadPhotos" xml:space="preserve">
+    <value>Fotoğrafları Yükleyin.</value>
+  </data>
+  <data name="PhotoCouldNotUploaded" xml:space="preserve">
+    <value>Fotoğraf yüklenemedi.</value>
   </data>
 </root>

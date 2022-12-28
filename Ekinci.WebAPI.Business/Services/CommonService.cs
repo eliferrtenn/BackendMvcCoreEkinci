@@ -18,6 +18,12 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class CommonService : BaseService, ICommonService
     {
+        const string fileHumanResource = "HumanResource/";
+        const string fileIdentity = "IdentityGuide/";
+        const string fileIntro = "Intro/";
+        const string fileKvkk = "Kvkk/";
+        const string fileSustain = "Sustainability/";
+
         public CommonService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
@@ -49,6 +55,7 @@ namespace Ekinci.WebAPI.Business.Services
                                            ID = human.ID,
                                            Title = human.Title,
                                            Description = human.Description,
+                                           PhotoUrl=human.PhotoUrl,
                                        }).FirstAsync();
             result.Data = humanResource;
             return result;
@@ -62,7 +69,7 @@ namespace Ekinci.WebAPI.Business.Services
                                        {
                                            ID = identity.ID,
                                            Title = identity.Title,
-                                           PhotoUrl = ekinciUrl + identity.PhotoUrl,
+                                           PhotoUrl = identity.PhotoUrl.PrepareCDNUrl(fileIdentity),
                                        }).FirstAsync();
             result.Data = IdentityGuide;
             return result;
@@ -80,7 +87,7 @@ namespace Ekinci.WebAPI.Business.Services
                                    SquareMeter= intro.SquareMeter,
                                    YearCount= intro.YearCount,
                                    CommercialAreaCount= intro.CommercialAreaCount,
-                                   PhotoUrl = ekinciUrl + intro.PhotoUrl,
+                                   PhotoUrl = intro.PhotoUrl.PrepareCDNUrl(fileIntro),
                                }).FirstAsync();
             result.Data = Intro;
             return result;
@@ -95,7 +102,7 @@ namespace Ekinci.WebAPI.Business.Services
                                   ID = kvk.ID,
                                   Title = kvk.Title,
                                   Description = kvk.Description,
-                                  PhotoUrl = ekinciUrl + kvk.PhotoUrl,
+                                  PhotoUrl = kvk.PhotoUrl.PrepareCDNUrl(fileKvkk),
                               }).FirstAsync();
             result.Data = kvkk;
             return result;
@@ -110,7 +117,7 @@ namespace Ekinci.WebAPI.Business.Services
                                             ID = sustain.ID,
                                             Title = sustain.Title,
                                             Description = sustain.Description,
-                                            PhotoUrl = ekinciUrl + sustain.PhotoUrl,
+                                            PhotoUrl = sustain.PhotoUrl.PrepareCDNUrl(fileSustain),
                                         }).FirstAsync();
             result.Data = sustainability;
             return result;

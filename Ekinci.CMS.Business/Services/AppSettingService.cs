@@ -2,6 +2,7 @@
 using Ekinci.CMS.Business.Models.Requests.AppSettingsRequest;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,7 @@ namespace Ekinci.CMS.Business.Services
     {
         private readonly ICacheManager cacheManager;
 
-        public AppSettingService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, ICacheManager _cacheManager) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public AppSettingService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload, ICacheManager _cacheManager) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
             cacheManager = _cacheManager;
         }
@@ -50,7 +51,7 @@ namespace Ekinci.CMS.Business.Services
             result.Data = appSettings;
             return result;
         }
-   
+
         public async Task<ServiceResult<UpdateAppSettingsRequest>> UpdateAsync(UpdateAppSettingsRequest request)
         {
             var result = new ServiceResult<UpdateAppSettingsRequest>();

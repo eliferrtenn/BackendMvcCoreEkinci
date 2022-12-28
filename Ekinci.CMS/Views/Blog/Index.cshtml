@@ -5,7 +5,7 @@
     var tokenSet = antiforgery.GetAndStoreTokens(Context);
 }
 
-<div class=" flex-column " id="kt_wrapper">
+<div class="flex-column" id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <div id="kt_content_container" class="container-xxl">
@@ -13,7 +13,7 @@
                     <div class="card shadow-sm">
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-3 mb-1">Blog</span>
+                                <span class="card-label fw-bolder fs-3 mb-1">@_localizer["BlogTitle"]</span>
                             </h3>
                             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover">
                                 <a href="@Url.Action("Create","Blog")" class="btn btn-sm btn btn-success">
@@ -23,7 +23,7 @@
                                             <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                         </svg>
                                     </span>
-                                    YENİ BLOG
+                                    @_localizer["Create"]
                                 </a>
                             </div>
                         </div>

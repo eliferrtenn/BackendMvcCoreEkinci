@@ -4,6 +4,8 @@ using Ekinci.CMS.Business.Models.Requests.KvkRequests;
 using Ekinci.CMS.Business.Models.Responses.KvkkResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -18,7 +20,7 @@ namespace Ekinci.CMS.Business.Services
     {
         const string file = "Kvkk/";
 
-        public KvkkService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public KvkkService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -28,7 +30,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Kvkks.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError(_localizer["KvkkWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -38,16 +40,13 @@ namespace Ekinci.CMS.Business.Services
             {
                 if (PhotoUrl.Length > 0)
                 {
-                    var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = file + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                    if (!fileUploadResult.IsSuccess)
                     {
-                        await PhotoUrl.CopyToAsync(stream);
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
                     }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    kvkk.PhotoUrl = type;
+                    kvkk.PhotoUrl = fileUploadResult.FileName;
                 }
             }
             kvkk.Title = request.Title;
@@ -55,7 +54,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Kvkks.Add(kvkk);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["KvkkAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
 
@@ -64,7 +63,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<GetKvkkResponse>();
             if (_context.Kvkks.Count() == 0)
             {
-                result.SetError(_localizer["KvkkNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             var kvkk = await (from kvk in _context.Kvkks
@@ -73,7 +72,7 @@ namespace Ekinci.CMS.Business.Services
                                   ID = kvk.ID,
                                   Title = kvk.Title,
                                   Description = kvk.Description,
-                                  PhotoUrl = ekinciUrl + kvk.PhotoUrl,
+                                  PhotoUrl = kvk.PhotoUrl.PrepareCDNUrl(file),
                               }).SingleOrDefaultAsync();
 
             result.Data = kvkk;
@@ -88,31 +87,27 @@ namespace Ekinci.CMS.Business.Services
             var kvkk = await _context.Kvkks.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (kvkk == null)
             {
-                result.SetError(_localizer["KvkkNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             if (PhotoUrl != null)
             {
                 if (PhotoUrl.Length > 0)
                 {
-                    await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + kvkk.PhotoUrl);
-                    var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = file + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                    if (!fileUploadResult.IsSuccess)
                     {
-                        await PhotoUrl.CopyToAsync(stream);
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
                     }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    kvkk.PhotoUrl = type;
+                    kvkk.PhotoUrl = fileUploadResult.FileName;
                 }
             }
             kvkk.Title = request.Title;
             kvkk.Description = request.Description;
             _context.Kvkks.Update(kvkk);
             await _context.SaveChangesAsync();
-            result.SetSuccess(_localizer["KvkkUpdated"]);
+            result.SetSuccess(_localizer["RecordUpdated"]);
             return result;
         }
     }

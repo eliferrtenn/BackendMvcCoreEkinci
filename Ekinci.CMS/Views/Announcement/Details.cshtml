@@ -1,17 +1,26 @@
 ﻿@model Ekinci.CMS.Business.Models.Responses.AnnouncementResponses.GetAnnouncementResponse
 
-<div class=" flex-column " id="kt_wrapper">
+<div class="flex-column" id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <div id="kt_content_container" class="container-xxl">
                 <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                     <div class="cursor-pointer">
                         <div class="card-header">
-                            <h3 class="card-title">HABERLER/DUYURULAR</h3>
+                            <h3 class="card-title">@_localizer["AnnouncementTitle"]</h3>
                             <div class="card-toolbar">
                                 <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-success align-self-center">@_localizer["Update"]</a>&nbsp;
                                 <a href="@Url.Action("Index","Announcement")" class="btn btn-danger btn-hover-rotate-start">@_localizer["TurnBack"]</a>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-9">
+                        <div class="row mb-7">
+                            <label class="col-lg-12 fw-bold text-muted">@_localizer["ThumbUrl"]</label>
+                                <div class="col-lg-4 mb-5">
+                                    <img src="@Model.ThumbUrl" alt="image" width="200" />
+                                </div>
                         </div>
                     </div>
                     <div class="card-body p-9">
@@ -32,7 +41,15 @@
                     </div>
                     <div class="card-body p-9">
                         <div class="row mb-7">
-                            <label class="col-lg-12 fw-bold text-muted">@_localizer["AnnouncementPhotos"]</label>
+                            <label class="col-lg-4 fw-bold text-muted">@_localizer["Daate"]</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.AnnouncementDate</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row mb-7">
+                            <label class="col-lg-12 fw-bold text-muted">@_localizer["Photos"]</label>
                             @foreach (var item in Model.AnnouncementPhotos)
                             {
                                 <div class="col-lg-4 mb-5">

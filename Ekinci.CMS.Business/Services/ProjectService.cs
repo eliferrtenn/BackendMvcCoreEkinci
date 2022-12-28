@@ -4,6 +4,7 @@ using Ekinci.CMS.Business.Models.Responses.ProjectResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
 using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -20,7 +21,7 @@ namespace Ekinci.CMS.Business.Services
         const string file = "Project/General/";
         private readonly IProjectStatusService projectStatusService;
 
-        public ProjectService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public ProjectService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -30,7 +31,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Projects.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError(_localizer["ProjectWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
             var project = new Projects();
@@ -40,16 +41,13 @@ namespace Ekinci.CMS.Business.Services
                 var filePaths = new List<string>();
                 if (PhotoUrl.Length > 0)
                 {
-                    var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = fileThumb + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    var fileUploadResult = _fileUpload.Upload(PhotoUrl, fileThumb);
+                    if (!fileUploadResult.IsSuccess)
                     {
-                        await PhotoUrl.CopyToAsync(stream);
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
                     }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    project.ThumbUrl = type;
+                    project.ThumbUrl = fileUploadResult.FileName;
                 }
             }
             project.Title = request.Title;
@@ -71,26 +69,21 @@ namespace Ekinci.CMS.Business.Services
                 {
                     var projectPhoto = new ProjectPhoto();
                     projectPhoto.ProjectID = id;
-                    Guid guid = Guid.NewGuid();
-                    var filePaths = new List<string>();
                     if (photo.Length > 0)
                     {
-                        var path = Path.GetExtension(photo.FileName);
-                        var type = file + guid.ToString() + path;
-                        var filePath = "wwwroot/Dosya/" + type;
-                        var filePathBunnyCdn = "/ekinci/" + type;
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var fileUploadResult = _fileUpload.Upload(photo, file);
+                        if (!fileUploadResult.IsSuccess)
                         {
-                            await photo.CopyToAsync(stream);
+                            result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                            return result;
                         }
-                        await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                        projectPhoto.PhotoUrl = type;
+                        projectPhoto.PhotoUrl = fileUploadResult.FileName;
                         _context.ProjectPhotos.Add(projectPhoto);
                     }
                 }
             }
             await _context.SaveChangesAsync();
-            result.SetSuccess(_localizer["ProjectAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
 
@@ -100,13 +93,13 @@ namespace Ekinci.CMS.Business.Services
             var projectPhoto = await _context.ProjectPhotos.FirstOrDefaultAsync(x => x.ID == projectPhotoID);
             if (projectPhoto == null)
             {
-                result.SetError(_localizer["ProjectPhotoNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             projectPhoto.IsEnabled = false;
             _context.ProjectPhotos.Update(projectPhoto);
             await _context.SaveChangesAsync();
-            result.SetSuccess(_localizer["ProjectPhotoDeleted"]);
+            result.SetSuccess(_localizer["RecordDeleted"]);
             return result;
         }
 
@@ -116,13 +109,13 @@ namespace Ekinci.CMS.Business.Services
             var project = await _context.Projects.FirstOrDefaultAsync(x => x.ID == projecttID);
             if (project == null)
             {
-                result.SetError(_localizer["ProjectNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             project.IsEnabled = false;
             _context.Projects.Update(project);
             await _context.SaveChangesAsync();
-            result.SetSuccess(_localizer["ProjectDeleted"]);
+            result.SetSuccess(_localizer["RecordDeleted"]);
             return result;
         }
 
@@ -138,7 +131,7 @@ namespace Ekinci.CMS.Business.Services
                                       StatusID = proj.StatusID,
                                       StatusName = ps.Name,
                                       Title = proj.Title,
-                                      ThumbUrl =ekinciUrl+proj.ThumbUrl,
+                                      ThumbUrl =proj.ThumbUrl.PrepareCDNUrl(fileThumb),
                                       SubTitle = proj.SubTitle,
                                       Description = proj.Description,
                                       ProjectDate = proj.ProjectDate.ToFormattedDate(),
@@ -162,7 +155,7 @@ namespace Ekinci.CMS.Business.Services
                                                       select new ProjectPhotosResponse
                                                       {
                                                           ID = prph.ID,
-                                                          PhotoUrl =ekinciUrl+prph.PhotoUrl
+                                                          PhotoUrl =prph.PhotoUrl.PrepareCDNUrl(file)
                                                       }).ToList()
                                  where proj.ID == projectID
                                  select new GetProjectResponse
@@ -175,15 +168,16 @@ namespace Ekinci.CMS.Business.Services
                                      Description = proj.Description,
                                      ProjectDate = proj.ProjectDate,
                                      DeliveryDate = proj.DeliveryDate,
-                                     ThumbUrl =ekinciUrl+proj.ThumbUrl,
-                                     FileUrl = ekinciUrl + proj.FileUrl,
+                                     ThumbUrl =proj.ThumbUrl.PrepareCDNUrl(fileThumb),
+                                     //TODO Farklı bir sistem olacak
+                                     FileUrl = proj.FileUrl.PrepareCDNUrl(file),
                                      ApartmentCount = proj.ApartmentCount,
                                      SquareMeter = proj.SquareMeter,
                                      ProjectPhotos = projectPhotos
                                  }).FirstAsync();
             if (project == null)
             {
-                result.SetError(_localizer["ProjectNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             result.Data = project;
@@ -196,13 +190,13 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Projects.AnyAsync(x => x.Title == request.Title && x.ID != request.ID);
             if (exist == true)
             {
-                result.SetError(_localizer["ProjectWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
             var project = await _context.Projects.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (project == null)
             {
-                result.SetError(_localizer["ProjectNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             else
@@ -213,17 +207,13 @@ namespace Ekinci.CMS.Business.Services
                     var filePaths = new List<string>();
                     if (PhotoUrl.Length > 0)
                     {
-                        await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + project.ThumbUrl);
-                        var path = Path.GetExtension(PhotoUrl.FileName);
-                        var type = fileThumb + guid.ToString() + path;
-                        var filePath = "wwwroot/Dosya/" + type;
-                        var filePathBunnyCdn = "/ekinci/" + type;
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var fileUploadResult = _fileUpload.Upload(PhotoUrl, fileThumb);
+                        if (!fileUploadResult.IsSuccess)
                         {
-                            await PhotoUrl.CopyToAsync(stream);
+                            result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                            return result;
                         }
-                        await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                        project.ThumbUrl = type;
+                        project.ThumbUrl = fileUploadResult.FileName;
                     }
                 }
                 project.Title = request.Title;
@@ -248,22 +238,19 @@ namespace Ekinci.CMS.Business.Services
                         var filePaths = new List<string>();
                         if (photo.Length > 0)
                         {
-                            var path = Path.GetExtension(photo.FileName);
-                            var type = file + guid.ToString() + path;
-                            var filePath = "wwwroot/Dosya/" + type;
-                            var filePathBunnyCdn = "/ekinci/" + type;
-                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            var fileUploadResult = _fileUpload.Upload(photo, file);
+                            if (!fileUploadResult.IsSuccess)
                             {
-                                await photo.CopyToAsync(stream);
+                                result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                                return result;
                             }
-                            await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                            projectPhoto.PhotoUrl = type;
+                            projectPhoto.PhotoUrl = fileUploadResult.FileName;
                             _context.ProjectPhotos.Add(projectPhoto);
                         }
                     }
                 }
                 await _context.SaveChangesAsync();
-                result.SetSuccess(_localizer["ProjectUpdated"]);
+                result.SetSuccess(_localizer["RecordUpdated"]);
                 return result;
             }
 

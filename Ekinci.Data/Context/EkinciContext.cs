@@ -24,6 +24,7 @@ namespace Ekinci.Data.Context
         public DbSet<ProjectPhoto> ProjectPhotos { get; set; }
         public DbSet<Projects> Projects { get; set; }
         public DbSet<Sustainability> Sustainabilities { get; set; }
+        public DbSet<TechnicalServiceDemand> TechnicalServiceDemands{ get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Videos> Videos { get; set; }
         public DbSet<ProjectStatus> ProjectStatus { get; set; }

@@ -34,9 +34,9 @@ namespace Ekinci.CMS.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(AddVideosRequest request,IFormFile VideoUrl)
+        public async Task<IActionResult> Create(AddVideosRequest request,IFormFile PhotoUrl)
         {
-            var result = await videosService.AddVideo(request,VideoUrl);
+            var result = await videosService.AddVideo(request,PhotoUrl);
             if (result.IsSuccess)
             {
                 Message(result);
@@ -51,9 +51,9 @@ namespace Ekinci.CMS.Controllers
             return View(result.Data);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(UpdateVideosRequest request,IFormFile VideoUrl)
+        public async Task<IActionResult> Edit(UpdateVideosRequest request,IFormFile PhotoUrl)
         {
-            var result = await videosService.UpdateVideo(request,VideoUrl);
+            var result = await videosService.UpdateVideo(request,PhotoUrl);
             if (result.IsSuccess)
             {
                 Message(result);

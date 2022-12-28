@@ -13,6 +13,8 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class HistoryService : BaseService, IHistoryService
     {
+        const string file = "History/";
+
         public HistoryService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
@@ -28,7 +30,7 @@ namespace Ekinci.WebAPI.Business.Services
                                        Title = hist.Title,
                                        StartDate = hist.StartDate.ToFormattedDate(),
                                        EndDate = hist.EndDate.ToFormattedDate(),
-                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
+                                       PhotoUrl = hist.PhotoUrl.PrepareCDNUrl(file),
                                    }).ToListAsync();
             result.Data = histories;
             return result;
@@ -45,7 +47,7 @@ namespace Ekinci.WebAPI.Business.Services
                                        Title = hist.Title,
                                        StartDate = hist.StartDate.ToFormattedDate(),
                                        EndDate = hist.EndDate.ToFormattedDate(),
-                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
+                                       PhotoUrl = hist.PhotoUrl.PrepareCDNUrl(file),
                                    }).FirstAsync();
             if (histories == null)
             {

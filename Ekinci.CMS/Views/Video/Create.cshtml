@@ -11,16 +11,26 @@
         <div class="card-body">
             <div class="row">
                 <div class="row mb-6">
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">@_localizer["VideoUrl"]</label>
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">@_localizer["PhotoUrl"]</label>
                     <div class="col-lg-8">
                         <div class="image-input image-input-outline" data-kt-image-input="true">
                             <div class="image-input-wrapper w-125px h-125px"></div>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Yükle">
                                 <i class="bi bi-pencil-fill fs-7"></i>
-                                <input type="file" name="VideoUrl" accept=".mp4" />
+                                <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
                             </label>
                         </div>
                         <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label class="control-label">@_localizer["VideoUrl"]</label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="VideoUrl" class="form-control" />
+                        <span asp-validation-for="VideoUrl" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-12 mb-5">

@@ -1,4 +1,5 @@
 ﻿using Ekinci.Common.Business;
+using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
@@ -12,6 +13,8 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class CommercialAreaService : BaseService, ICommercialAreaService
     {
+        const string file = "CommercialArea/";
+
         public CommercialAreaService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
@@ -24,7 +27,7 @@ namespace Ekinci.WebAPI.Business.Services
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl = ekinciUrl + commercial.PhotoUrl,
+                                         PhotoUrl = commercial.PhotoUrl.PrepareCDNUrl(file),
                                      }).ToListAsync();
             result.Data = commercials;
             return result; ;
@@ -40,7 +43,7 @@ namespace Ekinci.WebAPI.Business.Services
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl = ekinciUrl + commercial.PhotoUrl,
+                                         PhotoUrl = commercial.PhotoUrl.PrepareCDNUrl(file),
                                      }).FirstAsync();
             if (commercials == null)
             {

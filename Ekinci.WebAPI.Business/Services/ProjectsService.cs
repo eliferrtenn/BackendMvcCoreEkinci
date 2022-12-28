@@ -1,7 +1,7 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
-using Ekinci.Data.Models;
 using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Responses.ProjectResponse;
@@ -14,7 +14,9 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class ProjectsService : BaseService, IProjectsService
     {
-        public ProjectsService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
+        const string fileThumb = "Project/Thumb/";
+        const string file = "Project/General/";
+        public ProjectsService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer, FileUpload fileUpload) : base(context, configuration, httpContext, localizer, fileUpload)
         {
         }
 
@@ -29,7 +31,7 @@ namespace Ekinci.WebAPI.Business.Services
                                       StatusID = proj.StatusID,
                                       StatusName = ps.Name,
                                       Title = proj.Title,
-                                      ThumbUrl= ekinciUrl + proj.ThumbUrl,
+                                      ThumbUrl = proj.ThumbUrl.PrepareCDNUrl(fileThumb),
                                       SubTitle = proj.SubTitle,
                                       Description = proj.Description,
                                       ProjectDate = proj.ProjectDate.ToFormattedDate(),
@@ -51,7 +53,7 @@ namespace Ekinci.WebAPI.Business.Services
                                                       select new ProjectPhotosResponse
                                                       {
                                                           ID = prph.ID,
-                                                          PhotoUrl = ekinciUrl + prph.PhotoUrl
+                                                          PhotoUrl = prph.PhotoUrl.PrepareCDNUrl(file)
                                                       }).ToList()
                                  where proj.ID == projectID
                                  select new GetProjectResponse

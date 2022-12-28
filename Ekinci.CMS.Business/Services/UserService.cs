@@ -3,6 +3,7 @@ using Ekinci.CMS.Business.Models.Requests.UserRequests;
 using Ekinci.CMS.Business.Models.Responses.UserResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +15,7 @@ namespace Ekinci.CMS.Business.Services
 {
     public class UserService : BaseService, IUserService
     {
-        public UserService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public UserService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -44,7 +45,7 @@ namespace Ekinci.CMS.Business.Services
             var user = await _context.Users.FirstOrDefaultAsync(x => x.ID == CurrentUserID);
             if (user == null)
             {
-                result.SetError("Kullanıcı Bulunamadı!");
+                result.SetError(_localizer["UserNotFound"]);
                 return result;
             }
 
@@ -56,7 +57,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess("Kullanıcı başarıyla güncellendi!");
+            result.SetSuccess(_localizer["UserUpdated"]);
             return result;
         }
     }

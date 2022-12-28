@@ -4,6 +4,7 @@ using Ekinci.CMS.Business.Models.Responses.HistoryResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
 using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
+using System.Reflection.Metadata;
 
 namespace Ekinci.CMS.Business.Services
 {
@@ -18,7 +20,7 @@ namespace Ekinci.CMS.Business.Services
     {
         const string file = "History/";
 
-        public HistoryService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public HistoryService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -28,7 +30,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Histories.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError(_localizer["HistoryWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
             Guid guid = Guid.NewGuid();
@@ -38,16 +40,13 @@ namespace Ekinci.CMS.Business.Services
             {
                 if (PhotoUrl.Length > 0)
                 {
-                    var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = file + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                    if (!fileUploadResult.IsSuccess)
                     {
-                        await PhotoUrl.CopyToAsync(stream);
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
                     }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    history.PhotoUrl = type;
+                    history.PhotoUrl = fileUploadResult.FileName;
                 }
             }
             history.Title = request.Title;
@@ -56,7 +55,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Histories.Add(history);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["HistoryAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
 
@@ -66,14 +65,14 @@ namespace Ekinci.CMS.Business.Services
             var history = await _context.Histories.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (history == null)
             {
-                result.SetError(_localizer["HistoryNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             history.IsEnabled = false;
             _context.Histories.Update(history);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["HistoryDeleted"]);
+            result.SetSuccess(_localizer["RecordDeleted"]);
             return result;
         }
 
@@ -82,7 +81,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListHistoriesResponse>>();
             if (_context.Histories.Count() == 0)
             {
-                result.SetError(_localizer["HistoryNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             var histories = await (from hist in _context.Histories
@@ -93,7 +92,7 @@ namespace Ekinci.CMS.Business.Services
                                        Title = hist.Title,
                                        StartDate = hist.StartDate.ToFormattedDate(),
                                        EndDate = hist.EndDate.ToFormattedDate(),
-                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
+                                       PhotoUrl = hist.PhotoUrl.PrepareCDNUrl(file),
                                    }).ToListAsync();
             result.Data = histories;
             return result;
@@ -110,11 +109,11 @@ namespace Ekinci.CMS.Business.Services
                                        Title = hist.Title,
                                        StartDate = hist.StartDate,
                                        EndDate = hist.EndDate,
-                                       PhotoUrl = ekinciUrl + hist.PhotoUrl,
+                                       PhotoUrl =hist.PhotoUrl.PrepareCDNUrl(file),
                                    }).FirstAsync();
             if (histories == null)
             {
-                result.SetError(_localizer["HistoryNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             result.Data = histories;
@@ -126,30 +125,26 @@ namespace Ekinci.CMS.Business.Services
             Guid guid = Guid.NewGuid();
             var filePaths = new List<string>();
             var result = new ServiceResult();
-            var exist = await _context.Histories.AnyAsync(x => x.Title == request.Title && x.ID != request.ID);
+            var exist = await _context.Histories.AnyAsync(x => x.Title == request.Title && x.IsEnabled==true && x.ID != request.ID);
             if (exist == false)
             {
                 var history = await _context.Histories.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (history == null)
                 {
-                    result.SetError(_localizer["HistoryNotFound"]);
+                    result.SetError(_localizer["RecordNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
                 {
                     if (PhotoUrl.Length > 0)
                     {
-                        await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + history.PhotoUrl);
-                        var path = Path.GetExtension(PhotoUrl.FileName);
-                        var type = file + guid.ToString() + path;
-                        var filePath = "wwwroot/Dosya/" + type;
-                        var filePathBunnyCdn = "/ekinci/" + type;
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                        if (!fileUploadResult.IsSuccess)
                         {
-                            await PhotoUrl.CopyToAsync(stream);
+                            result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                            return result;
                         }
-                        await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                        history.PhotoUrl = type;
+                        history.PhotoUrl = fileUploadResult.FileName;
                     }
                 }
                 history.Title = request.Title;
@@ -157,11 +152,11 @@ namespace Ekinci.CMS.Business.Services
                 history.EndDate = request.EndDate;
                 _context.Histories.Update(history);
                 await _context.SaveChangesAsync();
-                result.SetSuccess(_localizer["HistoryUpdated"]);
+                result.SetSuccess(_localizer["RecordUpdated"]);
             }
             else
             {
-                result.SetError(_localizer["HistoryWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
             }
             return result;
         }

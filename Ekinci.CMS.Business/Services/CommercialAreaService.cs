@@ -3,6 +3,8 @@ using Ekinci.CMS.Business.Models.Requests.CommercialAreaRequests;
 using Ekinci.CMS.Business.Models.Responses.CommercialAreaResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
+using System.Reflection.Metadata;
 
 namespace Ekinci.CMS.Business.Services
 {
@@ -17,7 +20,7 @@ namespace Ekinci.CMS.Business.Services
     {
         const string file = "CommercialArea/";
 
-        public CommercialAreaService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public CommercialAreaService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -29,7 +32,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError(_localizer["CommercialAreaWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
             var commercialArea = new CommercialArea();
@@ -37,23 +40,20 @@ namespace Ekinci.CMS.Business.Services
             {
                 if (PhotoUrl.Length > 0)
                 {
-                    var path = Path.GetExtension(PhotoUrl.FileName);
-                    var type = file + guid.ToString() + path;
-                    var filePath = "wwwroot/Dosya/" + type;
-                    var filePathBunnyCdn = "/ekinci/" + type;
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                    if (!fileUploadResult.IsSuccess)
                     {
-                        await PhotoUrl.CopyToAsync(stream);
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
                     }
-                    await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                    commercialArea.PhotoUrl = type;
+                    commercialArea.PhotoUrl = fileUploadResult.FileName;
                 }
             }
             commercialArea.Title = request.Title;
             _context.CommercialAreas.Add(commercialArea);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["CommercialAreaAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
 
@@ -63,7 +63,7 @@ namespace Ekinci.CMS.Business.Services
             var commercialArea = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (commercialArea == null)
             {
-                result.SetError(_localizer["CommercialAreaNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
 
@@ -71,7 +71,7 @@ namespace Ekinci.CMS.Business.Services
             _context.CommercialAreas.Update(commercialArea);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["CommercialAreaDeleted"]);
+            result.SetSuccess(_localizer["RecordDeleted"]);
             return result;
         }
 
@@ -80,7 +80,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListCommercialAreasResponse>>();
             if (_context.CommercialAreas.Count() == 0)
             {
-                result.SetError(_localizer["CommercialAreaNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             var commercials = await (from commercial in _context.CommercialAreas
@@ -89,7 +89,7 @@ namespace Ekinci.CMS.Business.Services
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl = ekinciUrl + commercial.PhotoUrl,
+                                         PhotoUrl = commercial.PhotoUrl.PrepareCDNUrl(file),
                                      }).ToListAsync();
             result.Data = commercials;
             return result; ;
@@ -105,11 +105,11 @@ namespace Ekinci.CMS.Business.Services
                                      {
                                          ID = commercial.ID,
                                          Title = commercial.Title,
-                                         PhotoUrl = ekinciUrl + commercial.PhotoUrl,
+                                         PhotoUrl = commercial.PhotoUrl.PrepareCDNUrl(file),
                                      }).FirstAsync();
             if (commercials == null)
             {
-                result.SetError(_localizer["CommercialAreaNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             result.Data = commercials;
@@ -128,35 +128,31 @@ namespace Ekinci.CMS.Business.Services
                 var commercialArea = await _context.CommercialAreas.FirstOrDefaultAsync(x => x.ID == request.ID);
                 if (commercialArea == null)
                 {
-                    result.SetError(_localizer["CommercialAreaNotFound"]);
+                    result.SetError(_localizer["RecordNotFound"]);
                     return result;
                 }
                 if (PhotoUrl != null)
                 {
                     if (PhotoUrl.Length > 0)
                     {
-                        await bunnyCDNStorage.DeleteObjectAsync("/ekinci/" + commercialArea.PhotoUrl);
-                        var path = Path.GetExtension(PhotoUrl.FileName);
-                        var type = file + guid.ToString() + path;
-                        var filePath = "wwwroot/Dosya/" + type;
-                        var filePathBunnyCdn = "/ekinci/" + type;
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                        if (!fileUploadResult.IsSuccess)
                         {
-                            await PhotoUrl.CopyToAsync(stream);
+                            result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                            return result;
                         }
-                        await bunnyCDNStorage.UploadAsync(filePath, filePathBunnyCdn);
-                        commercialArea.PhotoUrl = type;
+                        commercialArea.PhotoUrl = fileUploadResult.FileName;
                     }
                 }
                 commercialArea.Title = request.Title;
                 _context.CommercialAreas.Update(commercialArea);
                 await _context.SaveChangesAsync();
 
-                result.SetSuccess(_localizer["CommercialAreaUpdated"]);
+                result.SetSuccess(_localizer["RecordUpdated"]);
             }
             else
             {
-                result.SetError(_localizer["CommercialAreaWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
             }
             return result;
         }

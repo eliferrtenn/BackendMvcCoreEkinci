@@ -3,6 +3,7 @@ using Ekinci.CMS.Business.Models.Requests.ContactRequests;
 using Ekinci.CMS.Business.Models.Responses.ContactResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -15,7 +16,7 @@ namespace Ekinci.CMS.Business.Services
 {
     public class ContactService : BaseService, IContactService
     {
-        public ContactService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public ContactService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -25,7 +26,7 @@ namespace Ekinci.CMS.Business.Services
             var exist = await _context.Contacts.FirstOrDefaultAsync(x => x.Title == request.Title);
             if (exist != null)
             {
-                result.SetError(_localizer["ContactWithNameAlreadyExist"]);
+                result.SetError(_localizer["RecordAlreadyExist"]);
                 return result;
             }
             var contact = new Contact();
@@ -41,7 +42,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["ContactAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
 
@@ -51,7 +52,7 @@ namespace Ekinci.CMS.Business.Services
             var contact = await _context.Contacts.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (contact == null)
             {
-                result.SetError(_localizer["ContactNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
 
@@ -59,7 +60,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Contacts.Update(contact);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["ContactDeleted"]);
+            result.SetSuccess(_localizer["RecordDeleted"]);
             return result;
         }
 
@@ -68,7 +69,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListContactsResponse>>();
             if (_context.Contacts.Count() == 0)
             {
-                result.SetError(_localizer["ContactNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             var contacts = await (from con in _context.Contacts
@@ -106,7 +107,7 @@ namespace Ekinci.CMS.Business.Services
                                  }).FirstAsync();
             if (contact == null)
             {
-                result.SetError(_localizer["ContactNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             result.Data = contact;
@@ -119,7 +120,7 @@ namespace Ekinci.CMS.Business.Services
             var contact = await _context.Contacts.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (contact == null)
             {
-                result.SetError(_localizer["ContactNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             contact.Title = request.Title;
@@ -134,7 +135,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Contacts.Update(contact);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["ContactUpdated"]);
+            result.SetSuccess(_localizer["RecordUpdated"]);
             return result;
         }
     }

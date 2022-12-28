@@ -1,4 +1,6 @@
 ﻿using Ekinci.Common.Business;
+using Ekinci.Common.Extentions;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
@@ -12,7 +14,9 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class VideosService : BaseService, IVideosService
     {
-        public VideosService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
+        const string file = "Video/";
+
+        public VideosService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer, FileUpload fileUpload) : base(context, configuration, httpContext, localizer, fileUpload)
         {
         }
 
@@ -25,7 +29,8 @@ namespace Ekinci.WebAPI.Business.Services
                                     ID = vid.ID,
                                     Title = vid.Title,
                                     Description = vid.Description,
-                                    PhotoUrl = ekinciUrl + vid.VideoUrl,
+                                    PhotoUrl = vid.PhotoUrl.PrepareCDNUrl(file),
+                                    VideoUrl=vid.VideoUrl,
                                 }).ToListAsync();
             result.Data = videos;
             return result;
@@ -41,7 +46,8 @@ namespace Ekinci.WebAPI.Business.Services
                                     ID = vid.ID,
                                     Title = vid.Title,
                                     Description = vid.Description,
-                                    VideoUrl = ekinciUrl + vid.VideoUrl,
+                                    PhotoUrl = vid.PhotoUrl.PrepareCDNUrl(file),
+                                    VideoUrl = vid.VideoUrl,
                                 }).FirstAsync();
             if (video == null)
             {

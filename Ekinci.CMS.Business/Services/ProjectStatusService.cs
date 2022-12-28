@@ -2,6 +2,7 @@
 using Ekinci.CMS.Business.Models.Responses.ProjectStatusResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,7 @@ namespace Ekinci.CMS.Business.Services
 {
     public class ProjectStatusService : BaseService, IProjectStatusService
     {
-        public ProjectStatusService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys) : base(context, configuration, localizer, httpContext, appSettingsKeys)
+        public ProjectStatusService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
 
@@ -22,7 +23,7 @@ namespace Ekinci.CMS.Business.Services
             var result = new ServiceResult<List<ListProjectStatusResponse>>();
             if (_context.ProjectStatus.Count() == 0)
             {
-                result.SetError("Proje Durumu bulunamadı");
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             var statuses = await (from status in _context.ProjectStatus
@@ -47,7 +48,7 @@ namespace Ekinci.CMS.Business.Services
                                   }).FirstAsync();
             if (statuses == null)
             {
-                result.SetError("Proje Durumu bulunamadı");
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             result.Data = statuses;

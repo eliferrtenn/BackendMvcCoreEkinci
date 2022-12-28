@@ -1,4 +1,5 @@
 ﻿using Ekinci.Common.Business;
+using Ekinci.Common.Extentions;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
@@ -12,6 +13,8 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class PressService : BaseService, IPressService
     {
+        const string file = "Press/";
+
         public PressService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
@@ -23,7 +26,7 @@ namespace Ekinci.WebAPI.Business.Services
                                  select new ListPressResponse
                                  {
                                      ID = press.ID,
-                                     PhotoUrl = ekinciUrl + press.PhotoUrl,
+                                     PhotoUrl = press.PhotoUrl.PrepareCDNUrl(file),
                                  }).ToListAsync();
             result.Data = presses;
             return result;
@@ -37,7 +40,7 @@ namespace Ekinci.WebAPI.Business.Services
                                select new GetPressResponse
                                {
                                    ID = pres.ID,
-                                   PhotoUrl = ekinciUrl + pres.PhotoUrl,
+                                   PhotoUrl = pres.PhotoUrl.PrepareCDNUrl(file),
                                }).FirstAsync();
             if (press == null)
             {

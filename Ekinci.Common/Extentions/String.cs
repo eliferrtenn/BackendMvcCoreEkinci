@@ -59,5 +59,14 @@ namespace Ekinci.Common.Extentions
                 return str;
             }
         }
+        public static string PrepareCDNUrl(this string imageUrl, string folder)
+        {
+            if (string.IsNullOrEmpty(imageUrl))
+            {
+                return imageUrl;
+            }
+
+            return string.Format("{0}{1}{2}", "https://ekinciapp.b-cdn.net/", folder, imageUrl);
+        }
     }
 }

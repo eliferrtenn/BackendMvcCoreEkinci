@@ -133,6 +133,10 @@
       "PackagePath": "staticwebassets\\Dosya\\Blog\\461a57f5-fb11-48b1-b51e-d1809d31ee74.png"
     },
     {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\Blog\\d350d385-2e1f-4041-8e02-4a0569584b11.jpg",
+      "PackagePath": "staticwebassets\\Dosya\\Blog\\d350d385-2e1f-4041-8e02-4a0569584b11.jpg"
+    },
+    {
       "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\Blog\\fbe8727d-54be-4ab9-930d-05550a120ba4.png",
       "PackagePath": "staticwebassets\\Dosya\\Blog\\fbe8727d-54be-4ab9-930d-05550a120ba4.png"
     },
@@ -301,6 +305,14 @@
       "PackagePath": "staticwebassets\\Dosya\\Intro\\534b9b8e-c4b2-42eb-a3d7-830bff0288cb.png"
     },
     {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\Intro\\5c4c892e-21ec-4a9a-b0df-8ea63aef039e.jpg",
+      "PackagePath": "staticwebassets\\Dosya\\Intro\\5c4c892e-21ec-4a9a-b0df-8ea63aef039e.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\Intro\\9767b0e4-ef02-402d-8c95-aaa7bdfca05d.jpg",
+      "PackagePath": "staticwebassets\\Dosya\\Intro\\9767b0e4-ef02-402d-8c95-aaa7bdfca05d.jpg"
+    },
+    {
       "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\Intro\\a954e39f-af23-488b-8ccd-5da478f80406.png",
       "PackagePath": "staticwebassets\\Dosya\\Intro\\a954e39f-af23-488b-8ccd-5da478f80406.png"
     },
@@ -411,6 +423,242 @@
     {
       "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Dosya\\Video\\fd004319-1a92-4b17-abfa-1c7f1b0465cb.mp4",
       "PackagePath": "staticwebassets\\Dosya\\Video\\fd004319-1a92-4b17-abfa-1c7f1b0465cb.mp4"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\045b77e2-44ea-4ffa-b0b8-c39cccd127e7.jpg",
+      "PackagePath": "staticwebassets\\Temp\\045b77e2-44ea-4ffa-b0b8-c39cccd127e7.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\06aef414-2d03-405d-9c87-408718d792ad.jpg",
+      "PackagePath": "staticwebassets\\Temp\\06aef414-2d03-405d-9c87-408718d792ad.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\0ab39533-ac97-483b-bcf3-fbf54cdc8626.jpg",
+      "PackagePath": "staticwebassets\\Temp\\0ab39533-ac97-483b-bcf3-fbf54cdc8626.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\14283d0d-fa4e-4465-86c3-87ea9bf524a6.jpg",
+      "PackagePath": "staticwebassets\\Temp\\14283d0d-fa4e-4465-86c3-87ea9bf524a6.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\24165914-1273-4d20-b8dc-e8feca875a2c.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\24165914-1273-4d20-b8dc-e8feca875a2c.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\24198d12-fd02-452e-8b9e-8435518a0b04.jpg",
+      "PackagePath": "staticwebassets\\Temp\\24198d12-fd02-452e-8b9e-8435518a0b04.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\2eab1b83-f94a-478f-af50-355ddb455f4b.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\2eab1b83-f94a-478f-af50-355ddb455f4b.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\34d7da80-412b-442a-a0ad-0b9c74668b5c.jpg",
+      "PackagePath": "staticwebassets\\Temp\\34d7da80-412b-442a-a0ad-0b9c74668b5c.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\39240e33-96cb-49fc-8e4a-be2ea30087ee.jpg",
+      "PackagePath": "staticwebassets\\Temp\\39240e33-96cb-49fc-8e4a-be2ea30087ee.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\3a8493dc-fbd9-4612-95a5-e0d546549d1e.jpg",
+      "PackagePath": "staticwebassets\\Temp\\3a8493dc-fbd9-4612-95a5-e0d546549d1e.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\3d5ded29-5337-446d-8bd1-7ebd4081e468.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\3d5ded29-5337-446d-8bd1-7ebd4081e468.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\3e1f248a-e206-44f6-9cc5-626c99818f8f.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\3e1f248a-e206-44f6-9cc5-626c99818f8f.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\4110c7bd-aa17-4b23-b2ec-175c6283cf98.jpg",
+      "PackagePath": "staticwebassets\\Temp\\4110c7bd-aa17-4b23-b2ec-175c6283cf98.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\43311648-7b40-4ab6-b663-29a30f2f528f.jpg",
+      "PackagePath": "staticwebassets\\Temp\\43311648-7b40-4ab6-b663-29a30f2f528f.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\4ab2f639-0202-4215-a492-651a42c83a45.jpg",
+      "PackagePath": "staticwebassets\\Temp\\4ab2f639-0202-4215-a492-651a42c83a45.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\4ac23692-5823-4da9-9585-611e53144155.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\4ac23692-5823-4da9-9585-611e53144155.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\502e91ba-c6a2-467d-bf19-9313f669467e.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\502e91ba-c6a2-467d-bf19-9313f669467e.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\52c47f90-e11f-4d5a-ab1e-6403ac59c4d4.jpg",
+      "PackagePath": "staticwebassets\\Temp\\52c47f90-e11f-4d5a-ab1e-6403ac59c4d4.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\5757a4a7-9551-4d97-a2f6-945919bbc248.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\5757a4a7-9551-4d97-a2f6-945919bbc248.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\5b89b58e-f5fa-40b1-93f3-4e90d6be4888.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\5b89b58e-f5fa-40b1-93f3-4e90d6be4888.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\5f86775b-8e4b-446c-97bb-d84d92fe410f.jpg",
+      "PackagePath": "staticwebassets\\Temp\\5f86775b-8e4b-446c-97bb-d84d92fe410f.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\65164d9e-93b6-4d19-8f39-bbb8be60d58e.jpg",
+      "PackagePath": "staticwebassets\\Temp\\65164d9e-93b6-4d19-8f39-bbb8be60d58e.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\67d4f47d-2b3f-4d9f-a9c7-8fe9721f72e7.jpg",
+      "PackagePath": "staticwebassets\\Temp\\67d4f47d-2b3f-4d9f-a9c7-8fe9721f72e7.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\6d7427d3-637e-43fa-8c47-be9ad3786c14.jpg",
+      "PackagePath": "staticwebassets\\Temp\\6d7427d3-637e-43fa-8c47-be9ad3786c14.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\6e72df75-c5ec-463d-beca-c78178e99955.jpg",
+      "PackagePath": "staticwebassets\\Temp\\6e72df75-c5ec-463d-beca-c78178e99955.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\703433c3-f41a-439d-882e-92128432fc87.jpg",
+      "PackagePath": "staticwebassets\\Temp\\703433c3-f41a-439d-882e-92128432fc87.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\705ec51a-6134-4657-997e-c329a067b305.jpg",
+      "PackagePath": "staticwebassets\\Temp\\705ec51a-6134-4657-997e-c329a067b305.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\77eeb0c7-8853-4638-a16b-732fba739132.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\77eeb0c7-8853-4638-a16b-732fba739132.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\780cba1f-a4f7-43b4-8c6c-23a808bc588f.jpg",
+      "PackagePath": "staticwebassets\\Temp\\780cba1f-a4f7-43b4-8c6c-23a808bc588f.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\7c8f0b67-b572-41d4-ad76-b1c56adf7535.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\7c8f0b67-b572-41d4-ad76-b1c56adf7535.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\7f20c221-34c9-4ce1-b458-365464f7c1eb.jpg",
+      "PackagePath": "staticwebassets\\Temp\\7f20c221-34c9-4ce1-b458-365464f7c1eb.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\81f8e09d-58f6-4aea-b190-8d88d757e71e.png",
+      "PackagePath": "staticwebassets\\Temp\\81f8e09d-58f6-4aea-b190-8d88d757e71e.png"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\88aa43e0-d5d2-4533-b710-aa7d747ee3c4.jpg",
+      "PackagePath": "staticwebassets\\Temp\\88aa43e0-d5d2-4533-b710-aa7d747ee3c4.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\89535df3-a5cb-4b31-8fe4-0ce3c4ef4ae4.jpg",
+      "PackagePath": "staticwebassets\\Temp\\89535df3-a5cb-4b31-8fe4-0ce3c4ef4ae4.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\8c39d4fb-2d09-4b86-98be-b5882420ab64.jpg",
+      "PackagePath": "staticwebassets\\Temp\\8c39d4fb-2d09-4b86-98be-b5882420ab64.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\94e8309f-0879-4fd6-b4e0-31a653f89b86.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\94e8309f-0879-4fd6-b4e0-31a653f89b86.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\9ff710d5-b12c-445a-8917-c8cd9a5ea3ea.jpg",
+      "PackagePath": "staticwebassets\\Temp\\9ff710d5-b12c-445a-8917-c8cd9a5ea3ea.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\a07f1ca8-be58-40da-9357-ccff56fd3257.jpg",
+      "PackagePath": "staticwebassets\\Temp\\a07f1ca8-be58-40da-9357-ccff56fd3257.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\a51b75a9-d04a-4d4d-8508-2f38f6348bd4.jpeg",
+      "PackagePath": "staticwebassets\\Temp\\a51b75a9-d04a-4d4d-8508-2f38f6348bd4.jpeg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\a96d2b45-4fe8-4528-a41f-90bb50e80d31.jpg",
+      "PackagePath": "staticwebassets\\Temp\\a96d2b45-4fe8-4528-a41f-90bb50e80d31.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\ad2dec73-a56d-4b6f-bec3-0b6cfd17eb1f.jpg",
+      "PackagePath": "staticwebassets\\Temp\\ad2dec73-a56d-4b6f-bec3-0b6cfd17eb1f.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\ae10bd3b-531b-45c0-82db-dfa4bc9455bc.jpg",
+      "PackagePath": "staticwebassets\\Temp\\ae10bd3b-531b-45c0-82db-dfa4bc9455bc.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\b38e586f-f332-4e04-a07b-93063e2b919d.jpg",
+      "PackagePath": "staticwebassets\\Temp\\b38e586f-f332-4e04-a07b-93063e2b919d.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\b8569f62-02fd-49ab-98b7-569533167244.jpg",
+      "PackagePath": "staticwebassets\\Temp\\b8569f62-02fd-49ab-98b7-569533167244.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\b8d20e3c-e818-43d6-b231-c79c28a3bba3.jpg",
+      "PackagePath": "staticwebassets\\Temp\\b8d20e3c-e818-43d6-b231-c79c28a3bba3.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\c006e346-642f-4d22-8241-f7887c3c1b0f.jpg",
+      "PackagePath": "staticwebassets\\Temp\\c006e346-642f-4d22-8241-f7887c3c1b0f.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\c1ee22d9-906b-4269-a151-bdd4d271b1fb.jpg",
+      "PackagePath": "staticwebassets\\Temp\\c1ee22d9-906b-4269-a151-bdd4d271b1fb.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\c2a2b263-785c-4c0a-baaf-f88de8a6c782.jpg",
+      "PackagePath": "staticwebassets\\Temp\\c2a2b263-785c-4c0a-baaf-f88de8a6c782.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\cf24227b-08f4-4220-ae76-0133cf926322.jpg",
+      "PackagePath": "staticwebassets\\Temp\\cf24227b-08f4-4220-ae76-0133cf926322.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\d419d2c8-f71f-4012-8bd2-c2e3f44e595d.jpg",
+      "PackagePath": "staticwebassets\\Temp\\d419d2c8-f71f-4012-8bd2-c2e3f44e595d.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\d7fa9de5-06d7-408a-9293-d8448bc80861.jpg",
+      "PackagePath": "staticwebassets\\Temp\\d7fa9de5-06d7-408a-9293-d8448bc80861.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\e0431886-823c-4d3c-995a-5ec9dcc55757.jpg",
+      "PackagePath": "staticwebassets\\Temp\\e0431886-823c-4d3c-995a-5ec9dcc55757.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\e783dd44-f1c5-4eab-ab4b-8fb72e46411b.jpg",
+      "PackagePath": "staticwebassets\\Temp\\e783dd44-f1c5-4eab-ab4b-8fb72e46411b.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\eb973dc5-0e74-415d-8516-512cadb6ee99.jpg",
+      "PackagePath": "staticwebassets\\Temp\\eb973dc5-0e74-415d-8516-512cadb6ee99.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\eb9833ab-ac5e-4a73-a2ae-c71b4d870a00.jpg",
+      "PackagePath": "staticwebassets\\Temp\\eb9833ab-ac5e-4a73-a2ae-c71b4d870a00.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\f28dcdce-440c-46bc-9526-f78e373a9d36.jpg",
+      "PackagePath": "staticwebassets\\Temp\\f28dcdce-440c-46bc-9526-f78e373a9d36.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\f4c13cc5-b761-4d3a-ba4a-2c3848c5e5de.jpg",
+      "PackagePath": "staticwebassets\\Temp\\f4c13cc5-b761-4d3a-ba4a-2c3848c5e5de.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\fb66e0af-d518-4de1-b829-9d7dbe88be17.jpg",
+      "PackagePath": "staticwebassets\\Temp\\fb66e0af-d518-4de1-b829-9d7dbe88be17.jpg"
+    },
+    {
+      "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\fcf5c819-c2f5-4512-90d9-9057350ebfbb.jpg",
+      "PackagePath": "staticwebassets\\Temp\\fcf5c819-c2f5-4512-90d9-9057350ebfbb.jpg"
     },
     {
       "Id": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\assets\\bundle.js",
