@@ -1,6 +1,5 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Common.Extentions;
-using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
@@ -16,7 +15,7 @@ namespace Ekinci.WebAPI.Business.Services
     {
         const string file = "Video/";
 
-        public VideosService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer, FileUpload fileUpload) : base(context, configuration, httpContext, localizer, fileUpload)
+        public VideosService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 
@@ -30,7 +29,7 @@ namespace Ekinci.WebAPI.Business.Services
                                     Title = vid.Title,
                                     Description = vid.Description,
                                     PhotoUrl = vid.PhotoUrl.PrepareCDNUrl(file),
-                                    VideoUrl=vid.VideoUrl,
+                                    VideoUrl = vid.VideoUrl,
                                 }).ToListAsync();
             result.Data = videos;
             return result;
@@ -40,15 +39,15 @@ namespace Ekinci.WebAPI.Business.Services
         {
             var result = new ServiceResult<GetVideoResponse>();
             var video = await (from vid in _context.Videos
-                                where vid.ID == videoID
-                                select new GetVideoResponse
-                                {
-                                    ID = vid.ID,
-                                    Title = vid.Title,
-                                    Description = vid.Description,
-                                    PhotoUrl = vid.PhotoUrl.PrepareCDNUrl(file),
-                                    VideoUrl = vid.VideoUrl,
-                                }).FirstAsync();
+                               where vid.ID == videoID
+                               select new GetVideoResponse
+                               {
+                                   ID = vid.ID,
+                                   Title = vid.Title,
+                                   Description = vid.Description,
+                                   PhotoUrl = vid.PhotoUrl.PrepareCDNUrl(file),
+                                   VideoUrl = vid.VideoUrl,
+                               }).FirstAsync();
             if (video == null)
             {
                 result.SetError("Video bulunamadı");

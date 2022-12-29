@@ -25,5 +25,6 @@ namespace Ekinci.WebAPI.Controllers
             var result = await commercialAreaService.GetCommercialArea(CommercialAreaID);
             return Ok(result);
         }
+    
     }
 }

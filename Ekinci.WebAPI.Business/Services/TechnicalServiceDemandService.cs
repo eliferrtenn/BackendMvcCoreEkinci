@@ -17,7 +17,7 @@ namespace Ekinci.WebAPI.Business.Services
 {
     public class TechnicalServiceDemandService : BaseService, ITechnicalServiceDemandService
     {
-        public TechnicalServiceDemandService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer, FileUpload fileUpload) : base(context, configuration, httpContext, localizer, fileUpload)
+        public TechnicalServiceDemandService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 

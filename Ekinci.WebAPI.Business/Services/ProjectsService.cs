@@ -1,6 +1,5 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Common.Extentions;
-using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
 using Ekinci.WebAPI.Business.Interfaces;
@@ -16,7 +15,8 @@ namespace Ekinci.WebAPI.Business.Services
     {
         const string fileThumb = "Project/Thumb/";
         const string file = "Project/General/";
-        public ProjectsService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer, FileUpload fileUpload) : base(context, configuration, httpContext, localizer, fileUpload)
+
+        public ProjectsService(EkinciContext context, IConfiguration configuration, IHttpContextAccessor httpContext, IStringLocalizer<CommonResource> localizer) : base(context, configuration, httpContext, localizer)
         {
         }
 
