@@ -43,7 +43,7 @@ namespace Ekinci.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCommercialArea(int TechnicalServiceID)
+        public async Task<IActionResult> GetTechnicServiceDemand(int TechnicalServiceID)
         {
             var result = await technicalServiceDemandService.GetTechnicalServiceDemand(TechnicalServiceID);
             return Ok(result);

@@ -95,6 +95,7 @@ namespace Ekinci.CMS.Business.Services
             return result;
         }
 
+
         public async Task<ServiceResult> DeleteBlog(DeleteBlogRequest request)
         {
             var result = new ServiceResult();

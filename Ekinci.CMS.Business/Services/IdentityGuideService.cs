@@ -96,13 +96,13 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<GetIdentityGuideResponse>> GetIdentityGuide(int IdentityGuideID)
         {
             var result = new ServiceResult<GetIdentityGuideResponse>();
-            var identityGuide = await (from hist in _context.Histories
-                                   where hist.ID == IdentityGuideID
+            var identityGuide = await (from identit in _context.IdentityGuides
+                                   where identit.ID == IdentityGuideID
                                    select new GetIdentityGuideResponse
                                    {
-                                       ID = hist.ID,
-                                       Title = hist.Title,
-                                       PhotoUrl = hist.PhotoUrl.PrepareCDNUrl(file),
+                                       ID = identit.ID,
+                                       Title = identit.Title,
+                                       PhotoUrl = identit.PhotoUrl.PrepareCDNUrl(file),
                                    }).FirstAsync();
             if (identityGuide == null)
             {

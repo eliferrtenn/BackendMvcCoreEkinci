@@ -298,10 +298,10 @@
     <value>Dosya</value>
   </data>
   <data name="Latitude" xml:space="preserve">
-    <value>Latitude</value>
+    <value>Enlem</value>
   </data>
   <data name="Longitude" xml:space="preserve">
-    <value>Longitude</value>
+    <value>Boylam</value>
   </data>
   <data name="ProjectDate" xml:space="preserve">
     <value>Proje Tarihi</value>
@@ -524,5 +524,26 @@
   </data>
   <data name="PhotoCouldNotUploaded" xml:space="preserve">
     <value>Fotoğraf yüklenemedi.</value>
+  </data>
+  <data name="StatusID" xml:space="preserve">
+    <value>Durumu</value>
+  </data>
+  <data name="ProjectPhotosDescription" xml:space="preserve">
+    <value>PROJE FOTOĞRAFLARINI YÜKLEYİN.</value>
+  </data>
+  <data name="TechnicalServiceDemandTitle" xml:space="preserve">
+    <value>Teknik Servis İstek</value>
+  </data>
+  <data name="ApartmentFloor" xml:space="preserve">
+    <value>Bulunduğu Kat</value>
+  </data>
+  <data name="ApartmentName" xml:space="preserve">
+    <value>Apartman Adı/No</value>
+  </data>
+  <data name="ContactInform" xml:space="preserve">
+    <value>İletişim Bilgileri</value>
+  </data>
+  <data name="SiteName" xml:space="preserve">
+    <value>Site  Adı</value>
   </data>
 </root>

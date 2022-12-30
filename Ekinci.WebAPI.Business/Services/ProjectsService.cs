@@ -20,11 +20,12 @@ namespace Ekinci.WebAPI.Business.Services
         {
         }
 
-        public async Task<ServiceResult<List<ListProjectsResponse>>> GetAll()
+        public async Task<ServiceResult<List<ListProjectsResponse>>> GetAll(int projectStatusID)
         {
             var result = new ServiceResult<List<ListProjectsResponse>>();
             var projects = await (from proj in _context.Projects
-                                  join ps in _context.ProjectStatus on proj.StatusID equals ps.ID
+                                  where proj.StatusID==projectStatusID && proj.IsEnabled==true
+                                  join ps in _context.ProjectStatus on proj.StatusID equals ps.ID 
                                   select new ListProjectsResponse
                                   {
                                       ID = proj.ID,
@@ -49,13 +50,13 @@ namespace Ekinci.WebAPI.Business.Services
             var project = await (from proj in _context.Projects
                                  join ps in _context.ProjectStatus on proj.StatusID equals ps.ID
                                  let projectPhotos = (from prph in _context.ProjectPhotos
-                                                      where prph.ProjectID == proj.ID
+                                                      where prph.ProjectID == proj.ID && prph.IsEnabled == true
                                                       select new ProjectPhotosResponse
                                                       {
                                                           ID = prph.ID,
                                                           PhotoUrl = prph.PhotoUrl.PrepareCDNUrl(file)
                                                       }).ToList()
-                                 where proj.ID == projectID
+                                 where proj.ID == projectID && proj.IsEnabled == true
                                  select new GetProjectResponse
                                  {
                                      ID = proj.ID,

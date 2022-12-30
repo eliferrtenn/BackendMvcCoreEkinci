@@ -1,6 +1,6 @@
 ﻿@model Ekinci.CMS.Business.Models.Responses.TechnicalServiceDemandResponses.GetTechnicalServiceDemandResponse
 
-<div class=" flex-column " id="kt_wrapper">
+<div class="flex-column" id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <div id="kt_content_container" class="container-xxl">
@@ -8,10 +8,10 @@
                     <form asp-action="Edit" enctype="multipart/form-data">
                         <div class="card shadow-sm">
                             <div class="card-header">
-                                <h3 class="card-title">@_localizer["SustainabilityTitle"]</h3>
+                                <h3 class="card-title">@_localizer["TechnicalServiceDemandTitle"]</h3>
                                 <div class="card-toolbar">
                                     <input type="submit" class="btn btn-success btn-hover-rotate-end" value="@_localizer["Edit"]">&nbsp;
-                                    <a href="@Url.Action("Index","Sustainability")" class="btn btn-danger btn-hover-rotate-start">@_localizer["Edit"]</a>
+                                    <a href="@Url.Action("Index","TechnicalServiceDemand")" class="btn btn-danger btn-hover-rotate-start">@_localizer["TurnBack"]</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -49,6 +49,69 @@
         </div>
     </div>
 </div>
+
+
+<div class="flex-column" id="kt_wrapper">
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <div id="kt_content_container" class="container-xxl">
+                <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                    <div class="card-body p-9">
+                        <div class="row mb-7">
+                            <label class="col-lg-4 fw-bold text-muted">@_localizer["Title"]</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.Title</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row mb-7">
+                            <label class="col-lg-4 fw-bold text-muted">@_localizer["Description"]</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.Description</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-9">
+                        <div class="row mb-7">
+                            <label class="col-lg-4 fw-bold text-muted">@_localizer["SiteName"]</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.SiteName</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row mb-7">
+                            <label class="col-lg-4 fw-bold text-muted">@_localizer["ApartmentName"]</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.ApartmentName</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row mb-7">
+                            <label class="col-lg-4 fw-bold text-muted">@_localizer["ApartmentFloor"]</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.ApartmentFloor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="row mb-7">
+                            <label class="col-lg-4 fw-bold text-muted">@_localizer["ContactInform"]</label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-800">@Model.ContactInform</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

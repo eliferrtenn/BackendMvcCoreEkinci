@@ -13,9 +13,9 @@ namespace Ekinci.WebAPI.Controllers
             projectsService = ProjectsService;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(int projectID)
         {
-            var result = await projectsService.GetAll();
+            var result = await projectsService.GetAll(projectID);
             return Ok(result);
         }
         [HttpGet]

@@ -26,13 +26,16 @@ builder.Services.AddHttpContextAccessor();
 #region Services
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAnnouncementService, AnnouncementService>();
+builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<ICommercialAreaService, CommercialAreaService>();
 builder.Services.AddScoped<ICommonService, CommonService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IHistoryService, HistoryService>();
+builder.Services.AddScoped<IIdentityGuideService, IdentityGuideService>();
 builder.Services.AddScoped<IMemberService, MemberService>();
 builder.Services.AddScoped<IPressService, PressService>();
 builder.Services.AddScoped<IProjectsService, ProjectsService>();
+builder.Services.AddScoped<ITechnicalServiceDemandService, TechnicalServiceDemandService>();
 builder.Services.AddScoped<IVideosService, VideosService>();
 #endregion
 

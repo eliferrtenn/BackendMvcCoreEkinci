@@ -24,6 +24,7 @@ namespace Ekinci.WebAPI.Business.Services
         {
             var result = new ServiceResult<List<ListIdentityGuideResponse>>();
             var identities = await (from identity in _context.IdentityGuides
+                                    where identity.IsEnabled==true
                                     select new ListIdentityGuideResponse
                                     {
                                         ID = identity.ID,

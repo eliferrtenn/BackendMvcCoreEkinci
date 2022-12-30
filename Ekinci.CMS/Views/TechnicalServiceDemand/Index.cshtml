@@ -12,31 +12,19 @@
                     <div class="card shadow-sm">
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-3 mb-1">Basında Ekinci</span>
+                                <span class="card-label fw-bolder fs-3 mb-1">@_localizer["TechnicalServiceDemandTitle"]</span>
                             </h3>
-                            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover">
-                                <a href="@Url.Action("Create","Press")" class="btn btn-sm btn btn-success">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
-                                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
-                                        </svg>
-                                    </span>
-                                    YENİ BASIN
-                                </a>
-                            </div>
                         </div>
                         <div class="card-body">
                             @if (Model != null)
                             {
-
                                 <div class="table-responsive">
                                     <table class="table align-middle table-row-dashed fs-6 gy-5 table-responsive" id="kt_customers_table">
                                         <thead>
                                             <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
                                                 <th class="min-w-125px">@_localizer["Title"]</th>
-                                                <th class="min-w-125px">@_localizer["Descrption"]</th>
-                                                <th class="min-w-125px">@_localizer["PhotoUrl"]</th>
+                                                <th class="min-w-125px">@_localizer["Description"]</th>
+                                                <th class="min-w-125px">Görevli Kişi</th>
                                                 <th class="text-end min-w-70px"></th>
                                             </tr>
                                         </thead>
@@ -46,6 +34,7 @@
                                                 <tr>
                                                     <td>@item.Title</td>
                                                     <td>@item.Description</td>
+                                                    <td>@item.FullName</td>
                                                     <td>
                                                         <div class="d-flex justify-content-end flex-shrink-0">
                                                             <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">

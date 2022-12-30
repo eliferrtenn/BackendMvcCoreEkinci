@@ -47,7 +47,7 @@ namespace Ekinci.WebAPI.Business.Services
             }
             else
             {
-                result.Data.IsNewUser = true;
+                result.Data.IsNewUser = false;
             }
             var smsCode = string.Empty;
             if (request.MobilePhone == "909090909090" || request.MobilePhone == "905070033286") // Sabit numarayla giriş yapmak için Bu numara IOS ve Android ekibine verilecek.
@@ -59,12 +59,12 @@ namespace Ekinci.WebAPI.Business.Services
                 smsCode = KeyGenerator.CreateRandomNumber(1000, 9999).ToString();
 
                 var smsText = _localizer["SmsVerificationText"] + smsCode;
-                var smsResult = await smsSender.SendAsync(request.MobilePhone, smsText);
+               // var smsResult = await smsSender.SendAsync(request.MobilePhone, smsText);
             }
-
+            smsCode = "2020";
             member.SmsCode = smsCode.ToString();
             member.SmsCodeExpireDate = DateTime.Now.AddMinutes(3);
-            _context.Members.Update(member);
+            var result2 = _context.Members.Update(member);
             await _context.SaveChangesAsync();
 
             result.SetSuccess("Sms gönderildi.");

@@ -44,7 +44,7 @@ namespace Ekinci.WebAPI.Business.Services
             var announcement = await (from announ in _context.Announcements
                                       where announ.ID == announcementID
                                       let announPhotos = (from announphoto in _context.AnnouncementPhotos
-                                                          where announphoto.NewsID == announ.ID
+                                                          where announphoto.NewsID == announ.ID && announphoto.IsEnabled==true
                                                           select new AnnouncementResponse
                                                           {
                                                               ID = announphoto.ID,

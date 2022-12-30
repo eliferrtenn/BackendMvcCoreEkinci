@@ -1,7 +1,9 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
+using Ekinci.CMS.Business.Models.Requests.ProjectStatusResponses;
 using Ekinci.CMS.Business.Models.Responses.ProjectStatusResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.Extentions;
 using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
@@ -14,6 +16,8 @@ namespace Ekinci.CMS.Business.Services
 {
     public class ProjectStatusService : BaseService, IProjectStatusService
     {
+        const string file = "ProjectStatus/";
+
         public ProjectStatusService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
         }
@@ -31,6 +35,7 @@ namespace Ekinci.CMS.Business.Services
                                   {
                                       ID = status.ID,
                                       Name = status.Name,
+                                      PhotoUrl=status.PhotoUrl.PrepareCDNUrl(file),
                                   }).ToListAsync();
             result.Data = statuses;
             return result;
@@ -45,6 +50,7 @@ namespace Ekinci.CMS.Business.Services
                                   {
                                       ID = status.ID,
                                       Name = status.Name,
+                                      PhotoUrl = status.PhotoUrl.PrepareCDNUrl(file),
                                   }).FirstAsync();
             if (statuses == null)
             {
@@ -52,6 +58,36 @@ namespace Ekinci.CMS.Business.Services
                 return result;
             }
             result.Data = statuses;
+            return result;
+        }
+
+        public async Task<ServiceResult> UpdateProjectStatus(UpdateProjectStatusRequest request, IFormFile PhotoUrl)
+        {
+            Guid guid = Guid.NewGuid();
+            var filePaths = new List<string>();
+            var result = new ServiceResult();
+            var blog = await _context.ProjectStatus.FirstOrDefaultAsync(x => x.ID == request.ID);
+            if (blog == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            if (PhotoUrl != null)
+            {
+                if (PhotoUrl.Length > 0)
+                {
+                    var fileUploadResult = _fileUpload.Upload(PhotoUrl, file);
+                    if (!fileUploadResult.IsSuccess)
+                    {
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
+                    }
+                    blog.PhotoUrl = fileUploadResult.FileName;
+                }
+            }
+            _context.ProjectStatus.Update(blog);
+            await _context.SaveChangesAsync();
+            result.SetSuccess(_localizer["RecordUpdated"]);
             return result;
         }
     }

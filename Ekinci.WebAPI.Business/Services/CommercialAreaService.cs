@@ -23,6 +23,7 @@ namespace Ekinci.WebAPI.Business.Services
         {
             var result = new ServiceResult<List<ListCommercialAreasResponse>>();
             var commercials = await (from commercial in _context.CommercialAreas
+                                     where commercial.IsEnabled == true
                                      select new ListCommercialAreasResponse
                                      {
                                          ID = commercial.ID,

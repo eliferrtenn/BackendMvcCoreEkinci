@@ -1,6 +1,5 @@
 ﻿using Ekinci.Common.Business;
 using Ekinci.Common.Extentions;
-using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Data.Models;
 using Ekinci.Resources;
@@ -8,7 +7,6 @@ using Ekinci.WebAPI.Business.Interfaces;
 using Ekinci.WebAPI.Business.Models.Requests.TechnicalServiceDemandRequests;
 using Ekinci.WebAPI.Business.Models.Responses.TechnicalServiceDemandResponses;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
@@ -38,7 +36,7 @@ namespace Ekinci.WebAPI.Business.Services
 
             _context.TechnicalServiceDemands.Add(technicalServiceDemand);
             await _context.SaveChangesAsync();
-            result.SetSuccess(_localizer["BlogAdded"]);
+            result.SetSuccess(_localizer["RecordAdded"]);
             return result;
         }
 
@@ -48,13 +46,13 @@ namespace Ekinci.WebAPI.Business.Services
             var technic = await _context.TechnicalServiceDemands.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (technic == null)
             {
-                result.SetError(_localizer["BlogNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             technic.IsEnabled = false;
             _context.TechnicalServiceDemands.Update(technic);
             await _context.SaveChangesAsync();
-            result.SetSuccess(_localizer["BlogDeleted"]);
+            result.SetSuccess(_localizer["RecordDeleted"]);
             return result;
         }
 
@@ -64,7 +62,7 @@ namespace Ekinci.WebAPI.Business.Services
             var technicalServiceDemand = await _context.TechnicalServiceDemands.FirstOrDefaultAsync(x => x.ID == request.ID);
             if (technicalServiceDemand == null)
             {
-                result.SetError(_localizer["ContactNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             technicalServiceDemand.MemberID = CurrentUserID;
@@ -80,7 +78,7 @@ namespace Ekinci.WebAPI.Business.Services
             _context.TechnicalServiceDemands.Update(technicalServiceDemand);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_localizer["ContactUpdated"]);
+            result.SetSuccess(_localizer["RecordUpdated"]);
             return result;
         }
 
@@ -89,27 +87,27 @@ namespace Ekinci.WebAPI.Business.Services
             var result = new ServiceResult<List<ListTechnicalServiceDemandResponse>>();
             if (_context.Blog.Count() == 0)
             {
-                result.SetError(_localizer["BlogNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
-            var technics = await(from technic in _context.TechnicalServiceDemands
-                              where technic.IsEnabled == true && technic.MemberID==CurrentUserID
-                              select new ListTechnicalServiceDemandResponse
-                              {
-                                  ID = technic.ID,
-                                  DemandType = technic.DemandType,
-                                  Title = technic.Title,
-                                  Description = technic.Description,
-                                  DemandUrgencyStatus = technic.DemandUrgencyStatus,
-                                  SiteName = technic.SiteName,
-                                  ApartmentName = technic.ApartmentName,
-                                  ApartmentNo = technic.ApartmentNo,
-                                  ContactInform = technic.ContactInform,
-                                  FullName = technic.FullName,
-                                  MobilePhone = technic.MobilePhone,
-                                  CreateDayDemand = technic.CreateDayDemand.ToFormattedDate(),
-                                  SolutionDayDemand = technic.SolutionDayDemand.ToFormattedDate(),
-                              }).ToListAsync();
+            var technics = await (from technic in _context.TechnicalServiceDemands
+                                  where technic.IsEnabled == true && technic.MemberID == CurrentUserID
+                                  select new ListTechnicalServiceDemandResponse
+                                  {
+                                      ID = technic.ID,
+                                      DemandType = technic.DemandType,
+                                      Title = technic.Title,
+                                      Description = technic.Description,
+                                      DemandUrgencyStatus = technic.DemandUrgencyStatus,
+                                      SiteName = technic.SiteName,
+                                      ApartmentName = technic.ApartmentName,
+                                      ApartmentNo = technic.ApartmentNo,
+                                      ContactInform = technic.ContactInform,
+                                      FullName = technic.FullName,
+                                      MobilePhone = technic.MobilePhone,
+                                      CreateDayDemand = technic.CreateDayDemand.ToFormattedDate(),
+                                      SolutionDayDemand = technic.SolutionDayDemand.ToFormattedDate(),
+                                  }).ToListAsync();
 
             result.Data = technics;
             return result;
@@ -118,27 +116,27 @@ namespace Ekinci.WebAPI.Business.Services
         public async Task<ServiceResult<GetTechnicalServiceDemandResponse>> GetTechnicalServiceDemand(int technicalDemandServiceID)
         {
             var result = new ServiceResult<GetTechnicalServiceDemandResponse>();
-            var technics = await(from technic in _context.TechnicalServiceDemands
-                              where technic.ID == technicalDemandServiceID
-                              select new GetTechnicalServiceDemandResponse
-                              {
-                                  ID = technic.ID,
-                                  DemandType = technic.DemandType,
-                                  Title = technic.Title,
-                                  Description = technic.Description,
-                                  DemandUrgencyStatus = technic.DemandUrgencyStatus,
-                                  SiteName = technic.SiteName,
-                                  ApartmentName = technic.ApartmentName,
-                                  ApartmentNo = technic.ApartmentNo,
-                                  ContactInform = technic.ContactInform,
-                                  FullName = technic.FullName,
-                                  MobilePhone = technic.MobilePhone,
-                                  CreateDayDemand = technic.CreateDayDemand.ToFormattedDate(),
-                                  SolutionDayDemand = technic.SolutionDayDemand.ToFormattedDate(),
-                              }).FirstAsync();
+            var technics = await (from technic in _context.TechnicalServiceDemands
+                                  where technic.ID == technicalDemandServiceID
+                                  select new GetTechnicalServiceDemandResponse
+                                  {
+                                      ID = technic.ID,
+                                      DemandType = technic.DemandType,
+                                      Title = technic.Title,
+                                      Description = technic.Description,
+                                      DemandUrgencyStatus = technic.DemandUrgencyStatus,
+                                      SiteName = technic.SiteName,
+                                      ApartmentName = technic.ApartmentName,
+                                      ApartmentNo = technic.ApartmentNo,
+                                      ContactInform = technic.ContactInform,
+                                      FullName = technic.FullName,
+                                      MobilePhone = technic.MobilePhone,
+                                      CreateDayDemand = technic.CreateDayDemand.ToFormattedDate(),
+                                      SolutionDayDemand = technic.SolutionDayDemand.ToFormattedDate(),
+                                  }).FirstAsync();
             if (technics == null)
             {
-                result.SetError(_localizer["BlogNotFound"]);
+                result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
             result.Data = technics;
