@@ -47,7 +47,7 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await identityGuideService.GetIdentityGuide(id);
+            var result = await identityGuideService.UpdateIdentityGuide(id);
             return View(result.Data);
         }
         [HttpPost]

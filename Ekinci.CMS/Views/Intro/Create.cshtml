@@ -1,4 +1,5 @@
-﻿@model Ekinci.CMS.Business.Models.Responses.IntroResponses.GetIntroResponse
+﻿@model Ekinci.CMS.Business.Models.Requests.IntroRequests.AddIntroRequest
+
 
 <div class="flex-column" id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -26,7 +27,8 @@
                                                     <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
                                                 </label>
                                             </div>
-                                            <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
+                                            <div class="form-text">@_localizer["UploadImageHelpText"]</div>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="PhotoUrl"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
@@ -36,7 +38,7 @@
                                                 <i class="fa-solid fa-align-justify"></i>
                                             </span>
                                             <input asp-for="Title" class="form-control" />
-                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="Title"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
@@ -46,7 +48,7 @@
                                                 <i class="fa-solid fa-align-justify"></i>
                                             </span>
                                             <textarea rows="10" cols="40" asp-for="Description" class="form-control"></textarea>
-                                            <span asp-validation-for="Description" class="text-danger"></span>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="Description"></span>
                                         </div>
                                     </div>         
                                     <div class="col-md-12 mb-5">
@@ -56,7 +58,7 @@
                                                 <i class="fa-solid fa-align-justify"></i>
                                             </span>
                                             <input asp-for="SquareMeter" class="form-control" />
-                                            <span asp-validation-for="SquareMeter" class="text-danger"></span>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="SquareMeter"></span>
                                         </div>
                                     </div>        
                                     <div class="col-md-12 mb-5">
@@ -66,7 +68,7 @@
                                                 <i class="fa-solid fa-align-justify"></i>
                                             </span>
                                             <input asp-for="YearCount" class="form-control" />
-                                            <span asp-validation-for="YearCount" class="text-danger"></span>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="YearCount"></span>
                                         </div>
                                     </div>        
                                     <div class="col-md-12 mb-5">

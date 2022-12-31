@@ -150,5 +150,25 @@ namespace Ekinci.CMS.Business.Services
             }
             return result;
         }
+
+        public async Task<ServiceResult<UpdateIdentityGuideRequest>> UpdateIdentityGuide(int IdentityGuideID)
+        {
+            var result = new ServiceResult<UpdateIdentityGuideRequest>();
+            var identityGuide = await(from identit in _context.IdentityGuides
+                                      where identit.ID == IdentityGuideID
+                                      select new UpdateIdentityGuideRequest
+                                      {
+                                          ID = identit.ID,
+                                          Title = identit.Title,
+                                          PhotoUrl = identit.PhotoUrl.PrepareCDNUrl(file),
+                                      }).FirstAsync();
+            if (identityGuide == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = identityGuide;
+            return result;
+        }
     }
 }

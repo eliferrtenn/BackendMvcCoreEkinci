@@ -8,6 +8,7 @@ namespace Ekinci.CMS.Business.Interfaces
     public interface IVideosService
     {
         Task<ServiceResult> AddVideo(AddVideosRequest request,IFormFile PhotoUrl);
+        Task<ServiceResult<UpdateVideosRequest>> UpdateVideo(int VideoID);
         Task<ServiceResult> UpdateVideo(UpdateVideosRequest request,IFormFile PhotoUrl);
         Task<ServiceResult> DeleteVideo(DeleteVideosRequest request);
         Task<ServiceResult<List<ListVideosResponses>>> GetAll();

@@ -1,13 +1,16 @@
 using Ekinci.CMS.Business.Constants;
 using Ekinci.CMS.Business.Interfaces;
+using Ekinci.CMS.Business.Models;
 using Ekinci.CMS.Business.Services;
 using Ekinci.Common.Caching;
 using Ekinci.Common.Extentions;
 using Ekinci.Common.Utilities;
 using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +20,9 @@ builder.Services.AddDbContext<EkinciContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"));
 });
+builder.Services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<BaseValidator>());
 
 #region Core Services
 builder.Services.AddSingleton<IMemoryCache, MemoryCache>();
@@ -27,6 +33,7 @@ builder.Services.AddScoped<Ekinci.Common.Caching.AppSettingsKeys>();
 builder.Services.AddScoped<IMailService, MailManager>();
 builder.Services.AddScoped<IFTPClient, FTPClient>();
 builder.Services.AddScoped<FileUpload>();
+builder.Services.AddFluentValidationAutoValidation();
 #endregion
 
 
@@ -72,7 +79,7 @@ builder.Services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
 #endregion
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 

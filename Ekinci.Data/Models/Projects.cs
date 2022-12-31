@@ -6,7 +6,7 @@ namespace Ekinci.Data.Models
     public class Projects
     {
         public int ID { get; set; }
-        public long StatusID { get; set; }
+        public int StatusID { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string Description { get; set; }

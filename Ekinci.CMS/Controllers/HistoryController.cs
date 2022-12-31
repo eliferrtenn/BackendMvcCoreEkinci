@@ -48,7 +48,7 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await historyService.GetHistory(id);
+            var result = await historyService.UpdateHistory(id);
             return View(result.Data);
         }
         [HttpPost]

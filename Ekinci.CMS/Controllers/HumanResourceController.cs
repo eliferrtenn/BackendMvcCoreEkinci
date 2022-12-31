@@ -43,7 +43,7 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit()
         {
-            var result = await humanResourceService.GetHumanResource();
+            var result = await humanResourceService.UpdateHumanResource();
             return View(result.Data);
         }
         [HttpPost]

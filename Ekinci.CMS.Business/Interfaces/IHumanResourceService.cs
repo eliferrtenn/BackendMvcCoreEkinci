@@ -8,6 +8,7 @@ namespace Ekinci.CMS.Business.Interfaces
     public interface IHumanResourceService
     {
         Task<ServiceResult> AddHumanResource(AddHumanResourceRequest request, IFormFile PhotoUrl);
+        Task<ServiceResult<UpdateHumanResourceRequest>> UpdateHumanResource();
         Task<ServiceResult> UpdateHumanResource(UpdateHumanResourceRequest request, IFormFile PhotoUrl);
         Task<ServiceResult<GetHumanResourceResponse>> GetHumanResource();
     }

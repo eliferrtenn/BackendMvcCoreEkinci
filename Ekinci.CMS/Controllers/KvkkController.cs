@@ -45,7 +45,7 @@ namespace Ekinci.CMS.Controllers
             return View(result.Data);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(UpdateKvkkResponse request, IFormFile PhotoUrl)
+        public async Task<IActionResult> Edit(UpdateKvkkRequest request, IFormFile PhotoUrl)
         {
             var result = await kvkkService.UpdateKvkk(request, PhotoUrl);
             if (result.IsSuccess)

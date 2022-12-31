@@ -7,6 +7,7 @@ namespace Ekinci.CMS.Business.Interfaces
     public interface IContactService
     {
         Task<ServiceResult> AddContact(AddContactRequest request);
+        Task<ServiceResult<UpdateContactRequest>> UpdateContact(int ContactID);
         Task<ServiceResult> UpdateContact(UpdateContactRequest request);
         Task<ServiceResult> DeleteContact(DeleteContactRequest request);
         Task<ServiceResult<List<ListContactsResponse>>> GetAll();

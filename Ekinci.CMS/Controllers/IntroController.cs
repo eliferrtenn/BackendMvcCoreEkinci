@@ -44,7 +44,7 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit()
         {
-            var result = await introService.GetIntro();
+            var result = await introService.UpdateIntro();
             return View(result.Data);
         }
         [HttpPost]

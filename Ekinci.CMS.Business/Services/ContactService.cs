@@ -138,5 +138,30 @@ namespace Ekinci.CMS.Business.Services
             result.SetSuccess(_localizer["RecordUpdated"]);
             return result;
         }
+
+        public async Task<ServiceResult<UpdateContactRequest>> UpdateContact(int ContactID)
+        {
+            var result = new ServiceResult<UpdateContactRequest>();
+            var contact = await(from con in _context.Contacts
+                                where con.ID == ContactID
+                                select new UpdateContactRequest
+                                {
+                                    ID = con.ID,
+                                    Title = con.Title,
+                                    Location = con.Location,
+                                    MobilePhone = con.MobilePhone,
+                                    LandPhone = con.LandPhone,
+                                    Email = con.Email,
+                                    Longitude = con.Longitude,
+                                    Latitude = con.Latitude,
+                                }).FirstAsync();
+            if (contact == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = contact;
+            return result;
+        }
     }
 }

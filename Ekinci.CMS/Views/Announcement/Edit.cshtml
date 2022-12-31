@@ -1,4 +1,4 @@
-﻿@model Ekinci.CMS.Business.Models.Responses.AnnouncementResponses.GetAnnouncementResponse
+﻿@model Ekinci.CMS.Business.Models.Requests.AnnouncementRequests.UpdateAnnouncementRequest
 @using Microsoft.AspNetCore.Antiforgery
 @inject IAntiforgery antiforgery
 @{
@@ -30,7 +30,9 @@
                                                     <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
                                                 </label>
                                             </div>
-                                            <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
+                                            <div class="form-text">@_localizer["UploadImageHelpText"]</div>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="ThumbUrl"></span>
+
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
@@ -40,7 +42,8 @@
                                                 <i class="fa-solid fa-align-justify"></i>
                                             </span>
                                             <input asp-for="Title" class="form-control" />
-                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="Title"></span>
+
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
@@ -50,7 +53,7 @@
                                                 <i class="fa-solid fa-align-justify"></i>
                                             </span>
                                             <input asp-for="Description" class="form-control" />
-                                            <span asp-validation-for="Description" class="text-danger"></span>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="Description"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">

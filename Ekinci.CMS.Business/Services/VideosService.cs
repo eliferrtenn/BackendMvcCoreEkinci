@@ -144,5 +144,27 @@ namespace Ekinci.CMS.Business.Services
             result.SetSuccess(_localizer["RecordUpdated"]);
             return result;
         }
+
+        public async Task<ServiceResult<UpdateVideosRequest>> UpdateVideo(int VideoID)
+        {
+            var result = new ServiceResult<UpdateVideosRequest>();
+            var video = await(from vid in _context.Videos
+                              where vid.ID == VideoID
+                              select new UpdateVideosRequest
+                              {
+                                  ID = vid.ID,
+                                  Title = vid.Title,
+                                  Description = vid.Description,
+                                  VideoUrl = vid.VideoUrl,
+                                  PhotoUrl = vid.PhotoUrl.PrepareCDNUrl(file),
+                              }).FirstAsync();
+            if (video == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = video;
+            return result;
+        }
     }
 }

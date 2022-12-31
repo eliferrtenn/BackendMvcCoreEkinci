@@ -31,7 +31,7 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await technicalServiceDemandService.GetTechnicalServiceDemand(id);
+            var result = await technicalServiceDemandService.AssignPersonelTechnicalServiceDemand(id);
             return View(result.Data);
         }
         [HttpPost]

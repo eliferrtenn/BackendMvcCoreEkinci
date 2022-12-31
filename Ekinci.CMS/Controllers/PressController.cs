@@ -1,6 +1,5 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.PressRequests;
-using Ekinci.CMS.Business.Models.Requests.PressResponses;
 using Ekinci.Common.BaseController;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,9 +34,9 @@ namespace Ekinci.CMS.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(AddPressRequest request,IFormFile PhotoUrl)
+        public async Task<IActionResult> Create(AddPressRequest request, IFormFile PhotoUrl)
         {
-            var result = await pressService.AddPress(request,PhotoUrl);
+            var result = await pressService.AddPress(request, PhotoUrl);
             if (result.IsSuccess)
             {
                 Message(result);
@@ -48,13 +47,13 @@ namespace Ekinci.CMS.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await pressService.GetPress(id);
+            var result = await pressService.UpdatePress(id);
             return View(result.Data);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(UpdatePressRequest request, IFormFile PhotoUrl)
         {
-            var result = await pressService.UpdatePress(request,PhotoUrl);
+            var result = await pressService.UpdatePress(request, PhotoUrl);
             if (result.IsSuccess)
             {
                 Message(result);

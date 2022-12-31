@@ -11,5 +11,7 @@ namespace Ekinci.CMS.Business.Interfaces
         Task<ServiceResult<List<ListNonAssignmentTechnicalServiceDemendResponse>>> ListNonAssignmentTechnicalServiceDemend();
         Task<ServiceResult<List<ListAssignTechnicalServiceDemandResponse>>> ListAssignTechnicalServiceDemand();
         Task<ServiceResult> AssignPersonelTechnicalServiceDemand(AssignPersonelTechnicalServiceDemandRequest request);
+        Task<ServiceResult<AssignPersonelTechnicalServiceDemandRequest>> AssignPersonelTechnicalServiceDemand(int technicalDemandServiceID);
+
     }
 }

@@ -156,5 +156,27 @@ namespace Ekinci.CMS.Business.Services
             result.Data = blogs;
             return result;
         }
+
+        public async Task<ServiceResult<UpdateBlogRequest>> UpdateBlog(int BlogID)
+        {
+            var result = new ServiceResult<UpdateBlogRequest>();
+            var blogs = await (from blog in _context.Blog
+                               where blog.ID == BlogID
+                               select new UpdateBlogRequest
+                               {
+                                   ID = blog.ID,
+                                   Title = blog.Title,
+                                   BlogDate = blog.BlogDate,
+                                   InstagramUrl = blog.InstagramUrl,
+                                   PhotoUrl = blog.PhotoUrl.PrepareCDNUrl(file),
+                               }).FirstAsync();
+            if (blogs == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = blogs;
+            return result;
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await blogService.GetBlog(id);
+            var result = await blogService.UpdateBlog(id);
             return View(result.Data);
         }
         [HttpPost]

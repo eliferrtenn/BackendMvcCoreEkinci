@@ -22,6 +22,7 @@ namespace Ekinci.CMS.Business.Models.Requests.AnnouncementRequests
     {
         public AddAnnouncementRequestValidator(IStringLocalizer<CommonResource> _localizer)
         {
+            RuleFor(x => x.ThumbUrl).NotNull().WithMessage(x => _localizer["ValidationForRequired"]);
             RuleFor(x => x.Title).NotNull().WithMessage(x => _localizer["ValidationForRequired"]);
             RuleFor(x => x.Description).NotNull().WithMessage(x => _localizer["ValidationForRequired"]);
         }

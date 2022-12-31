@@ -19,7 +19,6 @@ namespace Ekinci.CMS.Business.Services
     {
         const string fileThumb = "Project/Thumb/";
         const string file = "Project/General/";
-        private readonly IProjectStatusService projectStatusService;
 
         public ProjectService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
@@ -254,6 +253,46 @@ namespace Ekinci.CMS.Business.Services
                 return result;
             }
 
+        }
+
+        public async Task<ServiceResult<UpdateProjectRequest>> UpdateProject(int projectID)
+        {
+            var result = new ServiceResult<UpdateProjectRequest>();
+            var project = await(from proj in _context.Projects
+                                join ps in _context.ProjectStatus on proj.StatusID equals ps.ID
+                                let projectPhotos = (from prph in _context.ProjectPhotos
+                                                     where prph.ProjectID == proj.ID
+                                                     where prph.IsEnabled == true
+                                                     select new ProjectPhotosRequest
+                                                     {
+                                                         ID = prph.ID,
+                                                         PhotoUrl = prph.PhotoUrl.PrepareCDNUrl(file)
+                                                     }).ToList()
+                                where proj.ID == projectID
+                                select new UpdateProjectRequest
+                                {
+                                    ID = proj.ID,
+                                    StatusID = proj.StatusID,
+                                    StatusName = ps.Name,
+                                    Title = proj.Title,
+                                    SubTitle = proj.SubTitle,
+                                    Description = proj.Description,
+                                    ProjectDate = proj.ProjectDate,
+                                    DeliveryDate = proj.DeliveryDate,
+                                    ThumbUrl = proj.ThumbUrl.PrepareCDNUrl(fileThumb),
+                                    //TODO Farklı bir sistem olacak
+                                    FileUrl = proj.FileUrl.PrepareCDNUrl(file),
+                                    ApartmentCount = proj.ApartmentCount,
+                                    SquareMeter = proj.SquareMeter,
+                                    ProjectPhotos = projectPhotos
+                                }).FirstAsync();
+            if (project == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = project;
+            return result;
         }
     }
 }

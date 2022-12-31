@@ -43,7 +43,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            var emailParameters = new Dictionary<string, string>
+           /* //TODO var emailParameters = new Dictionary<string, string>
                 {
                     { "[UserFullName]", user.FullName},
                     { "[Email]", user.Email },
@@ -61,7 +61,7 @@ namespace Ekinci.CMS.Business.Services
             {
                 result.SetError(emailResult.Message);
                 return result;
-            }
+            }*/
 
             result.SetSuccess(_localizer["EmailSentForPassword"]);
             return result;

@@ -1,4 +1,5 @@
-﻿@model Ekinci.CMS.Business.Models.Responses.PressResponses.GetPressResponse
+﻿@model Ekinci.CMS.Business.Models.Requests.PressRequests.AddPressRequest
+
 <div class="flex-column" id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -25,7 +26,8 @@
                                                     <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
                                                 </label>
                                             </div>
-                                            <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
+                                            <div class="form-text">@_localizer["UploadImageHelpText"]</div>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="PhotoUrl"></span>
                                         </div>
                                     </div>
                                 </div>

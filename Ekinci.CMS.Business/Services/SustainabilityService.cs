@@ -114,5 +114,27 @@ namespace Ekinci.CMS.Business.Services
             return result;
         }
 
+        public async Task<ServiceResult<UpdateSustainabilityRequest>> UpdateSustainability()
+        {
+            var result = new ServiceResult<UpdateSustainabilityRequest>();
+
+            if (_context.Sustainabilities.Count() == 0)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+
+            var sustainability = await (from sustain in _context.Sustainabilities
+                                        where sustain.IsEnabled == true
+                                        select new UpdateSustainabilityRequest
+                                        {
+                                            ID = sustain.ID,
+                                            Title = sustain.Title,
+                                            Description = sustain.Description,
+                                            PhotoUrl = sustain.PhotoUrl.PrepareCDNUrl(file),
+                                        }).FirstAsync();
+            result.Data = sustainability;
+            return result;
+        }
     }
 }

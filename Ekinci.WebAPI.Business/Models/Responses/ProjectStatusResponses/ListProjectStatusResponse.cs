@@ -1,0 +1,9 @@
+﻿namespace Ekinci.WebAPI.Business.Models.Responses.ProjectStatusResponses
+{
+    public class ListProjectStatusResponse
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string PhotoUrl { get; set; }
+    }
+}

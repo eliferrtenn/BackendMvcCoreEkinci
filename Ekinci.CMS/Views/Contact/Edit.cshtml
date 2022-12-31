@@ -1,5 +1,4 @@
-﻿@model Ekinci.CMS.Business.Models.Responses.ContactResponses.GetContactResponse
-
+﻿@model Ekinci.CMS.Business.Models.Requests.ContactRequests.UpdateContactRequest
 
 <div class=" flex-column " id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -28,7 +27,7 @@
                                                 <i class="fa-solid fa-align-justify"></i>
                                             </span>
                                             <input asp-for="Title" class="form-control" />
-                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="Title"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-5">
@@ -38,7 +37,7 @@
                                                 <i class="fa-solid fa-align-justify"></i>
                                             </span>
                                             <input asp-for="Location" class="form-control" />
-                                            <span asp-validation-for="Location" class="text-danger"></span>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="Location"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-5">

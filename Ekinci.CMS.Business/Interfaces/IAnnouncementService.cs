@@ -8,6 +8,7 @@ namespace Ekinci.CMS.Business.Interfaces
     public interface IAnnouncementService
     {
         Task<ServiceResult> AddAnnouncement(AddAnnouncementRequest request,IEnumerable<IFormFile> PhotoUrls, IFormFile PhotoUrl);
+        Task<ServiceResult<UpdateAnnouncementRequest>> UpdateAnnouncement(int announcementID);
         Task<ServiceResult> UpdateAnnouncement(UpdateAnnouncementRequest request,IEnumerable<IFormFile> PhotoUrls, IFormFile PhotoUrl);
         Task<ServiceResult<List<ListAnnouncementsResponse>>> GetAll();
         Task<ServiceResult<GetAnnouncementResponse>> GetAnnouncement(int announcementID);

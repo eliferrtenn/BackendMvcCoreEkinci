@@ -1,5 +1,5 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
-using Ekinci.CMS.Business.Models.Requests.ProjectStatusResponses;
+using Ekinci.CMS.Business.Models.Requests.ProjectStatusRequests;
 using Ekinci.Common.BaseController;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +31,7 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await projectStatusService.GetProjectStatus(id);
+            var result = await projectStatusService.UpdateProjectStatus(id);
             return View(result.Data);
         }
         [HttpPost]

@@ -41,7 +41,7 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit()
         {
-            var result = await sustainabilityService.GetSustainability();
+            var result = await sustainabilityService.UpdateSustainability();
             return View(result.Data);
         }
         [HttpPost]

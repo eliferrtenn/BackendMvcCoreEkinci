@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2RsgOMAMeXQL6MQ3R1/5bMYNCiQ5QFumKip+2hvIjX8=",
+  "Hash": "siwqUlN7xD968SDeFmWvs/ZOYD24unvn/MqAJNYrtfU=",
   "Source": "Ekinci.CMS",
   "BasePath": "_content/Ekinci.CMS",
   "Mode": "Default",
@@ -45492,6 +45492,23 @@
       "OriginalItemSpec": "wwwroot\\Temp\\045b77e2-44ea-4ffa-b0b8-c39cccd127e7.jpg"
     },
     {
+      "Identity": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\058b23b5-89dd-493a-b57c-b14a7f9247f8.jpg",
+      "SourceId": "Ekinci.CMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\",
+      "BasePath": "_content/Ekinci.CMS",
+      "RelativePath": "Temp/058b23b5-89dd-493a-b57c-b14a7f9247f8.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Temp\\058b23b5-89dd-493a-b57c-b14a7f9247f8.jpg"
+    },
+    {
       "Identity": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\06aef414-2d03-405d-9c87-408718d792ad.jpg",
       "SourceId": "Ekinci.CMS",
       "SourceType": "Discovered",
@@ -45711,6 +45728,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Temp\\43311648-7b40-4ab6-b663-29a30f2f528f.jpg"
+    },
+    {
+      "Identity": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\47ca00a4-e141-4c4b-9f00-3d6745865d0a.jpeg",
+      "SourceId": "Ekinci.CMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\",
+      "BasePath": "_content/Ekinci.CMS",
+      "RelativePath": "Temp/47ca00a4-e141-4c4b-9f00-3d6745865d0a.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Temp\\47ca00a4-e141-4c4b-9f00-3d6745865d0a.jpeg"
     },
     {
       "Identity": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\4ab2f639-0202-4215-a492-651a42c83a45.jpg",
@@ -46155,6 +46189,23 @@
       "OriginalItemSpec": "wwwroot\\Temp\\a51b75a9-d04a-4d4d-8508-2f38f6348bd4.jpeg"
     },
     {
+      "Identity": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\a61f1b59-bb6c-4f9d-bc45-6c8a59dd82b0.jpg",
+      "SourceId": "Ekinci.CMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\",
+      "BasePath": "_content/Ekinci.CMS",
+      "RelativePath": "Temp/a61f1b59-bb6c-4f9d-bc45-6c8a59dd82b0.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Temp\\a61f1b59-bb6c-4f9d-bc45-6c8a59dd82b0.jpg"
+    },
+    {
       "Identity": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\a96d2b45-4fe8-4528-a41f-90bb50e80d31.jpg",
       "SourceId": "Ekinci.CMS",
       "SourceType": "Discovered",
@@ -46493,6 +46544,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Temp\\fcf5c819-c2f5-4512-90d9-9057350ebfbb.jpg"
+    },
+    {
+      "Identity": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\feac8155-d0d7-4025-8bfe-a4f7d2709d20.jpg",
+      "SourceId": "Ekinci.CMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\",
+      "BasePath": "_content/Ekinci.CMS",
+      "RelativePath": "Temp/feac8155-d0d7-4025-8bfe-a4f7d2709d20.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Temp\\feac8155-d0d7-4025-8bfe-a4f7d2709d20.jpg"
     }
   ]
 }

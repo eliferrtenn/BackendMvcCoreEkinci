@@ -53,7 +53,7 @@ namespace Ekinci.CMS.Controllers
         {
             var result1 = await projectStatusService.GetAll();
             ViewBag.StatusID = new SelectList(result1.Data, "ID", "Name");
-            var result = await projectService.GetProject(id);
+            var result = await projectService.UpdateProject(id);
             return View(result.Data);
         }
 

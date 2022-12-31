@@ -9,6 +9,7 @@ namespace Ekinci.CMS.Business.Interfaces
     public interface IIdentityGuideService
     {
         Task<ServiceResult> AddIdentityGuide(AddIdentityGuideRequest request, IFormFile PhotoUrl);
+        Task<ServiceResult<UpdateIdentityGuideRequest>> UpdateIdentityGuide(int IdentityGuideID);
         Task<ServiceResult> UpdateIdentityGuide(UpdateIdentityGuideRequest request, IFormFile PhotoUrl);
         Task<ServiceResult> DeleteIdentityGuide(DeleteIdentityGuideRequest request);
         Task<ServiceResult<List<ListIdentityGuideResponse>>> GetAll();

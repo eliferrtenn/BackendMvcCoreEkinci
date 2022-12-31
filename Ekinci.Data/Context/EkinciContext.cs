@@ -28,6 +28,5 @@ namespace Ekinci.Data.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Videos> Videos { get; set; }
         public DbSet<ProjectStatus> ProjectStatus { get; set; }
-
     }
 }

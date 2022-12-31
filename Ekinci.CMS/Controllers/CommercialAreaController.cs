@@ -47,7 +47,7 @@ namespace Ekinci.CMS.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await commercialAreaService.GetCommercialArea(id);
+            var result = await commercialAreaService.UpdateCommercialArea(id);
             return View(result.Data);
         }
         [HttpPost]

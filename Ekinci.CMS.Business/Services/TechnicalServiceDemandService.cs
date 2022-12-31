@@ -160,5 +160,35 @@ namespace Ekinci.CMS.Business.Services
             result.Data = technicalServiceDemand;
             return result;
         }
+
+        public async Task<ServiceResult<AssignPersonelTechnicalServiceDemandRequest>> AssignPersonelTechnicalServiceDemand(int technicalDemandServiceID)
+        {
+            var result = new ServiceResult<AssignPersonelTechnicalServiceDemandRequest>();
+            var technicalServiceDemand = await(from technic in _context.TechnicalServiceDemands
+                                               where technic.ID == technicalDemandServiceID
+                                               select new AssignPersonelTechnicalServiceDemandRequest
+                                               {
+                                                   ID = technic.ID,
+                                                   DemandType = technic.DemandType,
+                                                   Title = technic.Title,
+                                                   Description = technic.Description,
+                                                   DemandUrgencyStatus = technic.DemandUrgencyStatus,
+                                                   SiteName = technic.SiteName,
+                                                   ApartmentName = technic.ApartmentName,
+                                                   ApartmentNo = technic.ApartmentNo,
+                                                   ContactInform = technic.ContactInform,
+                                                   FullName = technic.FullName,
+                                                   MobilePhone = technic.MobilePhone,
+                                                   CreateDayDemand = technic.CreateDayDemand,
+                                                   SolutionDayDemand = technic.SolutionDayDemand,
+                                               }).FirstAsync();
+            if (technicalServiceDemand == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = technicalServiceDemand;
+            return result;
+        }
     }
 }

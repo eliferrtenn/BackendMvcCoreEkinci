@@ -1,5 +1,5 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
-using Ekinci.CMS.Business.Models.Requests.ProjectStatusResponses;
+using Ekinci.CMS.Business.Models.Requests.ProjectStatusRequests;
 using Ekinci.CMS.Business.Models.Responses.ProjectStatusResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
@@ -35,7 +35,7 @@ namespace Ekinci.CMS.Business.Services
                                   {
                                       ID = status.ID,
                                       Name = status.Name,
-                                      PhotoUrl=status.PhotoUrl.PrepareCDNUrl(file),
+                                      PhotoUrl = status.PhotoUrl.PrepareCDNUrl(file),
                                   }).ToListAsync();
             result.Data = statuses;
             return result;
@@ -66,8 +66,8 @@ namespace Ekinci.CMS.Business.Services
             Guid guid = Guid.NewGuid();
             var filePaths = new List<string>();
             var result = new ServiceResult();
-            var blog = await _context.ProjectStatus.FirstOrDefaultAsync(x => x.ID == request.ID);
-            if (blog == null)
+            var projectStatus = await _context.ProjectStatus.FirstOrDefaultAsync(x => x.ID == request.ID);
+            if (projectStatus == null)
             {
                 result.SetError(_localizer["RecordNotFound"]);
                 return result;
@@ -82,12 +82,33 @@ namespace Ekinci.CMS.Business.Services
                         result.SetError(_localizer["PhotoCouldNotUploaded"]);
                         return result;
                     }
-                    blog.PhotoUrl = fileUploadResult.FileName;
+                    projectStatus.PhotoUrl = fileUploadResult.FileName;
                 }
             }
-            _context.ProjectStatus.Update(blog);
+            projectStatus.Name= request.Name;
+            _context.ProjectStatus.Update(projectStatus);
             await _context.SaveChangesAsync();
             result.SetSuccess(_localizer["RecordUpdated"]);
+            return result;
+        }
+
+        public async Task<ServiceResult<UpdateProjectStatusRequest>> UpdateProjectStatus(int projectStatusID)
+        {
+            var result = new ServiceResult<UpdateProjectStatusRequest>();
+            var statuses = await (from status in _context.ProjectStatus
+                                  where status.ID == projectStatusID
+                                  select new UpdateProjectStatusRequest
+                                  {
+                                      ID = status.ID,
+                                      Name = status.Name,
+                                      PhotoUrl = status.PhotoUrl.PrepareCDNUrl(file),
+                                  }).FirstAsync();
+            if (statuses == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = statuses;
             return result;
         }
     }

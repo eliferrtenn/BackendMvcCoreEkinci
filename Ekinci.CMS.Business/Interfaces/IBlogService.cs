@@ -8,6 +8,7 @@ namespace Ekinci.CMS.Business.Interfaces
     public interface IBlogService
     {
         Task<ServiceResult> AddBlog(AddBlogRequest request, IFormFile PhotoUrl);
+        Task<ServiceResult<UpdateBlogRequest>> UpdateBlog(int BlogID);
         Task<ServiceResult> UpdateBlog(UpdateBlogRequest request, IFormFile PhotoUrl);
         Task<ServiceResult> DeleteBlog(DeleteBlogRequest request);
         Task<ServiceResult<List<ListBlogResponse>>> GetAll();

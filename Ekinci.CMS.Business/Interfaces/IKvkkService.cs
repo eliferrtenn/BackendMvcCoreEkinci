@@ -9,7 +9,7 @@ namespace Ekinci.CMS.Business.Interfaces
     public interface IKvkkService
     {
         Task<ServiceResult> AddKvkk(AddKvkkRequest request, IFormFile PhotoUrl);
-        Task<ServiceResult> UpdateKvkk(UpdateKvkkResponse request, IFormFile PhotoUrl);
+        Task<ServiceResult> UpdateKvkk(UpdateKvkkRequest request, IFormFile PhotoUrl);
         Task<ServiceResult<GetKvkkResponse>> GetKvkk();
     }
 }

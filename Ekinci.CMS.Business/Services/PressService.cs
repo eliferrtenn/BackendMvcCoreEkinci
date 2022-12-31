@@ -1,6 +1,5 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.PressRequests;
-using Ekinci.CMS.Business.Models.Requests.PressResponses;
 using Ekinci.CMS.Business.Models.Responses.PressResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
@@ -138,6 +137,25 @@ namespace Ekinci.CMS.Business.Services
             _context.Press.Update(press);
             await _context.SaveChangesAsync();
             result.SetSuccess(_localizer["RecordUpdated"]);
+            return result;
+        }
+
+        public async Task<ServiceResult<UpdatePressRequest>> UpdatePress(int PressID)
+        {
+            var result = new ServiceResult<UpdatePressRequest>();
+            var press = await (from pres in _context.Press
+                               where pres.ID == PressID
+                               select new UpdatePressRequest
+                               {
+                                   ID = pres.ID,
+                                   PhotoUrl = pres.PhotoUrl.PrepareCDNUrl(file),
+                               }).FirstAsync();
+            if (press == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = press;
             return result;
         }
     }

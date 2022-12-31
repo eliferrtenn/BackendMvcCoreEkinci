@@ -1,4 +1,8 @@
-﻿namespace Ekinci.CMS.Business.Models.Requests.TechnicalServiceDemandRequests
+﻿using Ekinci.Resources;
+using FluentValidation;
+using Microsoft.Extensions.Localization;
+
+namespace Ekinci.CMS.Business.Models.Requests.TechnicalServiceDemandRequests
 {
     public class AssignPersonelTechnicalServiceDemandRequest
     {
@@ -14,8 +18,16 @@
         public string ApartmentNo { get; set; }
         public string ContactInform { get; set; }
         public DateTime CreateDayDemand { get; set; }
-        public DateTime SolutionDayDemand { get; set; }
+        public DateTime? SolutionDayDemand { get; set; }
         public string FullName { get; set; }
         public string MobilePhone { get; set; }
+    }
+    public class AssignPersonelTechnicalServiceDemandRequestValidator : AbstractValidator<AssignPersonelTechnicalServiceDemandRequest>
+    {
+        public AssignPersonelTechnicalServiceDemandRequestValidator(IStringLocalizer<CommonResource> _localizer)
+        {
+            RuleFor(x => x.FullName).NotNull().WithMessage(x => _localizer["ValidationForRequired"]);
+            RuleFor(x => x.MobilePhone).NotNull().WithMessage(x => _localizer["ValidationForRequired"]);
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await announcementService.GetAnnouncement(id);
+            var result = await announcementService.UpdateAnnouncement(id);
             return View(result.Data);
         }
 

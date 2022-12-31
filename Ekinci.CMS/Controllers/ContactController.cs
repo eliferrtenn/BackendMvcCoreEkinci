@@ -47,7 +47,7 @@ namespace Ekinci.CMS.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await contactService.GetContact(id);
+            var result = await contactService.UpdateContact(id);
             return View(result.Data);
         }
         [HttpPost]

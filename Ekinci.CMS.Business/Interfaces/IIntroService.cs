@@ -8,6 +8,7 @@ namespace Ekinci.CMS.Business.Interfaces
     public interface IIntroService
     {
         Task<ServiceResult> AddIntro(AddIntroRequest request, IFormFile PhotoUrl);
+        Task<ServiceResult<UpdateIntroRequest>> UpdateIntro();
         Task<ServiceResult> UpdateIntro(UpdateIntroRequest request, IFormFile PhotoUrl);
         Task<ServiceResult<GetIntroResponse>> GetIntro();
     }

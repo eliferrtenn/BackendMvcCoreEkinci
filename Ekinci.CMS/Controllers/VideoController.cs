@@ -47,7 +47,7 @@ namespace Ekinci.CMS.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var result = await videosService.GetVideo(id);
+            var result = await videosService.UpdateVideo(id);
             return View(result.Data);
         }
         [HttpPost]

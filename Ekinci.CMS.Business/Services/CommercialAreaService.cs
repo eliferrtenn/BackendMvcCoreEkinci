@@ -156,5 +156,26 @@ namespace Ekinci.CMS.Business.Services
             }
             return result;
         }
+
+        public async Task<ServiceResult<UpdateCommercialAreaRequest>> UpdateCommercialArea(int CommercialAreaID)
+        {
+            var result = new ServiceResult<UpdateCommercialAreaRequest>();
+
+            var commercials = await (from commercial in _context.CommercialAreas
+                                     where commercial.ID == CommercialAreaID
+                                     select new UpdateCommercialAreaRequest
+                                     {
+                                         ID = commercial.ID,
+                                         Title = commercial.Title,
+                                         PhotoUrl = commercial.PhotoUrl.PrepareCDNUrl(file),
+                                     }).FirstAsync();
+            if (commercials == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = commercials;
+            return result;
+        }
     }
 }

@@ -160,5 +160,27 @@ namespace Ekinci.CMS.Business.Services
             }
             return result;
         }
+
+        public async Task<ServiceResult<UpdateHistoryRequest>> UpdateHistory(int HistoryID)
+        {
+            var result = new ServiceResult<UpdateHistoryRequest>();
+            var histories = await(from hist in _context.Histories
+                                  where hist.ID == HistoryID
+                                  select new UpdateHistoryRequest
+                                  {
+                                      ID = hist.ID,
+                                      Title = hist.Title,
+                                      StartDate = hist.StartDate,
+                                      EndDate = hist.EndDate,
+                                      PhotoUrl = hist.PhotoUrl.PrepareCDNUrl(file),
+                                  }).FirstAsync();
+            if (histories == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = histories;
+            return result;
+        }
     }
 }

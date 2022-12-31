@@ -117,5 +117,25 @@ namespace Ekinci.CMS.Business.Services
             }
             return result;
         }
+
+        public async Task<ServiceResult<UpdateHumanResourceRequest>> UpdateHumanResource()
+        {
+            var result = new ServiceResult<UpdateHumanResourceRequest>();
+            if (_context.HumanResources.Count() == 0)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            var humanResource = await (from human in _context.HumanResources
+                                       select new UpdateHumanResourceRequest
+                                       {
+                                           ID = human.ID,
+                                           Title = human.Title,
+                                           Description = human.Description,
+                                           PhotoUrl = human.PhotoUrl.PrepareCDNUrl(file),
+                                       }).FirstAsync();
+            result.Data = humanResource;
+            return result;
+        }
     }
 }

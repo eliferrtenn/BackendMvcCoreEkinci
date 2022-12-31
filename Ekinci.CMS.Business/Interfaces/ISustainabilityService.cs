@@ -8,6 +8,7 @@ namespace Ekinci.CMS.Business.Interfaces
     public interface ISustainabilityService
     {
         Task<ServiceResult> AddSustainability(AddSustainabilityRequest request, IFormFile PhotoUrl);
+        Task<ServiceResult<UpdateSustainabilityRequest>> UpdateSustainability();
         Task<ServiceResult> UpdateSustainability(UpdateSustainabilityRequest request, IFormFile PhotoUr);
         Task<ServiceResult<GetSustainabilityResponse>> GetSustainability();
     }

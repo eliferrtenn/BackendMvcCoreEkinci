@@ -125,5 +125,28 @@ namespace Ekinci.CMS.Business.Services
             }
             return result;
         }
+
+        public async Task<ServiceResult<UpdateIntroRequest>> UpdateIntro()
+        {
+            var result = new ServiceResult<UpdateIntroRequest>();
+            if (_context.Intros.Count() == 0)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            var Intro = await (from intro in _context.Intros
+                               select new UpdateIntroRequest
+                               {
+                                   ID = intro.ID,
+                                   Title = intro.Title,
+                                   Description = intro.Description,
+                                   SquareMeter = intro.SquareMeter,
+                                   YearCount = intro.YearCount,
+                                   CommercialAreaCount = intro.CommercialAreaCount,
+                                   PhotoUrl = intro.PhotoUrl.PrepareCDNUrl(file),
+                               }).FirstAsync();
+            result.Data = Intro;
+            return result;
+        }
     }
 }

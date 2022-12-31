@@ -79,7 +79,7 @@ namespace Ekinci.CMS.Business.Services
             return result;
         }
 
-        public async Task<ServiceResult> UpdateKvkk(UpdateKvkkResponse request, IFormFile PhotoUrl)
+        public async Task<ServiceResult> UpdateKvkk(UpdateKvkkRequest request, IFormFile PhotoUrl)
         {
             Guid guid = Guid.NewGuid();
             var filePaths = new List<string>();

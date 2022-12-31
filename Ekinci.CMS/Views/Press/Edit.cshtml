@@ -1,17 +1,9 @@
-﻿@model Ekinci.CMS.Business.Models.Responses.PressResponses.GetPressResponse
+﻿@model Ekinci.CMS.Business.Models.Requests.PressRequests.UpdatePressRequest
+
 <div class="flex-column" id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <div id="kt_content_container" class="container-xxl">
-                @if (TempData["MessageStatus"] != null && TempData["MessageText"] != null)
-                {
-                    <div class="alert alert-primary">
-                        <div class="d-flex flex-column">
-                            <h4 class="mb-1 text-dark">@TempData["MessageStatus"]</h4>
-                            <span>@TempData["MessageText"]</span>
-                        </div>
-                    </div>
-                }
                 <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                     <form asp-action="Edit" enctype="multipart/form-data">
                         <div class="card shadow-sm">
@@ -38,7 +30,8 @@
                                                     <input type="file" name="PhotoUrl" accept=".png, .jpg, .jpeg" />
                                                 </label>
                                             </div>
-                                            <div class="form-text">İzin verilen: png, jpg, jpeg.</div>
+                                            <div class="form-text">@_localizer["UploadImageHelpText"]</div>
+                                            <span class="fv-plugins-message-container invalid-feedback" asp-validation-for="PhotoUrl"></span>
                                         </div>
                                     </div>
                                 </div>

@@ -102,7 +102,6 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<GetAnnouncementResponse>> GetAnnouncement(int announcementID)
         {
             var result = new ServiceResult<GetAnnouncementResponse>();
-
             var announcement = await (from announ in _context.Announcements
                                       where announ.ID == announcementID
                                       let announPhotos = (from announphoto in _context.AnnouncementPhotos
@@ -227,6 +226,38 @@ namespace Ekinci.CMS.Business.Services
             _context.Announcements.Update(announcement);
             await _context.SaveChangesAsync();
             result.SetSuccess(_localizer["RecordDeleted"]);
+            return result;
+        }
+
+        public async Task<ServiceResult<UpdateAnnouncementRequest>> UpdateAnnouncement(int announcementID)
+        {
+            var result = new ServiceResult<UpdateAnnouncementRequest>();
+
+            var announcement = await(from announ in _context.Announcements
+                                     where announ.ID == announcementID
+                                     let announPhotos = (from announphoto in _context.AnnouncementPhotos
+                                                         where announphoto.NewsID == announ.ID
+                                                         where announphoto.IsEnabled == true
+                                                         select new AnnouncementRequests
+                                                         {
+                                                             ID = announphoto.ID,
+                                                             PhotoUrl = announphoto.PhotoUrl.PrepareCDNUrl(file),
+                                                         }).ToList()
+                                     select new UpdateAnnouncementRequest
+                                     {
+                                         ID = announ.ID,
+                                         Title = announ.Title,
+                                         Description = announ.Description,
+                                         AnnouncementDate = announ.AnnouncementDate,
+                                         ThumbUrl = announ.ThumbUrl.PrepareCDNUrl(fileThumb),
+                                         AnnouncementPhotos = announPhotos
+                                     }).FirstAsync();
+            if (announcement == null)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            result.Data = announcement;
             return result;
         }
     }
