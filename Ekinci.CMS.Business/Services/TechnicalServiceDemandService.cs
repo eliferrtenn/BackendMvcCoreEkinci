@@ -59,7 +59,7 @@ namespace Ekinci.CMS.Business.Services
                 return result;
             }
             var technicalServiceDemand = await (from technic in _context.TechnicalServiceDemands
-                                                where technic.IsEnabled == true && technic.FullName != null && technic.MobilePhone != null
+                                                where technic.IsEnabled == true && (technic.FullName != null && technic.MobilePhone != null)
                                                 select new ListAssignTechnicalServiceDemandResponse
                                                 {
                                                     ID = technic.ID,
@@ -90,7 +90,7 @@ namespace Ekinci.CMS.Business.Services
                 return result;
             }
             var technicalServiceDemand = await (from technic in _context.TechnicalServiceDemands
-                                                where technic.IsEnabled == true && technic.FullName == null && technic.MobilePhone == null
+                                                where technic.IsEnabled == true && (technic.FullName == null || technic.MobilePhone == null)
                                                 select new ListNonAssignmentTechnicalServiceDemendResponse
                                                 {
                                                     ID = technic.ID,

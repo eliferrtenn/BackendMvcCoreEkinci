@@ -46,5 +46,18 @@ namespace Ekinci.CMS.Controllers
             Message(result);
             return View();
         }
+
+        public async Task<IActionResult> ListNonAssignment()
+        {
+            var result = await technicalServiceDemandService.ListNonAssignmentTechnicalServiceDemend();
+            return View(result.Data);
+        }
+
+        public async Task<IActionResult> ListAssignment()
+        {
+            var result = await technicalServiceDemandService.ListAssignTechnicalServiceDemand();
+            return View(result.Data);
+        }
+
     }
 }

@@ -121,6 +121,11 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<List<ListProjectResponses>>> GetAll()
         {
             var result = new ServiceResult<List<ListProjectResponses>>();
+            if (_context.Projects.Count() == 0)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
             var projects = await (from proj in _context.Projects
                                   where proj.IsEnabled==true
                                   join ps in _context.ProjectStatus on proj.StatusID equals ps.ID
@@ -138,11 +143,38 @@ namespace Ekinci.CMS.Business.Services
                                       ApartmentCount = proj.ApartmentCount,
                                       SquareMeter = proj.SquareMeter,
                                   }).ToListAsync();
-            //TODO:NULL OLMA İHTİMALİNİ VER
             result.Data = projects;
             return result;
         }
 
+        public async Task<ServiceResult<List<ListProjectResponses>>> GetAllProjectStatus(int ProjectStatusID)
+        {
+            var result = new ServiceResult<List<ListProjectResponses>>();
+            if (_context.Projects.Count() == 0)
+            {
+                result.SetError(_localizer["RecordNotFound"]);
+                return result;
+            }
+            var projects = await(from proj in _context.Projects
+                                 where proj.IsEnabled == true && proj.StatusID == ProjectStatusID
+                                 join ps in _context.ProjectStatus on proj.StatusID equals ps.ID
+                                 select new ListProjectResponses
+                                 {
+                                     ID = proj.ID,
+                                     StatusID = proj.StatusID,
+                                     StatusName = ps.Name,
+                                     Title = proj.Title,
+                                     ThumbUrl = proj.ThumbUrl.PrepareCDNUrl(fileThumb),
+                                     SubTitle = proj.SubTitle,
+                                     Description = proj.Description,
+                                     ProjectDate = proj.ProjectDate.ToFormattedDate(),
+                                     DeliveryDate = proj.DeliveryDate.ToFormattedDate(),
+                                     ApartmentCount = proj.ApartmentCount,
+                                     SquareMeter = proj.SquareMeter,
+                                 }).ToListAsync();
+            result.Data = projects;
+            return result;
+        }
         public async Task<ServiceResult<GetProjectResponse>> GetProject(int projectID)
         {
             var result = new ServiceResult<GetProjectResponse>();

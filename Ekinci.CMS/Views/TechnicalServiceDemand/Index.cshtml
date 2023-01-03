@@ -14,6 +14,14 @@
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="card-label fw-bolder fs-3 mb-1">@_localizer["TechnicalServiceDemandTitle"]</span>
                             </h3>
+                            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover">
+                                <a href="@Url.Action("ListAssignment","TechnicalServiceDemand")" class="btn btn-light btn-hover-rotate-end">
+                                    Atananlar
+                                </a>&nbsp;
+                                <a href="@Url.Action("ListNonAssignment","TechnicalServiceDemand")" class="btn btn-light btn-hover-rotate-start">
+                                    Atanmayanlar
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body">
                             @if (Model != null)

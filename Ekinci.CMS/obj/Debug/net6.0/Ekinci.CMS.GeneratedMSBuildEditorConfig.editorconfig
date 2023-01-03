@@ -212,6 +212,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Projects/Ekinci/Ekinci.CMS/Views/Project/ListProjectStatus.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxMaXN0UHJvamVjdFN0YXR1cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Projects/Ekinci/Ekinci.CMS/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -270,6 +274,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Projects/Ekinci/Ekinci.CMS/Views/TechnicalServiceDemand/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVjaG5pY2FsU2VydmljZURlbWFuZFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Ekinci/Ekinci.CMS/Views/TechnicalServiceDemand/ListAssignment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVjaG5pY2FsU2VydmljZURlbWFuZFxMaXN0QXNzaWdubWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Projects/Ekinci/Ekinci.CMS/Views/TechnicalServiceDemand/ListNonAssignment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVjaG5pY2FsU2VydmljZURlbWFuZFxMaXN0Tm9uQXNzaWdubWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Projects/Ekinci/Ekinci.CMS/Views/Video/Create.cshtml]

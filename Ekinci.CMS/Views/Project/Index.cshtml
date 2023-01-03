@@ -16,6 +16,18 @@
                                 <span class="card-label fw-bolder fs-3 mb-1">Proje</span>
                             </h3>
                             <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover">
+                                <a href="@Url.Action("Index","Project",new { id = 1 })" class="btn btn-light btn-hover-rotate-end">
+                                    Tümü
+                                </a>&nbsp;
+                                <a href="@Url.Action("ListProjectStatus","Project",new { id = 1 })" class="btn btn-light btn-hover-rotate-end">
+                                    Satışta/İnşaatı Devam Ediyor
+                                </a>&nbsp;
+                                <a href="@Url.Action("ListProjectStatus","Project",new { id = 2 })" class="btn btn-light btn-hover-rotate-start">
+                                    Satışta/Yaşam Başladı
+                                </a>&nbsp;
+                                <a href="@Url.Action("ListProjectStatus","Project",new { id = 3 })" class="btn btn-light btn-hover-rotate-start">
+                                    Satışı Tamamlananlar
+                                </a>&nbsp;
                                 <a href="@Url.Action("Create","Project")" class="btn btn-sm btn btn-success">
                                     <span class="svg-icon svg-icon-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -48,7 +60,7 @@
                                                 <tr>
                                                     <td>
                                                         @item.Title
-                                                    </td> 
+                                                    </td>
                                                     <td>
                                                         @item.SubTitle
                                                     </td>

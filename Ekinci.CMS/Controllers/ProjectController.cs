@@ -19,6 +19,7 @@ namespace Ekinci.CMS.Controllers
             projectService = _projectService;
             projectStatusService = _projectStatusService;
         }
+
         public async Task<IActionResult> Index()
         {
             var result = await projectService.GetAll();
@@ -30,12 +31,14 @@ namespace Ekinci.CMS.Controllers
             var result = await projectService.GetProject(id);
             return View(result.Data);
         }
+     
         public async Task<IActionResult> Create()
         {
             var result1 = await projectStatusService.GetAll();
             ViewBag.StatusID = new SelectList(result1.Data, "ID", "Name");
             return View();
         }
+  
         [HttpPost]
         public async Task<IActionResult> Create(AddProjectRequest request, IEnumerable<IFormFile> PhotoUrls, IFormFile PhotoUrl)
         {
@@ -85,5 +88,10 @@ namespace Ekinci.CMS.Controllers
             return Json(ajaxResult);
         }
 
+        public async Task<IActionResult> ListProjectStatus(int id)
+        {
+            var result = await projectService.GetAllProjectStatus(id);
+            return View(result.Data);
+        }
     }
 }
