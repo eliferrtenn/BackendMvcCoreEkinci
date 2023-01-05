@@ -1,5 +1,4 @@
 ﻿using Ekinci.CMS.Business.Models.Requests.AccountRequests;
-using Ekinci.CMS.Business.Models.Responses.AccountResponses;
 using Ekinci.Common.Business;
 using Microsoft.AspNetCore.Http;
 
@@ -9,8 +8,8 @@ namespace Ekinci.CMS.Business.Interfaces
     {
         Task<ServiceResult> SignIn(LoginRequest request);
         Task<ServiceResult> SignOut();
-        Task<ServiceResult<UpdateProfileRequest>> GetProfile();
-        Task<ServiceResult> UpdateProfile(UpdateProfileRequest request,IFormFile ProfilePhotoUrl);
+        Task<ServiceResult<UpdateProfileRequest>> UpdateProfile();
+        Task<ServiceResult> UpdateProfile(UpdateProfileRequest request, IFormFile ProfilePhotoUrl);
         Task<ServiceResult> ForgotPassword(ForgotPasswordRequest request);
     }
 }

@@ -35,9 +35,10 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> MyProfile()
         {
-            var result = await accountService.GetProfile();
+            var result = await accountService.UpdateProfile();
             return View(result.Data);
         }
+
         [HttpPost]
         public async Task<IActionResult> UpdateProfile(UpdateProfileRequest request, IFormFile ProfilePhotoUrl)
         {

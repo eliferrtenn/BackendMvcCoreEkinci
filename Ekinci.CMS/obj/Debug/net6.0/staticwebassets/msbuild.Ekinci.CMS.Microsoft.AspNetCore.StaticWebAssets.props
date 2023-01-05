@@ -42992,6 +42992,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Temp\3e1f248a-e206-44f6-9cc5-626c99818f8f.jpeg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Temp\408f0af8-b7e3-4609-92a8-bb929a2e5b48.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Ekinci.CMS</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Ekinci.CMS</BasePath>
+      <RelativePath>Temp/408f0af8-b7e3-4609-92a8-bb929a2e5b48.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Temp\408f0af8-b7e3-4609-92a8-bb929a2e5b48.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Temp\4110c7bd-aa17-4b23-b2ec-175c6283cf98.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Ekinci.CMS</SourceId>

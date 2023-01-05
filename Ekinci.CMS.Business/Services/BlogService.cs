@@ -77,10 +77,6 @@ namespace Ekinci.CMS.Business.Services
                         blog.PhotoUrl = fileUploadResult.FileName;
                     }
                 }
-                else
-                {
-                    blog.PhotoUrl = request.PhotoUrl;
-                }
                 blog.Title = request.Title;
                 blog.BlogDate = request.BlogDate;
                 blog.InstagramUrl = request.InstagramUrl;
@@ -94,7 +90,6 @@ namespace Ekinci.CMS.Business.Services
             }
             return result;
         }
-
 
         public async Task<ServiceResult> DeleteBlog(DeleteBlogRequest request)
         {

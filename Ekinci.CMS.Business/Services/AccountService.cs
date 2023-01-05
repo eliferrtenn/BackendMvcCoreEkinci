@@ -21,8 +21,10 @@ namespace Ekinci.CMS.Business.Services
     public class AccountService : BaseService, IAccountService
     {
         private readonly IMailService mailService;
+        const string file = "Account/";
 
-        public AccountService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload,IMailService _mailService) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
+
+        public AccountService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload, IMailService _mailService) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
             mailService = _mailService;
         }
@@ -43,7 +45,7 @@ namespace Ekinci.CMS.Business.Services
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-           /* //TODO var emailParameters = new Dictionary<string, string>
+            var emailParameters = new Dictionary<string, string>
                 {
                     { "[UserFullName]", user.FullName},
                     { "[Email]", user.Email },
@@ -61,13 +63,13 @@ namespace Ekinci.CMS.Business.Services
             {
                 result.SetError(emailResult.Message);
                 return result;
-            }*/
+            };
 
             result.SetSuccess(_localizer["EmailSentForPassword"]);
             return result;
         }
 
-        public async Task<ServiceResult<UpdateProfileRequest>> GetProfile()
+        public async Task<ServiceResult<UpdateProfileRequest>> UpdateProfile()
         {
             var result = new ServiceResult<UpdateProfileRequest>();
             var user = await (from us in _context.Users
@@ -79,16 +81,13 @@ namespace Ekinci.CMS.Business.Services
                                   Lastname = us.Lastname,
                                   Email = us.Email,
                                   MobilePhone = us.MobilePhone,
-                                  ProfilePhotoUrl = us.ProfilePhotoUrl,
-                                  //TODO:PhotoUrl Yapılacak
-                              }).FirstOrDefaultAsync();
-
+                                  ProfilePhotoUrl = us.ProfilePhotoUrl.PrepareCDNUrl(file),
+                              }).FirstAsync();
             if (user is null)
             {
                 result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
-
             result.Data = user;
             return result;
         }
@@ -140,7 +139,7 @@ namespace Ekinci.CMS.Business.Services
             return result;
         }
 
-        public async Task<ServiceResult> UpdateProfile(UpdateProfileRequest request,IFormFile ProfilePhotoUrl)
+        public async Task<ServiceResult> UpdateProfile(UpdateProfileRequest request, IFormFile ProfilePhotoUrl)
         {
             var result = new ServiceResult();
             var member = await _context.Users.FirstOrDefaultAsync(x => x.ID == CurrentUserID);
@@ -154,10 +153,23 @@ namespace Ekinci.CMS.Business.Services
             member.Lastname = request.Lastname;
             member.Email = request.Email;
             member.MobilePhone = request.MobilePhone;
+            if (ProfilePhotoUrl != null)
+            {
+                if (ProfilePhotoUrl.Length > 0)
+                {
+                    var fileUploadResult = _fileUpload.Upload(ProfilePhotoUrl, file);
 
+                    if (!fileUploadResult.IsSuccess)
+                    {
+                        result.SetError(_localizer["PhotoCouldNotUploaded"]);
+                        return result;
+                    }
+                    member.ProfilePhotoUrl = fileUploadResult.FileName;
+
+                }
+            }
             _context.Users.Update(member);
             await _context.SaveChangesAsync();
-
             result.SetSuccess(_localizer["UserUpdated"]);
             return result;
         }

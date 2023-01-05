@@ -111,4 +111,3 @@ namespace Ekinci.Common.Utilities
         public string Message { get; set; }
     }
 }
-
