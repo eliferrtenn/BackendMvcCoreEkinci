@@ -59,7 +59,7 @@ namespace Ekinci.WebAPI.Business.Services
                 smsCode = KeyGenerator.CreateRandomNumber(1000, 9999).ToString();
 
                 var smsText = _localizer["SmsVerificationText"] + smsCode;
-               // var smsResult = await smsSender.SendAsync(request.MobilePhone, smsText);
+                var smsResult = await smsSender.SendAsync(request.MobilePhone, smsText);
             }
             smsCode = "2020";
             member.SmsCode = smsCode.ToString();

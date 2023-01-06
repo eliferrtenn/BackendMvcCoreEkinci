@@ -14,16 +14,10 @@
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="card-label fw-bolder fs-3 mb-1">Videolar</span>
                             </h3>
-                            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Yeni video eklemek için tıklayın">
-                                <a href="@Url.Action("Create","Video")" class="btn btn-sm btn btn-success">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
-                                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
-                                        </svg>
-                                    </span>
-                                    YENİ VİDEO
-                                </a>
+                            <div class="card-toolbar">
+                                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                    <a asp-action="Create" class="btn btn-primary me-2">@_localizer["Create"]</a>
+                                </div>
                             </div>
                         </div>
                         @if (Model != null)
@@ -36,7 +30,7 @@
                                             <tr class="text-start text-gray-400 fw-bolder fs-7 gs-0">
                                                 <th class="min-w-125px">@_localizer["Title"]</th>
                                                 <th class="min-w-125px">@_localizer["Description"]</th>
-                                                <th class="min-w-125px">@_localizer["VideoUrl"]</th>
+                                                <th class="min-w-125px">@_localizer["PhotoUrl"]</th>
                                                 <th class="text-end min-w-70px"></th>
                                             </tr>
                                         </thead>

@@ -3,6 +3,7 @@ using Ekinci.CMS.Business.Models.Requests.TechnicalServiceDemandRequests;
 using Ekinci.CMS.Business.Models.Responses.TechnicalServiceDemandResponses;
 using Ekinci.Common.Business;
 using Ekinci.Common.Caching;
+using Ekinci.Common.SMSSender;
 using Ekinci.Common.Utilities.FtpUpload;
 using Ekinci.Data.Context;
 using Ekinci.Resources;
@@ -15,8 +16,10 @@ namespace Ekinci.CMS.Business.Services
 {
     public class TechnicalServiceDemandService : BaseService, ITechnicalServiceDemandService
     {
-        public TechnicalServiceDemandService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
+        private readonly ISMSSender smsSender;
+        public TechnicalServiceDemandService(EkinciContext context, IConfiguration configuration, IStringLocalizer<CommonResource> localizer, IHttpContextAccessor httpContext, AppSettingsKeys appSettingsKeys, FileUpload fileUpload,ISMSSender _smsSender) : base(context, configuration, localizer, httpContext, appSettingsKeys, fileUpload)
         {
+            smsSender = _smsSender;
         }
 
         public async Task<ServiceResult<List<ListTechnicalServiceDemandResponse>>> GetAll()
@@ -57,8 +60,7 @@ namespace Ekinci.CMS.Business.Services
                 return result;
             }
             var technicalServiceDemand = await (from technic in _context.TechnicalServiceDemands
-                                                where technic.IsEnabled == true && technic.TechnicalServiceStaffID.ToString() == null
-                                                join ps in _context.TechnicalServiceStaffs on technic.TechnicalServiceStaffID equals ps.ID
+                                                where technic.IsEnabled == true && technic.TechnicalServiceStaffID.ToString() != null
                                                 select new ListAssignTechnicalServiceDemandResponse
                                                 {
                                                     ID = technic.ID,
@@ -110,15 +112,22 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult> AssignPersonelTechnicalServiceDemand(AssignPersonelTechnicalServiceDemandRequest request)
         {
             var result = new ServiceResult();
-            var contact = await _context.TechnicalServiceDemands.FirstOrDefaultAsync(x => x.ID == request.ID);
-            if (contact == null)
+            var technicalServiceDemand = await _context.TechnicalServiceDemands.FirstOrDefaultAsync(x => x.ID == request.ID);
+            if (technicalServiceDemand == null)
             {
                 result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
-            contact.TechnicalServiceStaffID = request.ID;
+            technicalServiceDemand.TechnicalServiceStaffID = request.ID;
             //TODO:Personele mesaj gönderme işlemi
-            _context.TechnicalServiceDemands.Update(contact);
+            var smsText = "Başlık :"+technicalServiceDemand.Title+"\nTanımı : "+technicalServiceDemand.Description+
+                "\nAciliyet Durumu : "+technicalServiceDemand.DemandUrgencyStatus+"\nSite Adı : "+technicalServiceDemand.SiteName+
+                "\nApartman Adı : "+technicalServiceDemand.ApartmentName+"\nKaçıncı katta : "+technicalServiceDemand.ApartmentFloor+
+                "\nBina No : "+technicalServiceDemand.ApartmentNo+"\nİletişim Bilgileri : "+technicalServiceDemand.ContactInform;
+
+            var technicalService = await _context.TechnicalServiceStaffs.FirstOrDefaultAsync(x => x.ID == technicalServiceDemand.TechnicalServiceStaffID);
+            var smsResult = await smsSender.SendAsync(technicalService.ID.ToString(), smsText);
+            _context.TechnicalServiceDemands.Update(technicalServiceDemand);
             await _context.SaveChangesAsync();
 
             result.SetSuccess(_localizer["TechnicalServiceDemandSendPersonel"]);

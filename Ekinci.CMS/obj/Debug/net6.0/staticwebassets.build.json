@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1X4P/bDJYmWRrKHuqPAIybmywaKi6wOLErLjNEdCmeA=",
+  "Hash": "whsXj/mgZpyCg+p2AXr0xi0zzq4HgE/MEpgrnKtidSY=",
   "Source": "Ekinci.CMS",
   "BasePath": "_content/Ekinci.CMS",
   "Mode": "Default",
@@ -46136,6 +46136,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Temp\\8c39d4fb-2d09-4b86-98be-b5882420ab64.jpg"
+    },
+    {
+      "Identity": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\949170e9-a139-49dc-9057-40ca1a62b419.jpg",
+      "SourceId": "Ekinci.CMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\",
+      "BasePath": "_content/Ekinci.CMS",
+      "RelativePath": "Temp/949170e9-a139-49dc-9057-40ca1a62b419.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Temp\\949170e9-a139-49dc-9057-40ca1a62b419.jpg"
     },
     {
       "Identity": "C:\\Projects\\Ekinci\\Ekinci.CMS\\wwwroot\\Temp\\94e8309f-0879-4fd6-b4e0-31a653f89b86.jpeg",

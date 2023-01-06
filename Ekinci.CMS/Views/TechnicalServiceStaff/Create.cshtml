@@ -4,7 +4,7 @@
 @{
     var tokenSet = antiforgery.GetAndStoreTokens(Context);
 }
-<div class=" flex-column " id="kt_wrapper">
+<div class="flex-column" id="kt_wrapper">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <div id="kt_content_container" class="container-xxl">
@@ -12,11 +12,7 @@
                     <form asp-action="Create" enctype="multipart/form-data">
                         <div class="card shadow-sm">
                             <div class="card-header">
-                                <h3 class="card-title">Proje</h3>
-                                <div class="card-toolbar">
-                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="OLUŞTUR">&nbsp;
-                                    <a href="@Url.Action("Index","TechnicalServiceStaff")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
-                                </div>
+                                <h3 class="card-title">Teknik Servis Personel</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -50,6 +46,10 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button type="submit" class="btn btn-primary me-2">@_localizer["Save"]</button>
+                                <a href="/TechnicalServiceStaff/Index" class="btn btn-light btn-light-primary">@_localizer["TurnBack"]</a>
                             </div>
                         </div>
                     </form>

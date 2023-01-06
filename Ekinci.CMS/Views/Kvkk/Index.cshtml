@@ -11,13 +11,13 @@
                             @if (Model != null)
                             {
                                 <div class="card-toolbar">
-                                    <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-success align-self-center">DÜZENLE</a>
+                                    <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-primary me-2">@_localizer["Edit"]</a>
                                 </div>
                             }
                             else
                             {
                                 <div class="card-toolbar">
-                                    <a asp-action="Create" class="btn btn-success align-self-center">OLUŞTUR</a>
+                                    <a asp-action="Create" asp-route-id="@Model.ID" class="btn btn-primary me-2">@_localizer["Create"]</a>
                                 </div>
                             }
                         </div>

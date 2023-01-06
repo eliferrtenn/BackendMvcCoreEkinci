@@ -9,10 +9,6 @@
                         <div class="card shadow-sm">
                             <div class="card-header">
                                 <h3 class="card-title">İnsan Kaynakları</h3>
-                                <div class="card-toolbar">
-                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="@_localizer["Edit"]">&nbsp;
-                                    <a href="@Url.Action("Index","HumanResource")" class="btn btn-danger btn-hover-rotate-start">@_localizer["TurnBack"]</a>
-                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -55,6 +51,10 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button type="submit" class="btn btn-primary me-2">@_localizer["Save"]</button>
+                                <a href="/HumanResource/Index" class="btn btn-light btn-light-primary">@_localizer["TurnBack"]</a>
                             </div>
                         </div>
                     </form>
