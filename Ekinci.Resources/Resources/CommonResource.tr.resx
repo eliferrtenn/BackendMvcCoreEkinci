@@ -328,7 +328,7 @@
     <value>Adres</value>
   </data>
   <data name="MobilePhone" xml:space="preserve">
-    <value>Mobil Telefon Numarası</value>
+    <value>Telefon Numarası</value>
   </data>
   <data name="CommercialAreaAdded" xml:space="preserve">
     <value>Ticari alan başarıyla eklendi.</value>
@@ -545,5 +545,8 @@
   </data>
   <data name="SiteName" xml:space="preserve">
     <value>Site  Adı</value>
+  </data>
+  <data name="ThumbUrls" xml:space="preserve">
+    <value>Kapak Fotoğrafı</value>
   </data>
 </root>

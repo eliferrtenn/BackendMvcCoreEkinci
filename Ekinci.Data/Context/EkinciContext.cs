@@ -25,6 +25,8 @@ namespace Ekinci.Data.Context
         public DbSet<Projects> Projects { get; set; }
         public DbSet<Sustainability> Sustainabilities { get; set; }
         public DbSet<TechnicalServiceDemand> TechnicalServiceDemands{ get; set; }
+        public DbSet<TechnicalServiceName> TechnicalServiceNames{ get; set; }
+        public DbSet<TechnicalServiceStaff> TechnicalServiceStaffs{ get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Videos> Videos { get; set; }
         public DbSet<ProjectStatus> ProjectStatus { get; set; }

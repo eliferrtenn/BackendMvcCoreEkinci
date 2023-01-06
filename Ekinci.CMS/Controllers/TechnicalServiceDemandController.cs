@@ -1,8 +1,10 @@
 ﻿using Ekinci.CMS.Business.Interfaces;
 using Ekinci.CMS.Business.Models.Requests.BlogRequests;
 using Ekinci.CMS.Business.Models.Requests.TechnicalServiceDemandRequests;
+using Ekinci.CMS.Business.Services;
 using Ekinci.Common.BaseController;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace Ekinci.CMS.Controllers
@@ -10,9 +12,13 @@ namespace Ekinci.CMS.Controllers
     public class TechnicalServiceDemandController : CMSBaseController
     {
         private readonly ITechnicalServiceDemandService technicalServiceDemandService;
+        private readonly ITechnicalServiceStaffService technicalServiceStaffService;
 
-        public TechnicalServiceDemandController(ITechnicalServiceDemandService _technicalServiceDemandService)
+
+        public TechnicalServiceDemandController(ITechnicalServiceStaffService _technicalServiceStaffService, ITechnicalServiceDemandService _technicalServiceDemandService)
         {
+
+            technicalServiceStaffService = _technicalServiceStaffService;
             technicalServiceDemandService = _technicalServiceDemandService;
         }
 
@@ -31,6 +37,8 @@ namespace Ekinci.CMS.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
+            var result1 = await technicalServiceStaffService.GetAll();
+            ViewBag.TechnicalServiceStaffID = new SelectList(result1.Data, "ID", "FullName");
             var result = await technicalServiceDemandService.AssignPersonelTechnicalServiceDemand(id);
             return View(result.Data);
         }

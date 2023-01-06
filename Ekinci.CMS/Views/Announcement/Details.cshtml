@@ -8,10 +8,6 @@
                     <div class="cursor-pointer">
                         <div class="card-header">
                             <h3 class="card-title">@_localizer["AnnouncementTitle"]</h3>
-                            <div class="card-toolbar">
-                                <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-success align-self-center">@_localizer["Update"]</a>&nbsp;
-                                <a href="@Url.Action("Index","Announcement")" class="btn btn-danger btn-hover-rotate-start">@_localizer["TurnBack"]</a>
-                            </div>
                         </div>
                     </div>
 
@@ -56,6 +52,28 @@
                                     <img src="@item.PhotoUrl" alt="image" width="200" />
                                 </div>
                             }
+                        </div>
+                    </div>
+                    <div class="card-footer" style="text-align:end">
+                        <h3 class="card-title"></h3>
+                        <div class="card-toolbar">
+                            <a href="@Url.Action("Edit","Announcement")" class="btn btn-sm btn btn-success">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
+                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                                    </svg>
+                                </span>
+                                @_localizer["Edit"]
+                            </a>&nbsp;
+                            <a href="@Url.Action("Index","Announcement")" class="btn btn-sm btn btn-danger">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                                    </svg>
+                                </span>
+                                @_localizer["TurnBack"]
+                            </a>
                         </div>
                     </div>
                 </div>

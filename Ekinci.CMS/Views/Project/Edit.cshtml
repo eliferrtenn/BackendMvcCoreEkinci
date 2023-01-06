@@ -12,14 +12,14 @@
                     <form asp-action="Edit" enctype="multipart/form-data">
                         <div class="card shadow-sm">
                             <div class="card-header">
-                                <h3 class="card-title">Haber/Duyuru</h3>
-                                <div class="card-toolbar">
-                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="@_localizer["Edit"]">&nbsp;
-                                    <a href="@Url.Action("Index","Project")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
-                                </div>
+                                <h3 class="card-title">Proje</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="col-md-12 mb-5">
+                                        <input asp-for="ID" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    </div>
                                     <div class="row mb-6">
                                         <label class="col-lg-4 col-form-label fw-bold fs-6">@_localizer["ThumbUrls"]</label>
                                         <div class="col-lg-8">
@@ -169,6 +169,31 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="card-footer" style="text-align:end">
+                                <h3 class="card-title"></h3>
+                                <div class="card-toolbar">
+                                    <a href="@Url.Action("Edit","Project")" class="btn btn-sm btn btn-success">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
+                                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                                            </svg>
+                                        </span>
+                                        @_localizer["Edit"]
+                                    </a>&nbsp;
+                                    <a href="@Url.Action("Index","Project")" class="btn btn-sm btn btn-danger">
+                                        <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                                            </svg>
+                                        </span>
+                                        @_localizer["TurnBack"]
+                                    </a>
+                                </div>
+                            </div>
+                        
                         </div>
                     </form>
                 </div>

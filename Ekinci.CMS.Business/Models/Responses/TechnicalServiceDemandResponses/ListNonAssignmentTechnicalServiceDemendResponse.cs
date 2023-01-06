@@ -4,6 +4,8 @@
     {
         public int ID { get; set; }
         public int MemberID { get; set; }
+        public int TechnicalServiceStaffID { get; set; }
+        public string TechnicalServiceName { get; set; }
         public string DemandType { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

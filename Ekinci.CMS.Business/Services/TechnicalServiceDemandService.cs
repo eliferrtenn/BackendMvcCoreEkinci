@@ -40,8 +40,6 @@ namespace Ekinci.CMS.Business.Services
                                                     ApartmentName = technic.ApartmentName,
                                                     ApartmentNo = technic.ApartmentNo,
                                                     ContactInform = technic.ContactInform,
-                                                    FullName = technic.FullName,
-                                                    MobilePhone = technic.MobilePhone,
                                                     CreateDayDemand = technic.CreateDayDemand,
                                                     SolutionDayDemand = technic.SolutionDayDemand,
                                                 }).ToListAsync();
@@ -59,7 +57,8 @@ namespace Ekinci.CMS.Business.Services
                 return result;
             }
             var technicalServiceDemand = await (from technic in _context.TechnicalServiceDemands
-                                                where technic.IsEnabled == true && (technic.FullName != null && technic.MobilePhone != null)
+                                                where technic.IsEnabled == true && technic.TechnicalServiceStaffID.ToString() == null
+                                                join ps in _context.TechnicalServiceStaffs on technic.TechnicalServiceStaffID equals ps.ID
                                                 select new ListAssignTechnicalServiceDemandResponse
                                                 {
                                                     ID = technic.ID,
@@ -71,8 +70,6 @@ namespace Ekinci.CMS.Business.Services
                                                     ApartmentName = technic.ApartmentName,
                                                     ApartmentNo = technic.ApartmentNo,
                                                     ContactInform = technic.ContactInform,
-                                                    FullName = technic.FullName,
-                                                    MobilePhone = technic.MobilePhone,
                                                     CreateDayDemand = technic.CreateDayDemand,
                                                     SolutionDayDemand = technic.SolutionDayDemand,
                                                 }).ToListAsync();
@@ -90,7 +87,7 @@ namespace Ekinci.CMS.Business.Services
                 return result;
             }
             var technicalServiceDemand = await (from technic in _context.TechnicalServiceDemands
-                                                where technic.IsEnabled == true && (technic.FullName == null || technic.MobilePhone == null)
+                                                where technic.IsEnabled == true && technic.TechnicalServiceStaffID.ToString() == null
                                                 select new ListNonAssignmentTechnicalServiceDemendResponse
                                                 {
                                                     ID = technic.ID,
@@ -102,8 +99,6 @@ namespace Ekinci.CMS.Business.Services
                                                     ApartmentName = technic.ApartmentName,
                                                     ApartmentNo = technic.ApartmentNo,
                                                     ContactInform = technic.ContactInform,
-                                                    FullName = technic.FullName,
-                                                    MobilePhone = technic.MobilePhone,
                                                     CreateDayDemand = technic.CreateDayDemand,
                                                     SolutionDayDemand = technic.SolutionDayDemand,
                                                 }).ToListAsync();
@@ -121,8 +116,7 @@ namespace Ekinci.CMS.Business.Services
                 result.SetError(_localizer["RecordNotFound"]);
                 return result;
             }
-            contact.FullName = request.FullName;
-            contact.MobilePhone = request.MobilePhone;
+            contact.TechnicalServiceStaffID = request.ID;
             //TODO:Personele mesaj gönderme işlemi
             _context.TechnicalServiceDemands.Update(contact);
             await _context.SaveChangesAsync();
@@ -134,8 +128,50 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<GetTechnicalServiceDemandResponse>> GetTechnicalServiceDemand(int technicalDemandServiceID)
         {
             var result = new ServiceResult<GetTechnicalServiceDemandResponse>();
+            var technicServiceStaff = _context.TechnicalServiceStaffs;
+            var technicalService = await _context.TechnicalServiceDemands.FirstOrDefaultAsync(x => x.ID == technicalDemandServiceID);
+
+            int count = 0;
+            foreach (var i in technicServiceStaff)
+            {
+                if (technicalService.TechnicalServiceStaffID == i.ID)
+                {
+                    count++;
+                }
+            }
+
+            if (count != 0)
+            {
+                var technicalServiceDemandd = await (from technic in _context.TechnicalServiceDemands
+                                                    where technic.ID == technicalDemandServiceID && technic.IsEnabled == true
+                                                    join ps in _context.TechnicalServiceStaffs on technic.TechnicalServiceStaffID equals ps.ID
+                                                    select new GetTechnicalServiceDemandResponse
+                                                    {
+                                                        ID = technic.ID,
+                                                        TechnicalServiceStaffID = technic.TechnicalServiceStaffID != null ? (int)technic.TechnicalServiceStaffID : 0,
+                                                        TechnicalServiceName = ps.FullName,
+                                                        TechnicalServiceMobilePhone = ps.MobilePhone,
+                                                        DemandType = technic.DemandType,
+                                                        Title = technic.Title,
+                                                        Description = technic.Description,
+                                                        DemandUrgencyStatus = technic.DemandUrgencyStatus,
+                                                        SiteName = technic.SiteName,
+                                                        ApartmentName = technic.ApartmentName,
+                                                        ApartmentNo = technic.ApartmentNo,
+                                                        ContactInform = technic.ContactInform,
+                                                        CreateDayDemand = technic.CreateDayDemand,
+                                                        SolutionDayDemand = technic.SolutionDayDemand,
+                                                    }).FirstOrDefaultAsync();
+                if (technicalServiceDemandd == null)
+                {
+                    result.SetError(_localizer["RecordNotFound"]);
+                    return result;
+                }
+                result.Data = technicalServiceDemandd;
+                return result;
+            }
             var technicalServiceDemand = await (from technic in _context.TechnicalServiceDemands
-                                                where technic.ID == technicalDemandServiceID
+                                                where technic.ID == technicalDemandServiceID && technic.IsEnabled == true
                                                 select new GetTechnicalServiceDemandResponse
                                                 {
                                                     ID = technic.ID,
@@ -147,11 +183,10 @@ namespace Ekinci.CMS.Business.Services
                                                     ApartmentName = technic.ApartmentName,
                                                     ApartmentNo = technic.ApartmentNo,
                                                     ContactInform = technic.ContactInform,
-                                                    FullName = technic.FullName,
-                                                    MobilePhone = technic.MobilePhone,
                                                     CreateDayDemand = technic.CreateDayDemand,
                                                     SolutionDayDemand = technic.SolutionDayDemand,
-                                                }).FirstAsync();
+                                                }).FirstOrDefaultAsync();
+
             if (technicalServiceDemand == null)
             {
                 result.SetError(_localizer["RecordNotFound"]);
@@ -164,24 +199,63 @@ namespace Ekinci.CMS.Business.Services
         public async Task<ServiceResult<AssignPersonelTechnicalServiceDemandRequest>> AssignPersonelTechnicalServiceDemand(int technicalDemandServiceID)
         {
             var result = new ServiceResult<AssignPersonelTechnicalServiceDemandRequest>();
-            var technicalServiceDemand = await(from technic in _context.TechnicalServiceDemands
-                                               where technic.ID == technicalDemandServiceID
-                                               select new AssignPersonelTechnicalServiceDemandRequest
-                                               {
-                                                   ID = technic.ID,
-                                                   DemandType = technic.DemandType,
-                                                   Title = technic.Title,
-                                                   Description = technic.Description,
-                                                   DemandUrgencyStatus = technic.DemandUrgencyStatus,
-                                                   SiteName = technic.SiteName,
-                                                   ApartmentName = technic.ApartmentName,
-                                                   ApartmentNo = technic.ApartmentNo,
-                                                   ContactInform = technic.ContactInform,
-                                                   FullName = technic.FullName,
-                                                   MobilePhone = technic.MobilePhone,
-                                                   CreateDayDemand = technic.CreateDayDemand,
-                                                   SolutionDayDemand = technic.SolutionDayDemand,
-                                               }).FirstAsync();
+
+            var technicServiceStaff = _context.TechnicalServiceStaffs;
+            var technicalService = await _context.TechnicalServiceDemands.FirstOrDefaultAsync(x => x.ID == technicalDemandServiceID);
+
+            int count = 0;
+            foreach (var i in technicServiceStaff)
+            {
+                if (technicalService.TechnicalServiceStaffID == i.ID)
+                {
+                    count++;
+                }
+            }
+
+            if (count != 0)
+            {
+                var technicalServiceDemandd = await (from technic in _context.TechnicalServiceDemands
+                                                     where technic.ID == technicalDemandServiceID && technic.IsEnabled == true
+                                                     join ps in _context.TechnicalServiceStaffs on technic.TechnicalServiceStaffID equals ps.ID
+                                                     select new AssignPersonelTechnicalServiceDemandRequest
+                                                     {
+                                                         ID = technic.ID,
+                                                         TechnicalServiceStaffID = technic.TechnicalServiceStaffID != null ? (int)technic.TechnicalServiceStaffID : 0,
+                                                         DemandType = technic.DemandType,
+                                                         Title = technic.Title,
+                                                         Description = technic.Description,
+                                                         DemandUrgencyStatus = technic.DemandUrgencyStatus,
+                                                         SiteName = technic.SiteName,
+                                                         ApartmentName = technic.ApartmentName,
+                                                         ApartmentNo = technic.ApartmentNo,
+                                                         ContactInform = technic.ContactInform,
+                                                         CreateDayDemand = technic.CreateDayDemand,
+                                                         SolutionDayDemand = technic.SolutionDayDemand,
+                                                     }).FirstOrDefaultAsync();
+                if (technicalServiceDemandd == null)
+                {
+                    result.SetError(_localizer["RecordNotFound"]);
+                    return result;
+                }
+                result.Data = technicalServiceDemandd;
+                return result;
+            }
+            var technicalServiceDemand = await (from technic in _context.TechnicalServiceDemands
+                                                where technic.ID == technicalDemandServiceID && technic.IsEnabled == true
+                                                select new AssignPersonelTechnicalServiceDemandRequest
+                                                {
+                                                    ID = technic.ID,
+                                                    DemandType = technic.DemandType,
+                                                    Title = technic.Title,
+                                                    Description = technic.Description,
+                                                    DemandUrgencyStatus = technic.DemandUrgencyStatus,
+                                                    SiteName = technic.SiteName,
+                                                    ApartmentName = technic.ApartmentName,
+                                                    ApartmentNo = technic.ApartmentNo,
+                                                    ContactInform = technic.ContactInform,
+                                                    CreateDayDemand = technic.CreateDayDemand,
+                                                    SolutionDayDemand = technic.SolutionDayDemand,
+                                                }).FirstAsync();
             if (technicalServiceDemand == null)
             {
                 result.SetError(_localizer["RecordNotFound"]);
